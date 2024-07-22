@@ -13,12 +13,12 @@
 
 INT32U ADC_ConvertedValue;
 /*
-* STM32F103VET6´¦ÀíÆ÷ÄÚ²¿ÄÚÖÃÁËÒ»¸öÎÂ¶È´«¸ÐÆ÷£¬¸ÃÎÂ¶È´«¸ÐÆ÷µÄÔÚÄÚ²¿ºÍADC1_IN16ÊäÈëÍ¨µÀÏàÁ¬½Ó£¬´ËÍ¨µÀ°Ñ´«¸ÐÆ÷Êä³öµÄµçÑ¹×ª»»³ÉÊý×ÖÖµ¡£
-ÐèÒª×¢ÒâµÄÊÇ£¬ÄÚ²¿ÎÂ¶È´«¸ÐÆ÷¸üÊÊÓÃÓÚ¼ì²âÎÂ¶ÈµÄ±ä»¯£¬¶ø²»ÊÇ²âÁ¿¾ø¶ÔµÄÎÂ¶È£¬Èç¹ûÐèÒª²âÁ¿¾«È·µÄÎÂ¶È£¬Ó¦¸ÃÊ¹ÓÃÍâÖÃµÄÎÂ¶È´«¸ÐÆ÷¡£
-ADCÊä³öµÄÊý×ÖÖµºÍÎÂ¶ÈÖ®¼äµÄ¶ÔÓ¦¹ØÏµÈçÏÂ
-¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
-°æÈ¨ÉùÃ÷£º±¾ÎÄÎªCSDN²©Ö÷¡¸ÃÎÓ°Ó£·É¡¹µÄÔ­´´ÎÄÕÂ£¬×ñÑ­CC 4.0 BY-SA°æÈ¨Ð­Òé£¬×ªÔØÇë¸½ÉÏÔ­ÎÄ³ö´¦Á´½Ó¼°±¾ÉùÃ÷¡£
-Ô­ÎÄÁ´½Ó£ºhttps://blog.csdn.net/aricchen77/article/details/112443564
+* STM32F103VET6å¤„ç†å™¨å†…éƒ¨å†…ç½®äº†ä¸€ä¸ªæ¸©åº¦ä¼ æ„Ÿå™¨ï¼Œè¯¥æ¸©åº¦ä¼ æ„Ÿå™¨çš„åœ¨å†…éƒ¨å’ŒADC1_IN16è¾“å…¥é€šé“ç›¸è¿žæŽ¥ï¼Œæ­¤é€šé“æŠŠä¼ æ„Ÿå™¨è¾“å‡ºçš„ç”µåŽ‹è½¬æ¢æˆæ•°å­—å€¼ã€‚
+éœ€è¦æ³¨æ„çš„æ˜¯ï¼Œå†…éƒ¨æ¸©åº¦ä¼ æ„Ÿå™¨æ›´é€‚ç”¨äºŽæ£€æµ‹æ¸©åº¦çš„å˜åŒ–ï¼Œè€Œä¸æ˜¯æµ‹é‡ç»å¯¹çš„æ¸©åº¦ï¼Œå¦‚æžœéœ€è¦æµ‹é‡ç²¾ç¡®çš„æ¸©åº¦ï¼Œåº”è¯¥ä½¿ç”¨å¤–ç½®çš„æ¸©åº¦ä¼ æ„Ÿå™¨ã€‚
+ADCè¾“å‡ºçš„æ•°å­—å€¼å’Œæ¸©åº¦ä¹‹é—´çš„å¯¹åº”å…³ç³»å¦‚ä¸‹
+â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
+ç‰ˆæƒå£°æ˜Žï¼šæœ¬æ–‡ä¸ºCSDNåšä¸»ã€Œæ¢¦å½±æ¨±é£žã€çš„åŽŸåˆ›æ–‡ç« ï¼Œéµå¾ªCC 4.0 BY-SAç‰ˆæƒåè®®ï¼Œè½¬è½½è¯·é™„ä¸ŠåŽŸæ–‡å‡ºå¤„é“¾æŽ¥åŠæœ¬å£°æ˜Žã€‚
+åŽŸæ–‡é“¾æŽ¥ï¼šhttps://blog.csdn.net/aricchen77/article/details/112443564
 */
 void DMA_Configuration(void)
 {
@@ -54,7 +54,7 @@ void ADC_Configuration(void)
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_16, 1, ADC_SampleTime_55Cycles5);
 	ADC_DMACmd(ADC1, ENABLE);
 	/* Enable the temperature sensor and vref internal channel */
-	ADC_TempSensorVrefintCmd(ENABLE);                  //´ò¿ªÎÂ¶È´«¸ÐÆ÷²Î¿¼µçÑ¹
+	ADC_TempSensorVrefintCmd(ENABLE);                  //æ‰“å¼€æ¸©åº¦ä¼ æ„Ÿå™¨å‚è€ƒç”µåŽ‹
 
 	ADC_Cmd(ADC1, ENABLE);
 	/* Enable ADC1 reset calibaration register */
@@ -68,14 +68,14 @@ void ADC_Configuration(void)
 	/* Start ADC1 Software Conversion */
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 }
-//Ô­ÎÄÁ´½Ó£ºhttps://blog.csdn.net/qq_36413982/article/details/101778723
+//åŽŸæ–‡é“¾æŽ¥ï¼šhttps://blog.csdn.net/qq_36413982/article/details/101778723
 #define TEMPTURE_RAWDATA_LENTH 10
 static INT32U Temp_RawData[TEMPTURE_RAWDATA_LENTH];
 static INT32U TemperatureInside_Sample()
 {
 	static INT32U index;
 	static INT32U sampleTotalCount;
-	while (!DMA_GetFlagStatus(DMA1_FLAG_TC1));        //µÈ´ýDMA´«ÊäÍê³É
+	while (!DMA_GetFlagStatus(DMA1_FLAG_TC1));        //ç­‰å¾…DMAä¼ è¾“å®Œæˆ
 	Temp_RawData[index] = ADC_ConvertedValue;
 	sampleTotalCount++;
 	if (index++ > TEMPTURE_RAWDATA_LENTH) {

@@ -6,11 +6,11 @@
 
 
 /**********************Variable Definition Section******************************/
-INT8U 	TUNER_SMETER;   //FM/AM̨ͣ������
-INT8U  	AMSStop;   			//AMԶ��̨ͣ������
-INT8U  	AMLStop;			//AM����̨ͣ������ 
-INT8U  	FMDisSStop;			//FMԶ��̨ͣ������
-INT8U  	FMLocSStop;			//FM����̨ͣ������	
+INT8U 	TUNER_SMETER;   //FM/AM停台灵敏度
+INT8U  	AMSStop;   			//AM远程停台灵敏度
+INT8U  	AMLStop;			//AM近程停台灵敏度 
+INT8U  	FMDisSStop;			//FM远程停台灵敏度
+INT8U  	FMLocSStop;			//FM近程停台灵敏度	
 INT8U	g_u8RadioSStop[5];
 	
 INT32U 	freqTemp;
@@ -1277,7 +1277,7 @@ void RADIO_TunerChangeBand( INT8U  bandreq, INT16U freq )
 		OS_TaskDelay(5);//wait 50ms
 		RADIO_HIT_CmdSetIRType(OnlineIR_FM);//start IR alignment
 		/*Enable option funtion e.g. DMQ*/
-		RADIO_HIT_CmdMuSICA(1);//musica_flg,��Ҫһֱ��
+		RADIO_HIT_CmdMuSICA(1);//musica_flg,需要一直打开
 
 		/*SetSeekParameter if use auto seek method in HIT2*/
 		RADIO_HIT_CmdSeekTH(0x500, 0xC30000, 0x780000, 0x060000, 0x140000, 0x000000);
@@ -1369,7 +1369,7 @@ void RADIO_TunerChangeBandOnly( INT8U  bandreq)
 		OS_TaskDelay(5);//wait 50ms
 		RADIO_HIT_CmdSetIRType(OnlineIR_FM);//start IR alignment
 		/*Enable option funtion e.g. DMQ*/
-		RADIO_HIT_CmdMuSICA(1);//musica_flg,��Ҫһֱ��
+		RADIO_HIT_CmdMuSICA(1);//musica_flg,需要一直打开
 
 		/*SetSeekParameter if use auto seek method in HIT2*/
 		RADIO_HIT_CmdSeekTH(0x500, 0xC30000, 0x780000, 0x060000, 0x140000, 0x000000);
@@ -1534,7 +1534,7 @@ void RADIO_SeekOff(void)
 	RADIO_HIT_SeekOff(SeekStopUnmuted);
 }
 
-INT8U  RADIO_HIT_GetSMeter(void)//��ΪRDSCheckIFC()Ҫ�õ�USN/WAM/IFC,���Ըú���û�е�����SMeter
+INT8U  RADIO_HIT_GetSMeter(void)//因为RDSCheckIFC()要用到USN/WAM/IFC,所以该函数没有单单读SMeter
 {
 	if(!Radio.IsInitOver)
 	{
@@ -1551,7 +1551,7 @@ INT8U  RADIO_HIT_GetSMeter(void)//��ΪRDSCheckIFC()Ҫ�õ�USN/WAM/IFC,���Ըú����
 	return(REAL_CFReadSmeter);
 }
 
-void RADIO_LocSetting(INT16U setfreq)		//LOC On/OffҪ���øú���
+void RADIO_LocSetting(INT16U setfreq)		//LOC On/Off要调用该函数
 {
 	//INT8U i;
 	if( FreqInFM(setfreq) )
@@ -1571,7 +1571,7 @@ void RADIO_LocSetting(INT16U setfreq)		//LOC On/OffҪ���øú���
 		#if AM_LOC_EN
 		if(Radio.LocDXSta==RADIO_LOCAL) 	//if(ValBit(RadioFlag,F_RADIO_LOC))//loc
 		{
-			if(TUNER_SMETER>190)//�Ӹ��ж���Ϊ�˷�ֹTUNER_SSTOP>255
+			if(TUNER_SMETER>190)//加该判断是为了防止TUNER_SSTOP>255
 			{
 				TUNER_SMETER=190;
 			}
@@ -1659,18 +1659,18 @@ void RADIO_vdSenseWrite(INT8U a8uFM_Loc,INT8U a8uFM_Dis,INT8U a8uAM_Loc,INT8U a8
 
 void RADIO_SetFMSStop(INT8U SStop) 
 {	
-	//FM̨ͣ������Ҫ��Ϊ��DX:22+/-8dB,LOC:35+/-10dB
-	//�������Ҫ����������Э�鲻ͬ����ͬ�ĵ���
+	//FM停台灵敏度要求为：DX:22+/-8dB,LOC:35+/-10dB
+	//这个函数要根据与解码的协议不同做不同的调整
 	INT8U temp;
 	temp=SStop;
 	if(temp<=15)
 	{
-		FMDisSStop=temp; //SStop�ķ�ΧΪ:0~15,��ӦFMSStopΪ:0~255
+		FMDisSStop=temp; //SStop的范围为:0~15,对应FMSStop为:0~255
 		temp=(INT8U)(FMDisSStop*2+HIT2_SMETER_DX);
 
 		if((temp<MIN_FM_DIS_SSTOP) || (temp>MAX_FM_DIS_SSTOP))
 		{
-			FMDisSStop=(INT8U) (DEFAULT_FM_DIS_SSTOP>>4);//����Ĭ��ֵΪ0X06,��ӦFMSStopΪ6*17=102,98.1MHzԼ22dB
+			FMDisSStop=(INT8U) (DEFAULT_FM_DIS_SSTOP>>4);//设置默认值为0X06,对应FMSStop为6*17=102,98.1MHz约22dB
 		}
 
 		if(FreqInFM(Radio.Freq)) //FM
@@ -1685,12 +1685,12 @@ void RADIO_SetFMSStop(INT8U SStop)
 
 void RADIO_SetAMSStop(INT8U SStop)   
 {
-	//AM̨ͣ������Ҫ��Ϊ��DX:30+/-10dB
-	//�������Ҫ����������Э�鲻ͬ����ͬ�ĵ���
+	//AM停台灵敏度要求为：DX:30+/-10dB
+	//这个函数要根据与解码的协议不同做不同的调整
 	INT8U  temp;
 	if(SStop<=15)
 	{
-		AMSStop=SStop; //SStop�ķ�ΧΪ:0~15,��ӦAMSStopΪ:0~255
+		AMSStop=SStop; //SStop的范围为:0~15,对应AMSStop为:0~255
 		temp=(INT8U)(AMSStop*2+HIT2_SMETER_DX);
 
 		if((temp<MIN_AM_DIS_SSTOP) || (temp>MAX_AM_DIS_SSTOP))
@@ -1705,7 +1705,7 @@ void RADIO_SetAMSStop(INT8U SStop)
 		#if AM_LOC_EN
 		if(Radio.LocDXSta==RADIO_LOCAL)//loc
 		{
-			if(TUNER_SMETER>190)//�Ӹ��ж���Ϊ�˷�ֹTUNER_SSTOP>255
+			if(TUNER_SMETER>190)//加该判断是为了防止TUNER_SSTOP>255
 			{
 				TUNER_SMETER=190;
 			}

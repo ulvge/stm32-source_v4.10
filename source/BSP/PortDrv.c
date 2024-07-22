@@ -551,10 +551,10 @@ void Port_vdInStopMode(void)
 	GPIOC->CRH=0x44444444;//Eject Detect interrupt
 	GPIOC->ODR=0x0000;
 	
-#ifdef S_MUTE_REVERSE               //20121016  ½â¾öACCOFFÊ±µÄPOPÒô
+#ifdef S_MUTE_REVERSE               //20121016  è§£å†³ACCOFFæ—¶çš„POPéŸ³
 	GPIOD->CRL=0x44444444; 
-	GPIOD->CRH=0x44444444;          //zgx20140214 ¸ÄPD11ÎªÊäÈë
-	GPIOD->ODR=0x0000;              //zgx20140214 ¸ÄPD11µçÆ½ÎªµÍ
+	GPIOD->CRH=0x44444444;          //zgx20140214 æ”¹PD11ä¸ºè¾“å…¥
+	GPIOD->ODR=0x0000;              //zgx20140214 æ”¹PD11ç”µå¹³ä¸ºä½Ž
 #else
 	GPIOD->CRL=0x44444444; 
 	GPIOD->CRH=0x44442444;			// 20131224

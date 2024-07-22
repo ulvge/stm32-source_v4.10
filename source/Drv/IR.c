@@ -1,20 +1,20 @@
 /**************************************
- * ÎÄ¼şÃû  £ºIR.c
- * ÃèÊö    £º²¶»ñ£¬²âÁ¿PWMµÄÆµÂÊ£¬Õ¼¿Õ±È 
- * Ô­Àí    £ºÓÃÊäÈë²¶»ñ²âÁ¿Ò»¶Î¸ßµçÆ½³ÖĞøÊ±¼äµÄÔ­ÀíÈçÍ¼£¬ÏÈÉèÖÃÉÏÉıÑØ´¥·¢ÖĞ¶Ï£¬µ±²¶»ñµ½ÉÏÉıÑØÊ±£¬
- ÈÃ¶¨Ê±Æ÷ÖØĞÂ¼ÆÊı£¬²¢ÉèÖÃÏÂ½µÑØ´¥·¢ÖĞ¶Ï¡£µ±ÏÂ½µÑØµ½À´Ê±£¬¼ÇÂ¼ÏÂ´ËÊ±¶¨Ê±Æ÷µÄÖµCCRx2¡£
- ÔÚ¸ßµçÆ½ÆÚ¼ä£¬¶¨Ê±Æ÷¿ÉÄÜÓĞN´ÎÒç³ö£¬
- ËùÒÔ×Ü¹²¼ÆÊı´ÎÊıÎª  N*ARR + CCRx2£¬ÔÙ³ËÒÔÒ»´Î¼ÆÊıµÄÊ±¼ä¾ÍµÃµ½¸ßµçÆ½³¤¶È¡£
+ * æ–‡ä»¶å  ï¼šIR.c
+ * æè¿°    ï¼šæ•è·ï¼Œæµ‹é‡PWMçš„é¢‘ç‡ï¼Œå ç©ºæ¯” 
+ * åŸç†    ï¼šç”¨è¾“å…¥æ•è·æµ‹é‡ä¸€æ®µé«˜ç”µå¹³æŒç»­æ—¶é—´çš„åŸç†å¦‚å›¾ï¼Œå…ˆè®¾ç½®ä¸Šå‡æ²¿è§¦å‘ä¸­æ–­ï¼Œå½“æ•è·åˆ°ä¸Šå‡æ²¿æ—¶ï¼Œ
+ è®©å®šæ—¶å™¨é‡æ–°è®¡æ•°ï¼Œå¹¶è®¾ç½®ä¸‹é™æ²¿è§¦å‘ä¸­æ–­ã€‚å½“ä¸‹é™æ²¿åˆ°æ¥æ—¶ï¼Œè®°å½•ä¸‹æ­¤æ—¶å®šæ—¶å™¨çš„å€¼CCRx2ã€‚
+ åœ¨é«˜ç”µå¹³æœŸé—´ï¼Œå®šæ—¶å™¨å¯èƒ½æœ‰Næ¬¡æº¢å‡ºï¼Œ
+ æ‰€ä»¥æ€»å…±è®¡æ•°æ¬¡æ•°ä¸º  N*ARR + CCRx2ï¼Œå†ä¹˜ä»¥ä¸€æ¬¡è®¡æ•°çš„æ—¶é—´å°±å¾—åˆ°é«˜ç”µå¹³é•¿åº¦ã€‚
 
- ¸üĞÂÖĞ¶Ï:±ÈÈçCNTµÄÖµ¼ÆÊıµ½ARRµÄÊ±ºò£¬ĞèÒªÖØĞÂ×°ÔØCNT£¨Ò²¾ÍÊÇËùÎ½µÄ¸üĞÂ£©£¬ÄÇÃ´¾Í¿ÉÒÔ´¥·¢¸üĞÂÖĞ¶Ï¡£
- ´¥·¢ÖĞ¶Ï:±ÈÈçÊäÈë²¶»ñµÄÊ±ºò£¬µ±´¥·¢Âö³å³öÏÖµÄÊ±ºò£¬ÄÇÃ´¾Í¿ÉÒÔÒıÆğ´¥·¢ÖĞ¶Ï¡£
+ æ›´æ–°ä¸­æ–­:æ¯”å¦‚CNTçš„å€¼è®¡æ•°åˆ°ARRçš„æ—¶å€™ï¼Œéœ€è¦é‡æ–°è£…è½½CNTï¼ˆä¹Ÿå°±æ˜¯æ‰€è°“çš„æ›´æ–°ï¼‰ï¼Œé‚£ä¹ˆå°±å¯ä»¥è§¦å‘æ›´æ–°ä¸­æ–­ã€‚
+ è§¦å‘ä¸­æ–­:æ¯”å¦‚è¾“å…¥æ•è·çš„æ—¶å€™ï¼Œå½“è§¦å‘è„‰å†²å‡ºç°çš„æ—¶å€™ï¼Œé‚£ä¹ˆå°±å¯ä»¥å¼•èµ·è§¦å‘ä¸­æ–­ã€‚
 
- * Ó²¼şÁ¬½Ó£º----------------------
- *          |   PA3  - ²¶»ñ       |
- *          |   PA8  - Êä³öPWM    |
+ * ç¡¬ä»¶è¿æ¥ï¼š----------------------
+ *          |   PA3  - æ•è·       |
+ *          |   PA8  - è¾“å‡ºPWM    |
  *           ----------------------
- * Ô­Àí²Î¿¼: https://blog.csdn.net/weixin_51466742/article/details/118336297
- * Ô­Àí²Î¿¼: https://blog.csdn.net/qq_16055183/article/details/118313393
+ * åŸç†å‚è€ƒ: https://blog.csdn.net/weixin_51466742/article/details/118336297
+ * åŸç†å‚è€ƒ: https://blog.csdn.net/qq_16055183/article/details/118313393
 
 *********************************************************/
 
@@ -41,7 +41,7 @@
 #define IR_PIN GPIO_Pin_3
 
 #define IR_TIME_HANDLER_PERIOD (100)
-#define IR_INACTIVE_AFTER_X_MS  _MS2TICK(2500) // x msºó£¬ÅĞ¶¨ÎªÒÑ¾­ÎŞĞÅºÅÁË
+#define IR_INACTIVE_AFTER_X_MS  _MS2TICK(2500) // x msåï¼Œåˆ¤å®šä¸ºå·²ç»æ— ä¿¡å·äº†
 
 #define IR_WORK_FREQUENCY (1000*1000)
 #define IR_WORK_CLOCK_PSC  (OS_CLOCK/IR_WORK_FREQUENCY)
@@ -67,14 +67,14 @@ typedef struct {
     INT32U	Perio;      //arr
 } IR_CFG;
 IR_CFG  g_IRCfg;
-static CaptureStatus g_captureStatus; //ÊäÈë²¶»ñ×´Ì¬  
-static IRMeasureStatus g_IRMeasureStatus; //ÊäÈë²¶»ñ×´Ì¬        
+static CaptureStatus g_captureStatus; //è¾“å…¥æ•è·çŠ¶æ€  
+static IRMeasureStatus g_IRMeasureStatus; //è¾“å…¥æ•è·çŠ¶æ€        
 static TIMER* TmrIR;
 
 static INT32U IR_calcFrequnecy(INT32U rawCounts);
 
 /**
- * ¶¨Ê±Æ÷ Í¨µÀ1ÊäÈë²¶»ñÅäÖÃ
+ * å®šæ—¶å™¨ é€šé“1è¾“å…¥æ•è·é…ç½®
  */
 void TIME_Cap_Init(IR_CFG* config)
 {
@@ -83,49 +83,49 @@ void TIME_Cap_Init(IR_CFG* config)
     TIM_ICInitTypeDef TIM_ICInitStructure;
     NVIC_InitTypeDef NVIC_InitStructure;
 
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);    /*Ê¹ÄÜIR_TIMEÊ±ÖÓ*/
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE); /*Ê¹ÄÜGPIOAÊ±ÖÓ*/
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);    /*ä½¿èƒ½IR_TIMEæ—¶é’Ÿ*/
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE); /*ä½¿èƒ½GPIOAæ—¶é’Ÿ*/
 
-    /*³õÊ¼»¯¶¨Ê±Æ÷ IR_TIME*/
-    TIM_TimeBaseStructure.TIM_Period = (INT16U)(config->Perio - 1); /*Éè¶¨¼ÆÊıÆ÷×Ô¶¯ÖØ×°Öµ */
-    TIM_TimeBaseStructure.TIM_Prescaler = config->preScale - 1; /*Ô¤·ÖÆµÆ÷ */
-    TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1; /*ÉèÖÃÊ±ÖÓ·Ö¸î:TDTS = Tck_tim*/
-    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up; /*TIMÏòÉÏ¼ÆÊıÄ£Ê½*/
-    TIM_TimeBaseInit(IR_TIME, &TIM_TimeBaseStructure); /*¸ù¾İTIM_TimeBaseInitStructÖĞÖ¸¶¨µÄ²ÎÊı³õÊ¼»¯TIMxµÄÊ±¼ä»ùÊıµ¥Î»*/
+    /*åˆå§‹åŒ–å®šæ—¶å™¨ IR_TIME*/
+    TIM_TimeBaseStructure.TIM_Period = (INT16U)(config->Perio - 1); /*è®¾å®šè®¡æ•°å™¨è‡ªåŠ¨é‡è£…å€¼ */
+    TIM_TimeBaseStructure.TIM_Prescaler = config->preScale - 1; /*é¢„åˆ†é¢‘å™¨ */
+    TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1; /*è®¾ç½®æ—¶é’Ÿåˆ†å‰²:TDTS = Tck_tim*/
+    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up; /*TIMå‘ä¸Šè®¡æ•°æ¨¡å¼*/
+    TIM_TimeBaseInit(IR_TIME, &TIM_TimeBaseStructure); /*æ ¹æ®TIM_TimeBaseInitStructä¸­æŒ‡å®šçš„å‚æ•°åˆå§‹åŒ–TIMxçš„æ—¶é—´åŸºæ•°å•ä½*/
 
-    /* ³õÊ¼»¯IR_TIMEÊäÈë²¶»ñ²ÎÊı */
-    TIM_ICInitStructure.TIM_Channel = IR_TIME_CHANNLE; /* Ñ¡ÔñÊäÈë¶ËÍ¨µÀ*/
-    TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Rising; /*ÉÏÉıÑØ²¶»ñ*/
-    TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI; /*Ó³Éäµ½TI1ÉÏ*/
-    TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1; /*ÅäÖÃÊäÈë·ÖÆµ,²»·ÖÆµ*/
-    TIM_ICInitStructure.TIM_ICFilter = 1; /*IC1F=0000 ÅäÖÃÊäÈëÂË²¨Æ÷ 0x0~0x0F */
+    /* åˆå§‹åŒ–IR_TIMEè¾“å…¥æ•è·å‚æ•° */
+    TIM_ICInitStructure.TIM_Channel = IR_TIME_CHANNLE; /* é€‰æ‹©è¾“å…¥ç«¯é€šé“*/
+    TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Rising; /*ä¸Šå‡æ²¿æ•è·*/
+    TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI; /*æ˜ å°„åˆ°TI1ä¸Š*/
+    TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1; /*é…ç½®è¾“å…¥åˆ†é¢‘,ä¸åˆ†é¢‘*/
+    TIM_ICInitStructure.TIM_ICFilter = 1; /*IC1F=0000 é…ç½®è¾“å…¥æ»¤æ³¢å™¨ 0x0~0x0F */
     TIM_ICInit(IR_TIME, &TIM_ICInitStructure);
 
-    /*ÖĞ¶Ï·Ö×é³õÊ¼»¯*/
-    NVIC_InitStructure.NVIC_IRQChannel = IR_IRQChannel;    /*IR_TIMEÖĞ¶Ï*/
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; /*ÏÈÕ¼ÓÅÏÈ¼¶2¼¶*/
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 5; /*´ÓÓÅÏÈ¼¶0¼¶*/
-    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; /*IRQÍ¨µÀ±»Ê¹ÄÜ*/
+    /*ä¸­æ–­åˆ†ç»„åˆå§‹åŒ–*/
+    NVIC_InitStructure.NVIC_IRQChannel = IR_IRQChannel;    /*IR_TIMEä¸­æ–­*/
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; /*å…ˆå ä¼˜å…ˆçº§2çº§*/
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 5; /*ä»ä¼˜å…ˆçº§0çº§*/
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; /*IRQé€šé“è¢«ä½¿èƒ½*/
     NVIC_Init(&NVIC_InitStructure);
 
-    TIM_OC1PolarityConfig(IR_TIME, TIM_ICPolarity_Rising); //init ÉèÖÃÎªÉÏÉıÑØ²¶»ñ
-    TIM_ITConfig(IR_TIME, TIM_IT_Update | IR_IT_CHANNLE, ENABLE);/*ÔÊĞí¸üĞÂÖĞ¶Ï ,ÔÊĞíCC1IE²¶»ñÖĞ¶Ï*/
-    TIM_Cmd(IR_TIME, ENABLE); /*Ê¹ÄÜ¶¨Ê±Æ÷*/
+    TIM_OC1PolarityConfig(IR_TIME, TIM_ICPolarity_Rising); //init è®¾ç½®ä¸ºä¸Šå‡æ²¿æ•è·
+    TIM_ITConfig(IR_TIME, TIM_IT_Update | IR_IT_CHANNLE, ENABLE);/*å…è®¸æ›´æ–°ä¸­æ–­ ,å…è®¸CC1IEæ•è·ä¸­æ–­*/
+    TIM_Cmd(IR_TIME, ENABLE); /*ä½¿èƒ½å®šæ—¶å™¨*/
 }
 
 /**
- * ¶¨Ê±Æ÷ÖĞ¶Ï·şÎñ³ÌĞò
+ * å®šæ—¶å™¨ä¸­æ–­æœåŠ¡ç¨‹åº
  */
 __inline void IR_TIME_IRQHandler_ISR(void)
 {
     INT16U isUpdate = TIM_GetITStatus(IR_TIME, TIM_IT_Update);
     INT16U isChannle = TIM_GetITStatus(IR_TIME, IR_IT_CHANNLE);
 
-    if (!g_captureStatus.bits.isCapOver) { //»¹Î´³É¹¦²¶»ñ  
-        // ±ÈÈçCNTµÄÖµ¼ÆÊıµ½ARRµÄÊ±ºò£¬ĞèÒªÖØĞÂ×°ÔØCNT£¨Ò²¾ÍÊÇËùÎ½µÄ¸üĞÂ£©£¬ÄÇÃ´¾Í¿ÉÒÔ´¥·¢¸üĞÂÖĞ¶Ï
+    if (!g_captureStatus.bits.isCapOver) { //è¿˜æœªæˆåŠŸæ•è·  
+        // æ¯”å¦‚CNTçš„å€¼è®¡æ•°åˆ°ARRçš„æ—¶å€™ï¼Œéœ€è¦é‡æ–°è£…è½½CNTï¼ˆä¹Ÿå°±æ˜¯æ‰€è°“çš„æ›´æ–°ï¼‰ï¼Œé‚£ä¹ˆå°±å¯ä»¥è§¦å‘æ›´æ–°ä¸­æ–­
         if (isUpdate != RESET) { // re-load value   
-            if (++g_captureStatus.bits.count == 0) {//¸ßµçÆ½Ì«³¤ÁË
-                if (g_captureStatus.bits.isCapHighLevel) {//ÒÑ¾­²¶»ñµ½¸ßµçÆ½ÁË
+            if (++g_captureStatus.bits.count == 0) {//é«˜ç”µå¹³å¤ªé•¿äº†
+                if (g_captureStatus.bits.isCapHighLevel) {//å·²ç»æ•è·åˆ°é«˜ç”µå¹³äº†
                     g_captureStatus.status = 0;
                     g_captureStatus.bits.isOverflow = TRUE;
                 }
@@ -135,20 +135,20 @@ __inline void IR_TIME_IRQHandler_ISR(void)
 
     if (isChannle != RESET) {
         g_IRMeasureStatus.activeTimeStamp = RTC_GetSysTick();
-        if (g_captureStatus.bits.isCapHighLevel) { // step2 Ö®Ç°ÒÑ¾­ÓĞ¹ıÉÏÉıÑØ´¥·¢£¬²¶»ñÁ÷³Ì½áÊø
+        if (g_captureStatus.bits.isCapHighLevel) { // step2 ä¹‹å‰å·²ç»æœ‰è¿‡ä¸Šå‡æ²¿è§¦å‘ï¼Œæ•è·æµç¨‹ç»“æŸ
             INT32U countVal = TIM_GetCounter(IR_TIME);
             INT32U rawCounts = g_captureStatus.bits.count * IR_RELOAD_VAL + countVal;
             g_IRMeasureStatus.frequency = IR_calcFrequnecy(rawCounts);             
-            g_captureStatus.status = 0; //Çå¿Õ
-            g_captureStatus.bits.isCapOver = TRUE;        //±ê¼Ç³É¹¦²¶»ñµ½Ò»´ÎÉÏÉıÑØ
+            g_captureStatus.status = 0; //æ¸…ç©º
+            g_captureStatus.bits.isCapOver = TRUE;        //æ ‡è®°æˆåŠŸæ•è·åˆ°ä¸€æ¬¡ä¸Šå‡æ²¿
 
-            TIM_OC1PolarityConfig(IR_TIME, TIM_ICPolarity_Rising); //CC1P=0 ÉèÖÃÎªÉÏÉıÑØ²¶»ñ
-        } else { // step1 ²¶»ñµ½£¬ÉÏÉıÑØ´¥·¢¡£ÖØÖÃ×´Ì¬£¬ĞŞ¸Ä³É ÏÂ½µ´¥·¢Ä£Ê½
-            TIM_OC1PolarityConfig(IR_TIME, TIM_ICPolarity_Falling);        //CC1P=1 ÉèÖÃÎªÏÂ½µÑØ²¶»ñ
+            TIM_OC1PolarityConfig(IR_TIME, TIM_ICPolarity_Rising); //CC1P=0 è®¾ç½®ä¸ºä¸Šå‡æ²¿æ•è·
+        } else { // step1 æ•è·åˆ°ï¼Œä¸Šå‡æ²¿è§¦å‘ã€‚é‡ç½®çŠ¶æ€ï¼Œä¿®æ”¹æˆ ä¸‹é™è§¦å‘æ¨¡å¼
+            TIM_OC1PolarityConfig(IR_TIME, TIM_ICPolarity_Falling);        //CC1P=1 è®¾ç½®ä¸ºä¸‹é™æ²¿æ•è·
             TIM_SetCounter(IR_TIME, 0);
 
-            g_captureStatus.status = 0; //Çå¿Õ
-            g_captureStatus.bits.isCapHighLevel = TRUE; //±ê¼Ç²¶»ñµ½ÁËÉÏÉıÑØ
+            g_captureStatus.status = 0; //æ¸…ç©º
+            g_captureStatus.bits.isCapHighLevel = TRUE; //æ ‡è®°æ•è·åˆ°äº†ä¸Šå‡æ²¿
         }
     }
 
@@ -159,34 +159,34 @@ __inline void IR_TIME_IRQHandler_ISR(void)
     if (isChannle) {
         itVal |= IR_IT_CHANNLE;
     }
-    TIM_ClearITPendingBit(IR_TIME, itVal); /*Çå³ıÖĞ¶Ï±êÖ¾Î»*/
+    TIM_ClearITPendingBit(IR_TIME, itVal); /*æ¸…é™¤ä¸­æ–­æ ‡å¿—ä½*/
 }
 
 // PA0,PA1,PA2,PA3 ; remap:PA0,PA1,PB10,PB11
-//ÏÖÔÚÊ¹ÓÃ PA3 ½øĞĞ²âÁ¿
+//ç°åœ¨ä½¿ç”¨ PA3 è¿›è¡Œæµ‹é‡
 void IR_InitPin(void)
 {
     /* GPIOA clock enable */;
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE); //¿ªÆô²¶»ñ¶Ë¿ÚPAµÄÊ±ÖÓ
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE); //å¼€å¯æ•è·ç«¯å£PAçš„æ—¶é’Ÿ
 
     /* GPIOA_0 */;
     GPIO_InitTypeDef GPIO_InitStructure;
     GPIO_InitStructure.GPIO_Pin = IR_PIN; /**/
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD; /*PA0 ÊäÈë*/
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD; /*PA0 è¾“å…¥*/
     GPIO_Init(GPIOA, &GPIO_InitStructure);
-    GPIO_ResetBits(GPIOA, IR_PIN); /*PA0 ÏÂÀ­*/
+    GPIO_ResetBits(GPIOA, IR_PIN); /*PA0 ä¸‹æ‹‰*/
 }
 
 /*
-32·ÖÆµ£¬1M £º¼´Êı1000 * 1000¸ö / 1s
-ÆµÂÊ = 1s×Ü¸öÊı / Êµ¼ÊÊıµÄ¸öÊı
-1s×Ü¸öÊı = PWMÆµÂÊ * Êµ¼ÊÊıµÄ¸öÊı
-1s×Ü¸öÊı = Êµ¼ÊÊıµÄ¸öÊı / PWMÖÜÆÚ
-1Ãë×Ü¸öÊı * PWMÖÜÆÚ = Êµ¼ÊÊıµÄ¸öÊı
+32åˆ†é¢‘ï¼Œ1M ï¼šå³æ•°1000 * 1000ä¸ª / 1s
+é¢‘ç‡ = 1sæ€»ä¸ªæ•° / å®é™…æ•°çš„ä¸ªæ•°
+1sæ€»ä¸ªæ•° = PWMé¢‘ç‡ * å®é™…æ•°çš„ä¸ªæ•°
+1sæ€»ä¸ªæ•° = å®é™…æ•°çš„ä¸ªæ•° / PWMå‘¨æœŸ
+1ç§’æ€»ä¸ªæ•° * PWMå‘¨æœŸ = å®é™…æ•°çš„ä¸ªæ•°
 */
 
 /// <summary>
-/// ¸ù¾İÊıµÄÊırawCounts£¬¼ÆËãÆµÂÊfreq
+/// æ ¹æ®æ•°çš„æ•°rawCountsï¼Œè®¡ç®—é¢‘ç‡freq
 /// </summary>
 /// <param name="rawCounts"></param>
 /// <returns></returns>
@@ -195,7 +195,7 @@ static INT32U IR_calcFrequnecy(INT32U rawCounts)
     INT32U freq = 0;
     rawCounts++;
     if (rawCounts != 0) {
-        freq = ((IR_WORK_FREQUENCY * 10) / rawCounts + 5) /10; // ÓÃ·Å´ó10µÄ·½·¨£¬ÊµÏÖËÄÉáÎåÈë
+        freq = ((IR_WORK_FREQUENCY * 10) / rawCounts + 5) /10; // ç”¨æ”¾å¤§10çš„æ–¹æ³•ï¼Œå®ç°å››èˆäº”å…¥
     }
     return freq;
 }
@@ -227,7 +227,7 @@ static void IR_getIRDefaultConfig(IR_CFG* config)
 static void IR_Init(void)
 {
     IR_getIRDefaultConfig(&g_IRCfg);
-    TIME_Cap_Init(&g_IRCfg);    //ÒÔ1MhzµÄÆµÂÊ¼ÆÊı
+    TIME_Cap_Init(&g_IRCfg);    //ä»¥1Mhzçš„é¢‘ç‡è®¡æ•°
     IR_InitPin();
 
     TmrIR = CreateTimer(IR_main);

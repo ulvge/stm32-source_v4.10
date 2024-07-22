@@ -61,7 +61,7 @@ INT8U Radix_DecToAscii(INT8U *dptr, INT16U data,INT8U reflen)
        if (data < 10) break;
        else data /= 10;
     }
-    if (reflen == 0) reflen = len; // Îª0Ê±£¬ÒÔÊµ¼ÊÖµ£»
+    if (reflen == 0) reflen = len; // ä¸º0æ—¶ï¼Œä»¥å®žé™…å€¼ï¼›
     if (len >= reflen) len = reflen;
     else {
        for (;len<reflen;len++) tempbuf[len] = '0';

@@ -59,7 +59,7 @@ void TM1637_SwitchDataPinMode(IIC_DATA_PIN_MODE pinMOde)
 }
 
 /*
-Ê±ÖÓÏßÎª¸ßÊ±£¬Êı¾İÏßÓÉ¸ß±äµÍ
+æ—¶é’Ÿçº¿ä¸ºé«˜æ—¶ï¼Œæ•°æ®çº¿ç”±é«˜å˜ä½
 */
 void I2C_Start(void)
 {
@@ -75,7 +75,7 @@ void I2C_Start(void)
 
 
 /*
-*Ê±ÖÓÏßÎª¸ßÊ±£¬Êı¾İÏßÓÉµÍ±ä¸ß
+*æ—¶é’Ÿçº¿ä¸ºé«˜æ—¶ï¼Œæ•°æ®çº¿ç”±ä½å˜é«˜
 */
 void I2C_stop(void)
 {
@@ -91,7 +91,7 @@ void I2C_stop(void)
 }
 
 
-//Ğ´Ò»¸ö±ÈÌØÎ»
+//å†™ä¸€ä¸ªæ¯”ç‰¹ä½
 void TM1637_WriteBit(unsigned char mBit)
 {
 	CLK_0;
@@ -107,12 +107,12 @@ void TM1637_WriteBit(unsigned char mBit)
 	TM1637_Delay_Us();
 }
 
-//Ğ´Ò»¸ö×Ö½Ú    
+//å†™ä¸€ä¸ªå­—èŠ‚    
 void TM1637_WriteByte(unsigned char Byte)
 {
 	char loop = 0;
 	for (loop = 0; loop < 8; loop++) {
-		TM1637_WriteBit((Byte >> loop) & 0x01);//ÏÈĞ´µÍÎ»	
+		TM1637_WriteBit((Byte >> loop) & 0x01);//å…ˆå†™ä½ä½	
 	}
 	CLK_0;
 	TM1637_Delay_Us();
@@ -131,14 +131,14 @@ void TM1637_WriteByte(unsigned char Byte)
 		}
 	}
 	TM1637_SwitchDataPinMode(IIC_DATA_PIN_OUTPUT);
-	//µÈ´ıÓ¦´ğĞÅºÅ
+	//ç­‰å¾…åº”ç­”ä¿¡å·
 }
 
 /*
-*Ğ´Ö¸Áîº¯Êı
-*B7:B6 =01  Êı¾İÃüÁî¿ØÖÆ
-*            11µØÖ·ÃüÁî¿ØÖÆ
-*            10ÏÔÊ¾ÃüÁî¿ØÖÆ
+*å†™æŒ‡ä»¤å‡½æ•°
+*B7:B6 =01  æ•°æ®å‘½ä»¤æ§åˆ¶
+*            11åœ°å€å‘½ä»¤æ§åˆ¶
+*            10æ˜¾ç¤ºå‘½ä»¤æ§åˆ¶
 */
 
 void TM1637_WriteCommand(unsigned char mData)
@@ -150,7 +150,7 @@ void TM1637_WriteCommand(unsigned char mData)
 
 
 /*
-*@note  Ğ´ÈëµØÖ·ºÍÊı¾İ
+*@note  å†™å…¥åœ°å€å’Œæ•°æ®
 */
 
 void TM1637_WriteData(unsigned char addr, unsigned char mData)
@@ -237,7 +237,7 @@ static void TM1637_GetBcdOfDisplay(DispContext* dispContext, DispContext* bcdCon
 	}
 }
 /*
- ¿ØÖÆÏÔÊ¾£¬ÅäÖÃºÃÊı¾İ½á¹¹ÌåÖ®ºó£¬Ö±½Óµ÷ÓÃ¸Ãº¯Êı¾Í¿ÉÒÔÏÔÊ¾
+ æ§åˆ¶æ˜¾ç¤ºï¼Œé…ç½®å¥½æ•°æ®ç»“æ„ä½“ä¹‹åï¼Œç›´æ¥è°ƒç”¨è¯¥å‡½æ•°å°±å¯ä»¥æ˜¾ç¤º
   */
 static void TM1637_CMDDisplay(DispContext *dispContext, TM1637_DISPLAY_TYPE type)
 {

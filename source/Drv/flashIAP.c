@@ -6,8 +6,8 @@ INT32U Flash_getPartitionStartAddr(INT32U partitionID);
 
 INT32U ReadFromFlashOneWord(INT32U addr)
 {
-	//´ÓFlashÖĞ¶ÁÈ¡Ò»¸ö×Ö£¨°ë¸ö×ÖµÄ¶ÁÈ¡£©
-	INT32U HData, LData;//¶¨Òå¸ßÎ»¡¢µÍÎ»Á½¸öÊı¾İ
+	//ä»Flashä¸­è¯»å–ä¸€ä¸ªå­—ï¼ˆåŠä¸ªå­—çš„è¯»å–ï¼‰
+	INT32U HData, LData;//å®šä¹‰é«˜ä½ã€ä½ä½ä¸¤ä¸ªæ•°æ®
 	HData = (__IO INT16U)addr;
 	LData = (__IO INT16U)(addr + 2);
 	return (HData << 16) + LData;
@@ -15,7 +15,7 @@ INT32U ReadFromFlashOneWord(INT32U addr)
 
 INT16U ReadFromFlashHalfWord(INT32U addr)
 {
-	//¶ÁÈ¡32Î»×Ö½ÚÊı¾İºó·µ»Ø16Î»Êı¾İ
+	//è¯»å–32ä½å­—èŠ‚æ•°æ®åè¿”å›16ä½æ•°æ®
 	return (INT16U)(*(( INT32U *)addr));
 }
 
@@ -64,19 +64,19 @@ INT32 Flash_WriteToFlashMass(INT32U partitionID, INT32U offset, INT8U *writeData
 	}
 	INT32U startAddr = Flash_getPartitionStartAddr(partitionID);        
     FLASH_Status flashStatus;
-	//ÏòFlashÖ¸¶¨µÄµØÖ·Ğ´ÈëÒ»¸ö×Ö
+	//å‘FlashæŒ‡å®šçš„åœ°å€å†™å…¥ä¸€ä¸ªå­—
 	FLASH_Unlock();
-	//Çå³ı±êÖ¾Î»
+	//æ¸…é™¤æ ‡å¿—ä½
 	//FLASH_ClearFlag(FLASH_FLAG_BSY | FLASH_FLAG_EOP | FLASH_FLAG_PGERR | FLASH_FLAG_WRPRTERR);
-	//²Á³ı
+	//æ“¦é™¤
 	FLASH_ErasePage(startAddr);
-	//Ğ´ÈëFlash
+	//å†™å…¥Flash
 	INT16U halfWordWriteVal;
 	INT32U i = 0;
 	for (i = 0; i < (writeLen / 2); i++) {
 		halfWordWriteVal = (writeData[i * 2+1]<<8)| writeData[i * 2];
 		flashStatus = FLASH_ProgramHalfWord(startAddr + i * HALF_WORD_LENGHT_BYTE, halfWordWriteVal);
-		if (flashStatus != FLASH_COMPLETE) {  //FLASH_COMPLETE±íÊ¾ÉÁ´æÍê³É  
+		if (flashStatus != FLASH_COMPLETE) {  //FLASH_COMPLETEè¡¨ç¤ºé—ªå­˜å®Œæˆ  
 	        FLASH_Lock();  
 			return -1;
 		}
@@ -84,19 +84,19 @@ INT32 Flash_WriteToFlashMass(INT32U partitionID, INT32U offset, INT8U *writeData
 	if ((writeLen % 2) == 1) {
 		halfWordWriteVal = writeData[writeLen];
 		flashStatus = FLASH_ProgramHalfWord(startAddr + i * HALF_WORD_LENGHT_BYTE, halfWordWriteVal);
-		if (flashStatus != FLASH_COMPLETE) {  //FLASH_COMPLETE±íÊ¾ÉÁ´æÍê³É   
+		if (flashStatus != FLASH_COMPLETE) {  //FLASH_COMPLETEè¡¨ç¤ºé—ªå­˜å®Œæˆ   
 	        FLASH_Lock();  
 			return -1;
 		}
 	}
-	//Ëø¶¨Flash
+	//é”å®šFlash
 	FLASH_Lock();  
 	return SUCCESS;
 }
-//¶ÁĞ´²âÊÔ£º
+//è¯»å†™æµ‹è¯•ï¼š
 //
 //uint32_t TestData = 0x12345678;
-//uint32_t TestAddr = 0x0800F000;                 //Ğ´ÈëFlash
+//uint32_t TestAddr = 0x0800F000;                 //å†™å…¥Flash
 //WriteToFlashOneWord(TestAddr, TestData);
 //HAL_Delay(100);
 //

@@ -97,28 +97,28 @@ static KeyStatusST *g_Keys[] = {
 	&ButtonUpStatus,
 	&ButtonDownStatus,
 };
-/***************  ÅäÖÃLEDÓÃµ½µÄI/O¿Ú *******************/
+/***************  é…ç½®LEDç”¨åˆ°çš„I/Oå£ *******************/
 static void LED_GPIO_Config(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE); // Ê¹ÄÜPC¶Ë¿ÚÊ±ÖÓ  
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE); // ä½¿èƒ½PCç«¯å£æ—¶é’Ÿ  
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);  //³õÊ¼»¯PC¶Ë¿Ú
-	GPIO_SetBits(GPIOC, GPIO_Pin_13);  // ¹Ø±ÕËùÓĞLED
+	GPIO_Init(GPIOC, &GPIO_InitStructure);  //åˆå§‹åŒ–PCç«¯å£
+	GPIO_SetBits(GPIOC, GPIO_Pin_13);  // å…³é—­æ‰€æœ‰LED
 }
 
-/*	 ÅäÖÃ°´¼üÓÃµ½µÄI/O¿Ú */
+/*	 é…ç½®æŒ‰é”®ç”¨åˆ°çš„I/Oå£ */
 static void Key_GPIO_Config(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
 
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE); //¿ªÆô°´¼ü¶Ë¿ÚPBµÄÊ±ÖÓ
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE); //å¼€å¯æŒ‰é”®ç«¯å£PBçš„æ—¶é’Ÿ
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | BUTTON_UP | BUTTON_DOWN;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; //¶Ë¿ÚÅäÖÃÎªÉÏÀ­ÊäÈë
-	GPIO_Init(GPIOA, &GPIO_InitStructure);	//³õÊ¼»¯¶Ë¿Ú
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; //ç«¯å£é…ç½®ä¸ºä¸Šæ‹‰è¾“å…¥
+	GPIO_Init(GPIOA, &GPIO_InitStructure);	//åˆå§‹åŒ–ç«¯å£
 }
 //BitAction state = (BitAction)GPIO_ReadOutputDataBit(currentKey->config->port, currentKey->config->pin);
 static void Key_UpdateStatus(INT8U *keyStatus, KEY_EVENT_BIT event)
@@ -189,14 +189,14 @@ Return Code      :None
 **************************************************************************/
 static void Key_Init(void)
 {
-	LED_GPIO_Config(); //LED ¶Ë¿Ú³õÊ¼»¯   	
-	Key_GPIO_Config();//°´¼ü¶Ë¿Ú³õÊ¼»¯
+	LED_GPIO_Config(); //LED ç«¯å£åˆå§‹åŒ–   	
+	Key_GPIO_Config();//æŒ‰é”®ç«¯å£åˆå§‹åŒ–
 
 	TmrKey = CreateTimer(Key_Scan);
 	StartTimer(TmrKey, _MS(20));
 //	INT8U testBuf[] = "test write APIS";
-//    //±ÜÃâÃ¿´ÎÖØÆô¶¼Ğ´Ò»´Î¡£½«Ğ¾Æ¬µÄflash´óĞ¡£¬ÓÉ±¾ÉíµÄ64K(0x10000)µ÷Õûµ½0xC000,²»ÔÙĞ´¡£
-//    //Ö®Ç°Ğ´ÔÚÕâÀïµÄÊı¾İ£¬ÈÔÈ»±£Áô£¬Ğ¾Æ¬ÈÔÈ»ÄÜ¶Á
+//    //é¿å…æ¯æ¬¡é‡å¯éƒ½å†™ä¸€æ¬¡ã€‚å°†èŠ¯ç‰‡çš„flashå¤§å°ï¼Œç”±æœ¬èº«çš„64K(0x10000)è°ƒæ•´åˆ°0xC000,ä¸å†å†™ã€‚
+//    //ä¹‹å‰å†™åœ¨è¿™é‡Œçš„æ•°æ®ï¼Œä»ç„¶ä¿ç•™ï¼ŒèŠ¯ç‰‡ä»ç„¶èƒ½è¯»
 //	INT32 res = Flash_WriteToFlashMass(PARTITION_USER_KEY, 0, testBuf, sizeof(testBuf));
 //    if(res != SUCCESS){
 //		KEY_DEBUG(("Flash_WriteToFlashMass failed !!!"));

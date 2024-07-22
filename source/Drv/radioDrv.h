@@ -171,13 +171,13 @@ enum
 #define AM_LOCAL_OFFSET         		30  
 
 
-#define DEFAULT_FM_LOC_SSTOP        	0x60//9*17=153,∂‘”¶98.1MHz‘º37dB
-#define DEFAULT_FM_DIS_SSTOP        	0x60//6*17=102,∂‘”¶98.1MHz‘º22dB
-#define DEFAULT_AM_LOC_SSTOP        	0x60// µº “—æ≠√ª”√
+#define DEFAULT_FM_LOC_SSTOP        	0x60//9*17=153,ÂØπÂ∫î98.1MHzÁ∫¶37dB
+#define DEFAULT_FM_DIS_SSTOP        	0x60//6*17=102,ÂØπÂ∫î98.1MHzÁ∫¶22dB
+#define DEFAULT_AM_LOC_SSTOP        	0x60//ÂÆûÈôÖÂ∑≤ÁªèÊ≤°Áî®
 #define DEFAULT_AM_DIS_SSTOP        	0x60//11*17=192
 
 
-//Õ£Ã®¡È√Ù∂»…Ë÷√
+//ÂÅúÂè∞ÁÅµÊïèÂ∫¶ËÆæÁΩÆ
 #define HIT2_SMETER_DX		180//14db  //172
 #define HIT2_SMETER_LOC	202
 #define HIT2_SMETER_0		180//14db

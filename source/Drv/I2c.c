@@ -165,9 +165,9 @@ void I2C1_Tx(INT8U dest_add,INT32U subaddr,INT8U SizeOFsubaddr,INT8U* pWriteData
 					#if I2C_DEBUG
 					static INT32U  ErrCnt;
 					#endif
-					I2C_DEBUG((":> IIC·¢ËÍÊ§°Ü: %s,%l\n",__FILE__,__LINE__));
-					I2C_DEBUG((":> IIC·¢ËÍÊ§°Ü: WriteData: [%h]\n",pWriteData,len));
-					I2C_DEBUG((":> IIC·¢ËÍÊ§°Ü: dest_add:0x%o,subaddr:%x\n",dest_add,subaddr));
+					I2C_DEBUG((":> IICå‘é€å¤±è´¥: %s,%l\n",__FILE__,__LINE__));
+					I2C_DEBUG((":> IICå‘é€å¤±è´¥: WriteData: [%h]\n",pWriteData,len));
+					I2C_DEBUG((":> IICå‘é€å¤±è´¥: dest_add:0x%o,subaddr:%x\n",dest_add,subaddr));
 				}
 			}
 			else break;
@@ -207,8 +207,8 @@ BOOL I2C1_Rx(INT8U dest_add,INT32U subaddr,INT8U SizeOFsubaddr,INT8U *pReadData,
 	} while (loop > 0 && ret == FALSE);
 
 	if (!ret){
-		I2C_DEBUG((":> IIC¶ÁÈ¡´íÎó:%s,%l\n",__FILE__,__LINE__));
-		I2C_DEBUG((":> IIC¶ÁÈ¡´íÎó:dest_add:0x%o,subaddr:%x\n",dest_add,subaddr));
+		I2C_DEBUG((":> IICè¯»å–é”™è¯¯:%s,%l\n",__FILE__,__LINE__));
+		I2C_DEBUG((":> IICè¯»å–é”™è¯¯:dest_add:0x%o,subaddr:%x\n",dest_add,subaddr));
 	}
 	return ret;
 }
@@ -401,9 +401,9 @@ void I2C2_Tx(INT8U dest_add,INT32U subaddr,INT8U SizeOFsubaddr,INT8U* pWriteData
 					#if I2C_DEBUG
 					static INT32U  ErrCnt;
 					#endif
-					I2C_DEBUG((":> IIC·¢ËÍÊ§°Ü: %s,%l\n",__FILE__,__LINE__));
-					I2C_DEBUG((":> IIC·¢ËÍÊ§°Ü: WriteData: [%h]\n",pWriteData,len));
-					I2C_DEBUG((":> IIC·¢ËÍÊ§°Ü: dest_add:0x%o,subaddr:%x\n",dest_add,subaddr));
+					I2C_DEBUG((":> IICå‘é€å¤±è´¥: %s,%l\n",__FILE__,__LINE__));
+					I2C_DEBUG((":> IICå‘é€å¤±è´¥: WriteData: [%h]\n",pWriteData,len));
+					I2C_DEBUG((":> IICå‘é€å¤±è´¥: dest_add:0x%o,subaddr:%x\n",dest_add,subaddr));
 				}
 			}
 			else break;
@@ -443,8 +443,8 @@ BOOL I2C2_Rx(INT8U dest_add,INT32U subaddr,INT8U SizeOFsubaddr,INT8U *pReadData,
 	} while (loop > 0 && ret == FALSE);
 
 	if (!ret){
-		I2C_DEBUG((":> IIC¶ÁÈ¡´íÎó:%s,%l\n",__FILE__,__LINE__));
-		I2C_DEBUG((":> IIC¶ÁÈ¡´íÎó:dest_add:0x%o,subaddr:%x\n",dest_add,subaddr));
+		I2C_DEBUG((":> IICè¯»å–é”™è¯¯:%s,%l\n",__FILE__,__LINE__));
+		I2C_DEBUG((":> IICè¯»å–é”™è¯¯:dest_add:0x%o,subaddr:%x\n",dest_add,subaddr));
 	}
 	return ret;
 }
@@ -522,7 +522,7 @@ BOOL EEP_ReadData(INT32U subaddr,INT8U *pReadData,INT16U len)
 INT8U EEP_WriteData(INT32U subaddr,INT8U *pWriteData,INT16U len) 
 {
 	INT16U i,OffSet,Len1;
-	//1¡¢´ÓÆğÊ¼Î»ÖÃµ½Ò³±¶Êı
+	//1ã€ä»èµ·å§‹ä½ç½®åˆ°é¡µå€æ•°
 	if(len == 0)	return TRUE;
 	
 	Len1 = EEPROM_PAGE_BYTES-(subaddr%EEPROM_PAGE_BYTES);
@@ -536,14 +536,14 @@ INT8U EEP_WriteData(INT32U subaddr,INT8U *pWriteData,INT16U len)
 		RTC_DelayXms(20);
 	}
 	
-	//2¡¢ËùÓĞÒ³±¶Êı
+	//2ã€æ‰€æœ‰é¡µå€æ•°
 	OffSet = Len1;
 	for(i = 0; i < (len/EEPROM_PAGE_BYTES);i++ ) {
 		I2C2_Tx(I2C1_EEPROM_ADDR,subaddr+OffSet,1,pWriteData+OffSet,EEPROM_PAGE_BYTES);
 		OffSet += EEPROM_PAGE_BYTES;
 		RTC_DelayXms(20);
 	}	
-	//3¡¢×îºóµÄÓàÊı
+	//3ã€æœ€åçš„ä½™æ•°
 	if(len%EEPROM_PAGE_BYTES){
 		I2C2_Tx(I2C1_EEPROM_ADDR,subaddr+OffSet,1,pWriteData+OffSet,len%EEPROM_PAGE_BYTES);
 		RTC_DelayXms(20);

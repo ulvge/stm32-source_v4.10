@@ -21,41 +21,41 @@
 #include	"typedef.h"	
 #include	"pwm.h"
 /****************************************************************
- * º¯ÊıÃû£ºvoid GPIO_Config(void) 
- * ÃèÊö  £ºÅäÖÃ¸´ÓÃÊä³öPWMÊ±ÓÃµ½µÄI/O 
- * ÊäÈë  £ºÎŞ 
- * Êä³ö  £ºÎŞ 
- * µ÷ÓÃ  £ºmain()µ÷ÓÃ 
-¡ñ TIM1_CH1 pin (PA8)   pwm
-¡ñ TIM1_CH1N pin (PB13)
-¡ñ TIM1_CH2 pin (PA9)
-¡ñ TIM1_CH2N pin (PB14)
-¡ñ TIM1_CH3 pin (PA10)
-¡ñ TIM1_CH3N pin (PB15)
+ * å‡½æ•°åï¼švoid GPIO_Config(void) 
+ * æè¿°  ï¼šé…ç½®å¤ç”¨è¾“å‡ºPWMæ—¶ç”¨åˆ°çš„I/O 
+ * è¾“å…¥  ï¼šæ—  
+ * è¾“å‡º  ï¼šæ—  
+ * è°ƒç”¨  ï¼šmain()è°ƒç”¨ 
+â— TIM1_CH1 pin (PA8)   pwm
+â— TIM1_CH1N pin (PB13)
+â— TIM1_CH2 pin (PA9)
+â— TIM1_CH2N pin (PB14)
+â— TIM1_CH3 pin (PA10)
+â— TIM1_CH3N pin (PB15)
  ***************************************************************/
 #define PWM_TIM TIM1
 #define PWM_PIN GPIO_Pin_8
 #define PWM_PERCNET_DEFAULT 50	
 #define PWM_RESOLUTION_DEFAULT 5	//step
 
-//32MÏµÍ³Ê±ÖÓ£¬²»·ÖÆµ£º32M, ×î¸ßÆµÂÊ32M
-//32MÏµÍ³Ê±ÖÓ£¬32·ÖÆµ£º1M, ×î¸ßÆµÂÊ1M.
-//TIM_Period = 1000£¬¼´1ms; ÔòÆµÂÊÎª1000HZ
-//TIM_Period = 500£¬¼´0.5ms; ÔòÆµÂÊÎª2000HZ
+//32Mç³»ç»Ÿæ—¶é’Ÿï¼Œä¸åˆ†é¢‘ï¼š32M, æœ€é«˜é¢‘ç‡32M
+//32Mç³»ç»Ÿæ—¶é’Ÿï¼Œ32åˆ†é¢‘ï¼š1M, æœ€é«˜é¢‘ç‡1M.
+//TIM_Period = 1000ï¼Œå³1ms; åˆ™é¢‘ç‡ä¸º1000HZ
+//TIM_Period = 500ï¼Œå³0.5ms; åˆ™é¢‘ç‡ä¸º2000HZ
 
-//ÆµÂÊÎª1000HZ,¼´ÖÜÆÚ1ms£¬  TIM_Period = 1000
-//ÆµÂÊÎª2000HZ ¼´ÖÜÆÚ0.5ms£¬TIM_Period = 500
+//é¢‘ç‡ä¸º1000HZ,å³å‘¨æœŸ1msï¼Œ  TIM_Period = 1000
+//é¢‘ç‡ä¸º2000HZ å³å‘¨æœŸ0.5msï¼ŒTIM_Period = 500
 INT32U PWM_FREQUENCY =  1500;
 
 #define PWM_PRE_SCALE_DIV36_1M   (OS_CLOCK_X_MHZ)
 #define PWM_PRE_SCALE_DIV3600_1K  (OS_CLOCK_X_KHZ)
 typedef struct {
-	INT32U	freMax;		           //µ±Ç°Ô¤·ÖÆµµÄ×î¸ßÖ§³ÖµÄPWMÆµÂÊ
-	INT16U	preScale;              //Ô¤·ÖÆµµÄÖµ
-	INT16U	repetNums;              //Ô¤·ÖÆµÖµ
+	INT32U	freMax;		           //å½“å‰é¢„åˆ†é¢‘çš„æœ€é«˜æ”¯æŒçš„PWMé¢‘ç‡
+	INT16U	preScale;              //é¢„åˆ†é¢‘çš„å€¼
+	INT16U	repetNums;              //é¢„åˆ†é¢‘å€¼
 
-	//Éè¶¨·Ö¸îÆµÂÊ£¬¸ù¾İÂË²¨ÏµÊı¾ö¶¨µÄ²ÉÑùÆµÂÊºÍNÊÂ¼şÓĞÀûÓÚÂË³ı¸ßÆµ¸ÉÈÅĞÅºÅ
-	INT16U	clkDiv;               //ºÍPWMËÀÇøĞÅºÅÓĞ¹Ø https://blog.csdn.net/yuyan7045/article/details/121289037?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.nonecase
+	//è®¾å®šåˆ†å‰²é¢‘ç‡ï¼Œæ ¹æ®æ»¤æ³¢ç³»æ•°å†³å®šçš„é‡‡æ ·é¢‘ç‡å’ŒNäº‹ä»¶æœ‰åˆ©äºæ»¤é™¤é«˜é¢‘å¹²æ‰°ä¿¡å·
+	INT16U	clkDiv;               //å’ŒPWMæ­»åŒºä¿¡å·æœ‰å…³ https://blog.csdn.net/yuyan7045/article/details/121289037?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.nonecase
 }FrequecnyPreScale_ST;
 static const FrequecnyPreScale_ST g_tablePreScale[] = {
 	{100,			PWM_PRE_SCALE_DIV3600_1K, 0, TIM_CKD_DIV1},
@@ -63,24 +63,24 @@ static const FrequecnyPreScale_ST g_tablePreScale[] = {
 };
 
 typedef enum {
-	PWM_DispMode_CntSlef = (INT8U)0,	//×ÔÔö
-	PWM_DispMode_Table,			//²é±í
-	PWM_DispMode_Remote,			//Ô¶³Ì¿ØÖÆ
+	PWM_DispMode_CntSlef = (INT8U)0,	//è‡ªå¢
+	PWM_DispMode_Table,			//æŸ¥è¡¨
+	PWM_DispMode_Remote,			//è¿œç¨‹æ§åˆ¶
 	PWM_DispMode_MAX,
 }PWM_DispMode_ST;
 
-//Í¨¹ıshell£¬À´Ñ¡ÔñLEDÄ£Ê½,
+//é€šè¿‡shellï¼Œæ¥é€‰æ‹©LEDæ¨¡å¼,
 typedef struct {
 	INT32U	workFreq;
 	INT16U	preScale;
 	INT16U	repetNums;
 	INT16U	clkDiv;
 
-	INT16U	Perio;      //ÖÜÆÚ
-	INT16U	Resolution; //·Ö±æÂÊ °´¼ü¼Ó/¼õ Ê±µÄstepValµÄÖµ
+	INT16U	Perio;      //å‘¨æœŸ
+	INT16U	Resolution; //åˆ†è¾¨ç‡ æŒ‰é”®åŠ /å‡ æ—¶çš„stepValçš„å€¼
 	INT16U	DispRGBMode;
 	INT16U	DispSpeedMode;
-	INT16U	DispTbIndex;//TBColorÖĞµÄindex
+	INT16U	DispTbIndex;//TBColorä¸­çš„index
 } PWM_CFG;
 PWM_CFG  PwmCfg;
 
@@ -117,7 +117,7 @@ static INT16U PWM_getPWMDefaultConfig(PWM_CFG* config)
 	return TRUE;
 }
 
- /* ÅäÖÃTIM1¸´ÓÃÊä³öPWMÊ±ÓÃµ½µÄI/O  */
+ /* é…ç½®TIM1å¤ç”¨è¾“å‡ºPWMæ—¶ç”¨åˆ°çš„I/O  */
 static void PWM_GPIO_Config(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -153,13 +153,13 @@ void PWM_SetDuty(TIM_TypeDef* TIMx,INT16U pin,INT16U duty)
 {
     TIM_OCInitTypeDef  TIM_OCInitStructure;  
 	
-	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;                           //ÅäÖÃÎªPWMÄ£Ê½1  
-	TIM_OCInitStructure.TIM_Pulse = duty;                                       //ÉèÖÃÌø±äÖµ£¬µ±¼ÆÊıÆ÷¼ÆÊıµ½Õâ¸öÖµÊ±£¬µçÆ½·¢ÉúÌø±ä  
-	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;                    //µ±¶¨Ê±Æ÷¼ÆÊıÖµĞ¡ÓÚCCR2Ê±ÎªµÍµçÆ½ 
+	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;                           //é…ç½®ä¸ºPWMæ¨¡å¼1  
+	TIM_OCInitStructure.TIM_Pulse = duty;                                       //è®¾ç½®è·³å˜å€¼ï¼Œå½“è®¡æ•°å™¨è®¡æ•°åˆ°è¿™ä¸ªå€¼æ—¶ï¼Œç”µå¹³å‘ç”Ÿè·³å˜  
+	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;                    //å½“å®šæ—¶å™¨è®¡æ•°å€¼å°äºCCR2æ—¶ä¸ºä½ç”µå¹³ 
 	
-	TIM_OCInitStructure.TIM_OCIdleState = TIM_OCIdleState_Reset;					//RGBÎª¹²Ñô£¬¹Ê¿ÕÏĞÊ±Ò²À­¸ß
+	TIM_OCInitStructure.TIM_OCIdleState = TIM_OCIdleState_Reset;					//RGBä¸ºå…±é˜³ï¼Œæ•…ç©ºé—²æ—¶ä¹Ÿæ‹‰é«˜
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;    
-    //TIM_OCInitStructure.TIM_OCNPolarity = TIM_OCNPolarity_Low;//¿ª·´ÏòÍ¨µÀ
+    //TIM_OCInitStructure.TIM_OCNPolarity = TIM_OCNPolarity_Low;//å¼€åå‘é€šé“
 	
     switch(pin){
         case PWM_PIN:
@@ -174,8 +174,8 @@ void PWM_SetDuty(TIM_TypeDef* TIMx,INT16U pin,INT16U duty)
     return;
 }
 /*
-*dutyPercent:Öµ[0,100]
-PwmCfg.Resolution  :·Ö±æÂÊ 100£¬´Ó0~99£¬100¸ö½×Ìİ
+*dutyPercent:å€¼[0,100]
+PwmCfg.Resolution  :åˆ†è¾¨ç‡ 100ï¼Œä»0~99ï¼Œ100ä¸ªé˜¶æ¢¯
 */
 static INT16U  PWM_calcDutyByPercent(INT8U dutyPercent)
 {
@@ -208,18 +208,18 @@ static void PWM_TIM1_Config(PWM_CFG* pwmConfig) //INT8U psc, INT32U repetNums)
 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
 	/* Time base configuration */
-	TIM_TimeBaseStructure.TIM_Prescaler = pwmConfig->preScale - 1;                   //ÉèÖÃÔ¤·ÖÆµ£ºÔ¤·ÖÆµ=32£¬¼´Îª32/32=1MHz  
-	TIM_TimeBaseStructure.TIM_ClockDivision = pwmConfig->clkDiv;                 //0£º²»·ÖÆµ;ÉèÖÃÊ±ÖÓ·ÖÆµÏµÊı£º²»·ÖÆµ  
+	TIM_TimeBaseStructure.TIM_Prescaler = pwmConfig->preScale - 1;                   //è®¾ç½®é¢„åˆ†é¢‘ï¼šé¢„åˆ†é¢‘=32ï¼Œå³ä¸º32/32=1MHz  
+	TIM_TimeBaseStructure.TIM_ClockDivision = pwmConfig->clkDiv;                 //0ï¼šä¸åˆ†é¢‘;è®¾ç½®æ—¶é’Ÿåˆ†é¢‘ç³»æ•°ï¼šä¸åˆ†é¢‘  
 	TIM_TimeBaseStructure.TIM_Period = pwmConfig->Perio - 1;
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;                 //ÏòÉÏ¼ÆÊıÒç³öÄ£Ê½  
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;                 //å‘ä¸Šè®¡æ•°æº¢å‡ºæ¨¡å¼  
 
-	TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;		//Ã¿´ÎÏòÉÏÒç³ö¶¼²úÉú¸üĞÂÊÂ¼ş;ÏòÉÏÒç³ö,ÖØ¸´x´Îºó£¬²ÅÉÏ±¨Ò»´ÎÖĞ¶Ï
+	TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;		//æ¯æ¬¡å‘ä¸Šæº¢å‡ºéƒ½äº§ç”Ÿæ›´æ–°äº‹ä»¶;å‘ä¸Šæº¢å‡º,é‡å¤xæ¬¡åï¼Œæ‰ä¸ŠæŠ¥ä¸€æ¬¡ä¸­æ–­
 	TIM_TimeBaseInit(PWM_TIM, &TIM_TimeBaseStructure);
 	PWM_SetDuty(PWM_TIM, PWM_PIN, PWM_calcDutyByPercent(PWM_PERCNET_DEFAULT));
-	//ÉèÖÃPWM_TIMµÄPWMÊä³öÎªÊ¹ÄÜ
+	//è®¾ç½®PWM_TIMçš„PWMè¾“å‡ºä¸ºä½¿èƒ½
 	TIM_CtrlPWMOutputs(PWM_TIM, ENABLE);
 	/* PWM_TIM enable counter */
-	TIM_ARRPreloadConfig(PWM_TIM, ENABLE);                                         //Ê¹ÄÜPWM_TIMÖØÔØ¼Ä´æÆ÷ARR  
+	TIM_ARRPreloadConfig(PWM_TIM, ENABLE);                                         //ä½¿èƒ½PWM_TIMé‡è½½å¯„å­˜å™¨ARR  
 	
 	
 	PWM_DEBUG(("->: PWM_Duty percent default [%l]\n", PWM_PERCNET_DEFAULT));
@@ -229,26 +229,26 @@ __attribute__((unused)) static void PWN_ITConfig(void)
 {
 	NVIC_InitTypeDef NVIC_InitStructure;
 
-	//Step3.ÖĞ¶ÏNVICÉèÖÃ£ºÔÊĞíÖĞ¶Ï£¬ÉèÖÃÓÅÏÈ¼¶ 
-	NVIC_InitStructure.NVIC_IRQChannel = TIM1_UP_IRQChannel;    //¸üĞÂÊÂ¼ş 
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;   //ÇÀÕ¼ÓÅÏÈ¼¶0 
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;        //ÏìÓ¦ÓÅÏÈ¼¶1 
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;           //ÔÊĞíÖĞ¶Ï 
-	NVIC_Init(&NVIC_InitStructure);                       //Ğ´ÈëÉèÖÃ 
+	//Step3.ä¸­æ–­NVICè®¾ç½®ï¼šå…è®¸ä¸­æ–­ï¼Œè®¾ç½®ä¼˜å…ˆçº§ 
+	NVIC_InitStructure.NVIC_IRQChannel = TIM1_UP_IRQChannel;    //æ›´æ–°äº‹ä»¶ 
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;   //æŠ¢å ä¼˜å…ˆçº§0 
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;        //å“åº”ä¼˜å…ˆçº§1 
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;           //å…è®¸ä¸­æ–­ 
+	NVIC_Init(&NVIC_InitStructure);                       //å†™å…¥è®¾ç½® 
 
-	//Ê¹ÄÜTIM1ÖĞ¶ÏÔ´ 
+	//ä½¿èƒ½TIM1ä¸­æ–­æº 
 	TIM_ITConfig(PWM_TIM, TIM_IT_Update, ENABLE);
 }
 /// <summary>
-/// ¸ù¾İÆµÂÊ£¬µ±ÖĞ¶Ï´ÎÊı==ÆµÂÊÊ±£¬´òÓ¡Êä³ö£¬È·ÈÏÊ±¼ä£¬ÊÇ·ñ¸ÕºÃÊÇ1s
+/// æ ¹æ®é¢‘ç‡ï¼Œå½“ä¸­æ–­æ¬¡æ•°==é¢‘ç‡æ—¶ï¼Œæ‰“å°è¾“å‡ºï¼Œç¡®è®¤æ—¶é—´ï¼Œæ˜¯å¦åˆšå¥½æ˜¯1s
 /// </summary>
 /// <param name=""></param>
 void TIM1_UP_IRQHandler_ISR(void)
 {
 	static INT32U count;
 
-	if (TIM_GetITStatus(TIM1, TIM_IT_Update) != RESET) {//¼ì²éÖ¸¶¨µÄTIMÖĞ¶Ï·¢ÉúÓë·ñ:TIM ÖĞ¶ÏÔ´ 
-		TIM_ClearITPendingBit(TIM1, TIM_IT_Update);//Çå³ıTIMxµÄÖĞ¶Ï´ı´¦ÀíÎ»:TIM ÖĞ¶ÏÔ´ 
+	if (TIM_GetITStatus(TIM1, TIM_IT_Update) != RESET) {//æ£€æŸ¥æŒ‡å®šçš„TIMä¸­æ–­å‘ç”Ÿä¸å¦:TIM ä¸­æ–­æº 
+		TIM_ClearITPendingBit(TIM1, TIM_IT_Update);//æ¸…é™¤TIMxçš„ä¸­æ–­å¾…å¤„ç†ä½:TIM ä¸­æ–­æº 
 	}
 	count++;
 	if (count >= PWM_FREQUENCY) {
@@ -268,7 +268,7 @@ static void PWM_Init(void)
 
 	PWM_TIM1_Config(&PwmCfg);
 	//PWN_ITConfig();
-	TIM_Cmd(PWM_TIM, ENABLE);                   //Ê¹ÄÜPWM_TIM   
+	TIM_Cmd(PWM_TIM, ENABLE);                   //ä½¿èƒ½PWM_TIM   
 }
 
 CoreInitCall(PWM_Init);

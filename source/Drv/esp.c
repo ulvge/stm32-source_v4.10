@@ -11,7 +11,7 @@
 #endif
 
 
-#define    Addr_CfgNetPara     0x50    //ÔÚEepµ±ÖĞ±£´æ²ÎÊıµÄÆğÊ¼µØÖ·
+#define    Addr_CfgNetPara     0x50    //åœ¨Eepå½“ä¸­ä¿å­˜å‚æ•°çš„èµ·å§‹åœ°å€
 #define         SEP_CMD_SIZE     255
 
 static INT8U s_FIFO_Esp[SEP_CMD_SIZE];     
@@ -66,8 +66,8 @@ ESP_ST    Esp;
 
 typedef struct{         
     //INT8U    Index;    //
-    INT8U    DlyTick;        //·¢ËÍÃüÁîºó£¬µÈ´ıÒ»¶¨µÄÖÜÆÚ£¬Ê¹Ö®µÃµ½Ïà¹ØµÄ´ğÓ¦Êı¾İ
-                            //ÖØÆô/Á¬½ÓÍøÂçÊ±£¬µÈ´ıµÄÊ±¼äÒª³¤Ò»Ğ©
+    INT8U    DlyTick;        //å‘é€å‘½ä»¤åï¼Œç­‰å¾…ä¸€å®šçš„å‘¨æœŸï¼Œä½¿ä¹‹å¾—åˆ°ç›¸å…³çš„ç­”åº”æ•°æ®
+                            //é‡å¯/è¿æ¥ç½‘ç»œæ—¶ï¼Œç­‰å¾…çš„æ—¶é—´è¦é•¿ä¸€äº›
         
     INT8U (*func)(INT8U ch);
     char    * command;
@@ -90,29 +90,29 @@ typedef struct
 }SYS_CONFIG_ST;
 SYS_CONFIG_ST Cfg;
 
-CMD_LIST_ST  CmdList[]={    //ÉĞ²»ÄÜËæÒâ¸ü¸Ä£¬ÔöÌíĞòÁĞ
+CMD_LIST_ST  CmdList[]={    //å°šä¸èƒ½éšæ„æ›´æ”¹ï¼Œå¢æ·»åºåˆ—
         //{DLY_DEFULAT        ,Esp_IsTestAT,        "AT"},    
         {DLY_DEFULAT        ,null,        "AT"},                                            //debug;
-        {DLY_DEFULAT        ,null,        "AT+CWMODE=1"},                                //¹¤×÷Ä£Ê½ AP,satation
+        {DLY_DEFULAT        ,null,        "AT+CWMODE=1"},                                //å·¥ä½œæ¨¡å¼ AP,satation
         {DLY_DEFULAT*10        ,Esp_IsRest,        "AT+RST"},
-        {DLY_DEFULAT*25        ,Esp_IsConfigWifi_OK,        (char*)&Cfg.Wifi},            //{DLY_DEFULAT*5,"AT+CWJAP=MERCURY_F06A\",\"0123456780\""},    //9ÎªAT+CWJAP=
-        //{DLY_DEFULAT        ,null,        "AT+CWAUTOCONN=1"},                            //×Ô¶¯ÁªÍø
-        {DLY_DEFULAT        ,null,        "AT+CIPMUX=0"},                                //µ¥Á¬½Ó
-        {DLY_DEFULAT        ,null,        "AT+CIPMODE=0"},                    //0:·ÇÍ¸Ã÷;1:Í¸´«
+        {DLY_DEFULAT*25        ,Esp_IsConfigWifi_OK,        (char*)&Cfg.Wifi},            //{DLY_DEFULAT*5,"AT+CWJAP=MERCURY_F06A\",\"0123456780\""},    //9ä¸ºAT+CWJAP=
+        //{DLY_DEFULAT        ,null,        "AT+CWAUTOCONN=1"},                            //è‡ªåŠ¨è”ç½‘
+        {DLY_DEFULAT        ,null,        "AT+CIPMUX=0"},                                //å•è¿æ¥
+        {DLY_DEFULAT        ,null,        "AT+CIPMODE=0"},                    //0:éé€æ˜;1:é€ä¼ 
         {DLY_DEFULAT*10        ,Esp_IsConnectServer,        "AT+CIPSTART=\"TCP\",\"118.193.213.167\",1000"},
         {DLY_DEFULAT        ,null,        "AT+CIPSEND=17"},//Esp_IsLinkValid
         {DLY_DEFULAT        ,Esp_IsLogin_OK,        (char*)&Cfg.Login},                //"login:zb_ctrl,321"},                            //login    
         {DLY_DEFULAT        ,null,        "AT+CIPSEND=17"},
-        {DLY_DEFULAT        ,Esp_IsPeerLink,        (char*)&Cfg.Peer},//"peer:zb_phone,321"},                            //Á¬½ÓÁíÍâµÄÓÃ»§
+        {DLY_DEFULAT        ,Esp_IsPeerLink,        (char*)&Cfg.Peer},//"peer:zb_phone,321"},                            //è¿æ¥å¦å¤–çš„ç”¨æˆ·
 
         
-        //{DLY_DEFULAT        ,null,        "AT"},        //·Ö¸ôÇ°ºóÃüÁî
+        //{DLY_DEFULAT        ,null,        "AT"},        //åˆ†éš”å‰åå‘½ä»¤
         {DLY_DEFULAT*55        ,Esp_IsSmartLink_OK,        "AT+CWSMARTSTART=0"},//Start Smart Link
         {DLY_DEFULAT        ,null,        "AT+CWSMARTSTOP"},     //Stop  Smart Link
         
         
 };
-static INT8U CmdInitNum = sizeof(CmdList)/sizeof(CmdList[0])-2;//×îºóÁ½ÌõÓï¾ä²»ĞèÒªInit
+static INT8U CmdInitNum = sizeof(CmdList)/sizeof(CmdList[0])-2;//æœ€åä¸¤æ¡è¯­å¥ä¸éœ€è¦Init
 #define    CmdSmartLink  CmdInitNum
 
 
@@ -135,7 +135,7 @@ void Esp_API_DisMode(INT32U mode)
 }
 
 INT8U Esp_API_Rec(INT8U ch,char const *Str1,char const *Str2,char const *Str3)
-{//ÊÇ·ñÓÉÖ¸¶¨µÄ×Ö·û´®
+{//æ˜¯å¦ç”±æŒ‡å®šçš„å­—ç¬¦ä¸²
     static INT16U RecIndex;
     INT8U Res=0;
     Rec[RecIndex++] = ch;
@@ -162,7 +162,7 @@ INT8U Esp_API_Rec(INT8U ch,char const *Str1,char const *Str2,char const *Str3)
             }
         }    
         RecIndex=0;
-        memset(Rec,0,sizeof(Rec));//»»ĞĞÖ®ºóÇåµô
+        memset(Rec,0,sizeof(Rec));//æ¢è¡Œä¹‹åæ¸…æ‰
     }
     return Res;
     
@@ -186,7 +186,7 @@ INT8U Esp_IsPeerLink(INT8U ch)
 
     Res = Esp_API_Rec(ch,Strpeer,StrOK,StrFAIL);
     if(Res == 3){//Strpeer&&StrOK
-        Esp.IsPeerLinkSuccess = true; //Ö÷¶¯Á¬½Ó
+        Esp.IsPeerLinkSuccess = true; //ä¸»åŠ¨è¿æ¥
         ESP_DEBUG(("\n:>ESP: Rx:peer OK \n"));
         return true;
     }else if(Res == 4){
@@ -208,8 +208,8 @@ INT8U Esp_IsTestAT(INT8U ch)
 }
 INT8U Esp_IsConnectServer(INT8U ch)
 {
-//false:½ÓÊÕÒÑ¾­Íê³É
-//Esp.IsConnectServer ½ÓÊÕ½á¹û
+//false:æ¥æ”¶å·²ç»å®Œæˆ
+//Esp.IsConnectServer æ¥æ”¶ç»“æœ
     INT8U Res;
     char const  *Str = "ALREADY CONNECTED";
 
@@ -273,7 +273,7 @@ INT8U Esp_IsConfigWifi_OK(INT8U ch)
         return true;
     }else if(Res == 4){
         Esp.IsConnectRounter = 0;
-        Esp.IsSmartLinkOver = 0;//ËµÃ÷ÃÜÂë²»¶Ô
+        Esp.IsSmartLinkOver = 0;//è¯´æ˜å¯†ç ä¸å¯¹
         ESP_DEBUG(("\n:>ESP: Rx:Connect Rounter NO \n"));
     }
     return false;
@@ -291,7 +291,7 @@ INT8U Esp_IsSmartLink_OK(INT8U ch)
 //OK
     static INT8U RecIndex,Arraryindex;          
     static char const *Pdat=null; 
-    char *pCR;//´ÓSSID¿ªÊ¼£¬½ô½Ó×ÅÑ°ÕÒKEY_CR
+    char *pCR;//ä»SSIDå¼€å§‹ï¼Œç´§æ¥ç€å¯»æ‰¾KEY_CR
     char Len;
 
     if(Pdat == null){
@@ -302,10 +302,10 @@ INT8U Esp_IsSmartLink_OK(INT8U ch)
     if(ch == KEY_CR){
         char *pSSID= strstr(Rec,StrSSID);     
         char *pPWD= strstr(Rec,StrPWD);
-        if(NULL != pSSID)//´æÔÚ
+        if(NULL != pSSID)//å­˜åœ¨
         {
             char *pt="\",\"";
-            pCR= memchr(pSSID,KEY_CR,strlen(pSSID));//´ÓSSID¿ªÊ¼£¬½ô½Ó×ÅÑ°ÕÒKEY_CR
+            pCR= memchr(pSSID,KEY_CR,strlen(pSSID));//ä»SSIDå¼€å§‹ï¼Œç´§æ¥ç€å¯»æ‰¾KEY_CR
             Len = pCR-pSSID-strlen(StrSSID);
             memcpy(Cfg.Wifi+10,pSSID+strlen(StrSSID),Len);//10:AT+CWJAP="
             memcpy(Cfg.Wifi+10+Len,pt,strlen(pt));       
@@ -317,13 +317,13 @@ INT8U Esp_IsSmartLink_OK(INT8U ch)
             RecIndex=0;
             ESP_DEBUG((":>ESP: Rx:pSSID[%S]\n",pSSID));//
         }
-        if(NULL != pPWD)//´æÔÚ
+        if(NULL != pPWD)//å­˜åœ¨
         {
             char *pt="\"";
-            pCR= memchr(pPWD,KEY_CR,strlen(pPWD));//´ÓPASSWORD¿ªÊ¼£¬½ô½Ó×ÅÑ°ÕÒKEY_CR
+            pCR= memchr(pPWD,KEY_CR,strlen(pPWD));//ä»PASSWORDå¼€å§‹ï¼Œç´§æ¥ç€å¯»æ‰¾KEY_CR
             Len = pCR-pPWD-strlen(StrPWD);                //9:
             memcpy(Cfg.Wifi+Arraryindex,pPWD+strlen(StrPWD),Len);//10:AT+CWJAP="
-            memcpy(Cfg.Wifi+Arraryindex+Len,pt,strlen(pt)+1);//+1£¬×îºóµÄ\0    
+            memcpy(Cfg.Wifi+Arraryindex+Len,pt,strlen(pt)+1);//+1ï¼Œæœ€åçš„\0    
             RecIndex=0;            
             ESP_DEBUG((":>ESP: Rx:pPWD[%S]\n",pPWD));//
             
@@ -382,8 +382,8 @@ PERI_ST Peri;
 void Esp_SysConfig(void)
 {//Type
     switch(PackProt.Buff[0]){
-        case '1'://wifi //{3,DLY_DEFULAT*5,"AT+CWJAP=MERCURY_F06A\",\"0123456780\""},    //9ÎªAT+CWJAP=                                                                            
-            memcpy((char*)&Cfg.Wifi+9,&PackProt.Buff[1],PackProt.Len-1);//µÚÒ»¸öÎªÖ¡ÊôĞÔ
+        case '1'://wifi //{3,DLY_DEFULAT*5,"AT+CWJAP=MERCURY_F06A\",\"0123456780\""},    //9ä¸ºAT+CWJAP=                                                                            
+            memcpy((char*)&Cfg.Wifi+9,&PackProt.Buff[1],PackProt.Len-1);//ç¬¬ä¸€ä¸ªä¸ºå¸§å±æ€§
             Cfg.Wifi[9+PackProt.Len-1]=0;
 
             //EE_WriteVariable(VirtAddVarTab[0], Cfg.Wifi,PackProt.Len);
@@ -392,14 +392,14 @@ void Esp_SysConfig(void)
                             (INT8U*)&Cfg.Wifi,strlen((char*)&Cfg.Wifi)+1);
             break;
         case '2'://Login     //"login:zb_ctrl,321"}
-            memcpy((char*)&Cfg.Login+6,&PackProt.Buff[1],PackProt.Len-1);//µÚÒ»¸öÎªÖ¡ÊôĞÔ     
+            memcpy((char*)&Cfg.Login+6,&PackProt.Buff[1],PackProt.Len-1);//ç¬¬ä¸€ä¸ªä¸ºå¸§å±æ€§     
             Cfg.Login[6+PackProt.Len-1]=0;
             //EE_WriteVariable(VirtAddVarTab[1], Cfg.Login,PackProt.Len);
             EEP_WriteData(Addr_CfgNetPara+sizeof(Cfg.Wifi),
                             (INT8U*)&Cfg.Login,strlen((char*)&Cfg.Login)+1);
             break;
-        case '3'://Ô¶½ü¿ØÖÆ¶ËĞÅÏ¢//"peer:zb_phone,321"}
-            memcpy((char*)&Cfg.Peer+5,&PackProt.Buff[1],PackProt.Len-1);//µÚÒ»¸öÎªÖ¡ÊôĞÔ       
+        case '3'://è¿œè¿‘æ§åˆ¶ç«¯ä¿¡æ¯//"peer:zb_phone,321"}
+            memcpy((char*)&Cfg.Peer+5,&PackProt.Buff[1],PackProt.Len-1);//ç¬¬ä¸€ä¸ªä¸ºå¸§å±æ€§       
             Cfg.Peer[5+PackProt.Len-1]=0;
             //EE_WriteVariable(VirtAddVarTab[2], Cfg.Peer,PackProt.Len);
             EEP_WriteData(Addr_CfgNetPara+sizeof(Cfg.Wifi)+sizeof(Cfg.Login),    
@@ -413,20 +413,20 @@ void Esp_SysConfig(void)
 
 void Esp_Execute(void)
 {
-    if(Pack.Buff[3]){//Ğ­ÒéÖĞÊÇ1»ò2
+    if(Pack.Buff[3]){//åè®®ä¸­æ˜¯1æˆ–2
         Esp_Ctrl(LED_0,Pack.Buff[3]-1);
     }
-    if(Pack.Buff[4]){//Ğ­ÒéÖĞÊÇ1»ò2
+    if(Pack.Buff[4]){//åè®®ä¸­æ˜¯1æˆ–2
         Esp_Ctrl(LED_1,Pack.Buff[4]-1);
     }
-    if(Pack.Buff[5]){//Ğ­ÒéÖĞÊÇ1»ò2
+    if(Pack.Buff[5]){//åè®®ä¸­æ˜¯1æˆ–2
         Esp_Ctrl(LED_2,Pack.Buff[5]-1);
     }
-    if(Pack.Buff[6]){//Ğ­ÒéÖĞÊÇ1»ò2
+    if(Pack.Buff[6]){//åè®®ä¸­æ˜¯1æˆ–2
         Esp_Ctrl(LED_3,Pack.Buff[6]-1);
     }
-    //½«½á¹û±£´æµ½Peri×´Ì¬ÖĞ
-    //Ğ­ÒéÖĞÊÇ1»ò2
+    //å°†ç»“æœä¿å­˜åˆ°PeriçŠ¶æ€ä¸­
+    //åè®®ä¸­æ˜¯1æˆ–2
     Peri.LED0 = GPIO_ReadOutputDataBit(IO_PORT_LED,IO_PIN_LED0)+1;
     Peri.LED1 = GPIO_ReadOutputDataBit(IO_PORT_LED,IO_PIN_LED1)+1;
     Peri.LED2 = GPIO_ReadOutputDataBit(IO_PORT_LED,IO_PIN_LED2)+1;
@@ -436,18 +436,18 @@ void Esp_Execute(void)
 }
 
 const char *DEN_LEN="AT+CIPSEND=";            //len=11
-//ÏÈ·¢ËÍ"½«Òª·¢ËÍÊı¾İµÄ³¤¶È"
-//Esp.DlySendSta = 20;ÑÓÊ±
-//Ê±¼äµ½ÁËÒÔºó£¬ÔÙ·¢ËÍ×´Ì¬ĞÅÏ¢
+//å…ˆå‘é€"å°†è¦å‘é€æ•°æ®çš„é•¿åº¦"
+//Esp.DlySendSta = 20;å»¶æ—¶
+//æ—¶é—´åˆ°äº†ä»¥åï¼Œå†å‘é€çŠ¶æ€ä¿¡æ¯
 
 void Esp_Ack(INT8U *Cmd,INT8U    CmdLen)
-{//CmdÊÇÒÑ¾­±»·â×°ºÃÁËµÄ£¬°üº¬ÓĞCheckSum
-    //·¢ËÍ³¤¶È
+{//Cmdæ˜¯å·²ç»è¢«å°è£…å¥½äº†çš„ï¼ŒåŒ…å«æœ‰CheckSum
+    //å‘é€é•¿åº¦
     static INT8U Send[20],*pSend;
     INT8U Len = strlen((char*)DEN_LEN);
 
     char *Ps = strstr((char*)Cmd,DEN_LEN);
-    if(Ps != null){//ÊÇEspÄ£¿éµÄ»ØÏÔ,²»ĞèÒª×ª·¢ÖÁApp
+    if(Ps != null){//æ˜¯Espæ¨¡å—çš„å›æ˜¾,ä¸éœ€è¦è½¬å‘è‡³App
         return;
     }
     if(CmdLen == 0) return;
@@ -465,7 +465,7 @@ void Esp_Ack(INT8U *Cmd,INT8U    CmdLen)
     USART_print_byte(FIFO_Chan_ESP,KEY_LF);//
 
     //Load Data
-    Esp.SendAppLen = CmdLen;//ÏÈ½«Log±£´æ£¬¶¨Ê±ÔÙ·¢ËÍ£¬ÒÔ¹»Á¢¼´·¢ËÍ£¬Esp Busy
+    Esp.SendAppLen = CmdLen;//å…ˆå°†Logä¿å­˜ï¼Œå®šæ—¶å†å‘é€ï¼Œä»¥å¤Ÿç«‹å³å‘é€ï¼ŒEsp Busy
     memset(Esp.SendApp,0,sizeof(Esp.SendApp)+1);// \0
     memcpy(Esp.SendApp,Cmd,CmdLen);//+CheckSum
         
@@ -474,11 +474,11 @@ void Esp_Ack(INT8U *Cmd,INT8U    CmdLen)
 
 void Esp_SendSta(void)
 {
-    //·¢ËÍ´ğÓ¦Êı¾İ
-    //ÆğÊ¼±êÖ¾/Á½¸ö×´Ì¬±êÖ¾/4¸ö×´Ì¬(1¹Ø±Õ£º2¿ªÆô)/ÀÛ¼ÓºÍ
+    //å‘é€ç­”åº”æ•°æ®
+    //èµ·å§‹æ ‡å¿—/ä¸¤ä¸ªçŠ¶æ€æ ‡å¿—/4ä¸ªçŠ¶æ€(1å…³é—­ï¼š2å¼€å¯)/ç´¯åŠ å’Œ
     //22     01 01     00 00 02 00     26
 
-    //·¢ËÍ³¤¶È        
+    //å‘é€é•¿åº¦        
     StopTimer(TmrEspSendApp);
     #if 1
     FIFO_Writes(&FIFO_Buf[FIFO_Chan_ESP].sfifo,Esp.SendApp,Esp.SendAppLen);
@@ -562,7 +562,7 @@ void Usart2_Int_Handler(void)
             FIFO_Reset(&FIFO_Buf[FIFO_Chan_ESP].rfifo);
             FIFO_Write(&FIFO_Buf[FIFO_Chan_ESP].rfifo,aubData);
         }
-        //if(Err==1) return;//Èç¹û´íÎó£¬ÔòÖ±½Ó·µ»Ø
+        //if(Err==1) return;//å¦‚æœé”™è¯¯ï¼Œåˆ™ç›´æ¥è¿”å›
     }
     if(awFlag&0x80)//Transmit data register empty
     {
@@ -594,13 +594,13 @@ void Esp_Log_Send2APP(void)
     char *Str6 = "PD,";
     
     char *Pstr,*pSart=(char *)Log.Buff,*pCR;
-    char Buff[100],CopyLen;//µ¥´Î
-    char CntBuff[250],CntLen=0;//×îÖÕ½á¹û
+    char Buff[100],CopyLen;//å•æ¬¡
+    char CntBuff[250],CntLen=0;//æœ€ç»ˆç»“æœ
                      
     static INT32U      TickBak;       //
     pCR=pSart;        
 
-    do{//Ã¿Ò»ĞĞ¶¼ÒªÅĞ¶Ï¼ì²â£¬Óöµ½Str1,Str2...Ö®ºó,¶ªÆú£¬Ö±µ½È«²¿ÅĞ¶ÏÍê±Ï
+    do{//æ¯ä¸€è¡Œéƒ½è¦åˆ¤æ–­æ£€æµ‹ï¼Œé‡åˆ°Str1,Str2...ä¹‹å,ä¸¢å¼ƒï¼Œç›´åˆ°å…¨éƒ¨åˆ¤æ–­å®Œæ¯•
         
         pCR = memchr(pSart+1,KEY_CR,Log.Len-(pCR-(char *)Log.Buff));
 
@@ -611,7 +611,7 @@ void Esp_Log_Send2APP(void)
             CopyLen = &Buff[Log.Len-1]-pSart;
         }
 
-        while((*pSart <= 0x10)&&(CopyLen)){      //¿Õ¸ñ£¬»»ĞĞµÈ
+        while((*pSart <= 0x10)&&(CopyLen)){      //ç©ºæ ¼ï¼Œæ¢è¡Œç­‰
             *pSart++;
              CopyLen--;
         }
@@ -634,7 +634,7 @@ void Esp_Log_Send2APP(void)
         Pstr= strstr(Buff,Str6);    
         if(Pstr != null) goto Lab_End;//goto Lab_Del;
 
-        Buff[CopyLen++] = KEY_CR;//ÏÔÊ¾Ê±»»ĞĞ
+        Buff[CopyLen++] = KEY_CR;//æ˜¾ç¤ºæ—¶æ¢è¡Œ
         Buff[CopyLen++] = KEY_LF;
         memcpy(CntBuff+CntLen,Buff,CopyLen);//
         if((CntLen+CopyLen)>=sizeof(CntBuff)) break;
@@ -645,7 +645,7 @@ Lab_Del:
     }while(pCR);
                 
     if(CntBuff){                    
-        if(RTC_SysTickOffSet(&TickBak) > 50){    //ÖÜÆÚÎª50£¬Ïàµ±ÓÚÁ¬ĞøµÄ
+        if(RTC_SysTickOffSet(&TickBak) > 50){    //å‘¨æœŸä¸º50ï¼Œç›¸å½“äºè¿ç»­çš„
             Esp_Ack((INT8U *)CntBuff,CntLen);
         }
         return;
@@ -667,17 +667,17 @@ void Esp_Log_Handler(INT8U Printf_Mode,INT8U Data)
         Cnt_0=0;
     }
     if(Printf_Mode != Printf_Force){
-        Log.Buff[Log.Len++] = Data;//±£´æÊı¾İ
+        Log.Buff[Log.Len++] = Data;//ä¿å­˜æ•°æ®
     }
     
-    if((Log.Len>=200)||(Printf_Mode == Printf_Force)&&(Log.Len)){//Ç¿ĞĞ´òÓ¡&ÓĞÊı¾İ
+    if((Log.Len>=200)||(Printf_Mode == Printf_Force)&&(Log.Len)){//å¼ºè¡Œæ‰“å°&æœ‰æ•°æ®
         if(Printf_Mode == Printf_Force){
             //ESP_DEBUG((":>ESP: Rx:Log********Printf_Force**********\n"));
         }
-        //ESP_DEBUG((":>ESP: Rx:Log[\n%s]\n",Log.Buff));    //Ğ­ÒéÖĞµÄ0£¬×ªÒå×Ö·û»á±»½ØÈ¡
+        //ESP_DEBUG((":>ESP: Rx:Log[\n%s]\n",Log.Buff));    //åè®®ä¸­çš„0ï¼Œè½¬ä¹‰å­—ç¬¦ä¼šè¢«æˆªå–
         ESP_DEBUG((":>ESP: Rx:Log[\n%S]\n\n",Log.Buff,Log.Len));//
 
-        //½«LogÊı¾İ°ü£¬·¢ËÍµ½APP
+        //å°†Logæ•°æ®åŒ…ï¼Œå‘é€åˆ°APP
         if(Esp.IsPeerLinkSuccess){      
             Esp_Log_Send2APP();
         }
@@ -692,16 +692,16 @@ BOOL    Esp_InitPara(INT8U Cmd)
 {
     static INT32U TickBak;
     static INT8U CmdSendIndex;
-    static INT8U Mode = Mode_TXInit,RetRes;//RetResÊÇ·ñÓĞÔ¤¶¨µÄ»Ø´ğ
+    static INT8U Mode = Mode_TXInit,RetRes;//RetResæ˜¯å¦æœ‰é¢„å®šçš„å›ç­”
     if(Cmd == ESP_CMD_Reset){
         CmdSendIndex=0;                       
         Esp.InitOver=0;       
         
         if(Esp.IsPeerLinkSuccess == true){
-            Esp.IsPeerLinkSuccess = false;    //ÔÚÁ¬½ÓÖ®ºó£¬³¤Ê±¼äÃ»ÓĞÊÕµ½ÈÎºÎÊı¾İ 
+            Esp.IsPeerLinkSuccess = false;    //åœ¨è¿æ¥ä¹‹åï¼Œé•¿æ—¶é—´æ²¡æœ‰æ”¶åˆ°ä»»ä½•æ•°æ® 
             CmdSendIndex=6;            
         }else if(Esp.IsConnectRounter == true){
-            Esp.IsConnectRounter = false;    //ÔÚÁ¬½ÓÖ®ºó£¬³¤Ê±¼äÃ»ÓĞÊÕµ½ÈÎºÎÊı¾İ 
+            Esp.IsConnectRounter = false;    //åœ¨è¿æ¥ä¹‹åï¼Œé•¿æ—¶é—´æ²¡æœ‰æ”¶åˆ°ä»»ä½•æ•°æ® 
             CmdSendIndex=3;            
         }
         return FALSE;
@@ -719,28 +719,28 @@ BOOL    Esp_InitPara(INT8U Cmd)
             if(CmdSendIndex >= CmdInitNum){             
                 Mode = Mode_TXInit;
                 Esp_Log_Handler(Printf_Force,KEY_CR);
-                ESP_DEBUG((":>ESP: ËùÓĞInitÃüÁî·¢ËÍÍê±Ï******************************\n\n"));       
+                ESP_DEBUG((":>ESP: æ‰€æœ‰Initå‘½ä»¤å‘é€å®Œæ¯•******************************\n\n"));       
                 CmdSendIndex=0;        
                 return TRUE;
             }
         }    
         else if(Mode == Mode_TXSmartIink){
-            if(Esp.IsConnectRounter){//ÒÑ¾­Á¬½ÓÉÏÂ·ÓÉÆ÷ÁË,ÎŞĞèSmartLink
+            if(Esp.IsConnectRounter){//å·²ç»è¿æ¥ä¸Šè·¯ç”±å™¨äº†,æ— éœ€SmartLink
                 CmdSendIndex=3;          //ready to login
                 //goto   lab_InitOver;
             }
             if(CmdSendIndex >= sizeof(CmdList)/sizeof(CmdList[0])){    
                 Esp_Log_Handler(Printf_Force,KEY_CR);
-                ESP_DEBUG((":>ESP: SmartLinkÃüÁî·¢ËÍÍê±Ï******************************\n\n"));  
+                ESP_DEBUG((":>ESP: SmartLinkå‘½ä»¤å‘é€å®Œæ¯•******************************\n\n"));  
                 
-                if((Esp.IsSmartLinkOver)|| //1¡¢ÊÕµ½ÃÜÂë
-                    ((Esp.IsSmartLinkOver == 0)&&(Esp.ReInitSmartLinkCnt++ >= 1))){ //2¡¢ÔİÊ±»¹Î´ÊÕµ½ÃÜÂë
+                if((Esp.IsSmartLinkOver)|| //1ã€æ”¶åˆ°å¯†ç 
+                    ((Esp.IsSmartLinkOver == 0)&&(Esp.ReInitSmartLinkCnt++ >= 1))){ //2ã€æš‚æ—¶è¿˜æœªæ”¶åˆ°å¯†ç 
                     Esp.ReInitConnectRounterCnt=0;
                     Esp.ReInitSmartLinkCnt = 0;
                     CmdSendIndex=0;                
-                    ESP_DEBUG((":>ESP: SmartLink ÊÕµ½ÃÜÂë£¬Re Init All again\n"));  
+                    ESP_DEBUG((":>ESP: SmartLink æ”¶åˆ°å¯†ç ï¼ŒRe Init All again\n"));  
                 }    
-                else {    //3¡¢ÊµÔÚÊÇÊÕ²»µ½ÃÜÂë
+                else {    //3ã€å®åœ¨æ˜¯æ”¶ä¸åˆ°å¯†ç 
                     CmdSendIndex=CmdSmartLink;//Re  Smart Link;    
                 }
             } 
@@ -761,30 +761,30 @@ BOOL    Esp_InitPara(INT8U Cmd)
         INT8U Data;
         static INT8U Loop;
         Loop++;
-        if(Loop >= CmdList[CmdSendIndex-1].DlyTick){//ÅĞ¶ÏÉÏÒ»Ö¡Êı¾İ£¬ÑÓÊ±Ê±¼äÊÇ·ñ×ã¹»
+        if(Loop >= CmdList[CmdSendIndex-1].DlyTick){//åˆ¤æ–­ä¸Šä¸€å¸§æ•°æ®ï¼Œå»¶æ—¶æ—¶é—´æ˜¯å¦è¶³å¤Ÿ
             Esp_Log_Handler(Printf_Force,Data);
             ESP_DEBUG(("\n"));                   //Lab_end 
-            //ESP_DEBUG((":>ESP: [%l]:Tx: Ö´ĞĞÏÂÒ»ÌõÖ¸Áî\n\n",RTC_SysTickOffSet(&TickBak)));
+            //ESP_DEBUG((":>ESP: [%l]:Tx: æ‰§è¡Œä¸‹ä¸€æ¡æŒ‡ä»¤\n\n",RTC_SysTickOffSet(&TickBak)));
             if(RetRes) {          
                 RetRes = 0;               
-                Mode = Mode_TXInit;//Ä¬ÈÏ¼ÌĞøInit    
-                if(CmdSendIndex >= CmdInitNum)    //Èç¹û´ıInitNum Init Over
+                Mode = Mode_TXInit;//é»˜è®¤ç»§ç»­Init    
+                if(CmdSendIndex >= CmdInitNum)    //å¦‚æœå¾…InitNum Init Over
                 {//Stop SmartLink 
-                    if(!Esp.IsConnectRounter){//Ã»ÓĞÁ¬½ÓÉÏÂ·ÓÉÆ÷ÁË,ÔòĞèÒªSmartLink
+                    if(!Esp.IsConnectRounter){//æ²¡æœ‰è¿æ¥ä¸Šè·¯ç”±å™¨äº†,åˆ™éœ€è¦SmartLink
                         Mode = Mode_TXSmartIink;
                     }    
                 }
-            }else{    //Ã»ÓĞÊÕµ½Ô¤¶¨µÄ»Ø´ğ£¬ÖØĞÂInit;    
-                if((Esp.IsConnectRounter == FALSE)&&((Esp.ReInitConnectRounterCnt++)<1)){//ÏÈ¶àÊÔ×ÅÁ¬½Ó¼¸´Î                
+            }else{    //æ²¡æœ‰æ”¶åˆ°é¢„å®šçš„å›ç­”ï¼Œé‡æ–°Init;    
+                if((Esp.IsConnectRounter == FALSE)&&((Esp.ReInitConnectRounterCnt++)<1)){//å…ˆå¤šè¯•ç€è¿æ¥å‡ æ¬¡                
                     Mode = Mode_TXInit;
                     CmdSendIndex=0;//Start  ReInit                     
                     Loop=0;
                     return FALSE;
                 }
-                if(CmdSendIndex < CmdInitNum){    //Î´³õÊ¼Íê    
-                    CmdSendIndex=CmdSmartLink;//Ö±½ÓÌøµ½Start  Smart Link; 
+                if(CmdSendIndex < CmdInitNum){    //æœªåˆå§‹å®Œ    
+                    CmdSendIndex=CmdSmartLink;//ç›´æ¥è·³åˆ°Start  Smart Link; 
                 }
-                Mode = Mode_TXSmartIink;    //¼ÌĞø½ÓÊÕÓ¦´ğ     
+                Mode = Mode_TXSmartIink;    //ç»§ç»­æ¥æ”¶åº”ç­”     
             }            
         
             Loop=0;
@@ -800,10 +800,10 @@ BOOL    Esp_InitPara(INT8U Cmd)
             PFunc = CmdList[CmdSendIndex-1].func;
             if(PFunc != null){
                 RetRes += (*PFunc)(Data);
-                if((Mode == Mode_RX)&&(RetRes)){    //ÈÔÔÚÑÓÊ±ÖĞ
+                if((Mode == Mode_RX)&&(RetRes)){    //ä»åœ¨å»¶æ—¶ä¸­
                     Loop = CmdList[CmdSendIndex-1].DlyTick;
                 }
-            }else{//ÎŞĞè´¦ÀíµÄÇé¿öÏÂ£¬¼ÙÉèÎªÕæ
+            }else{//æ— éœ€å¤„ç†çš„æƒ…å†µä¸‹ï¼Œå‡è®¾ä¸ºçœŸ
                 RetRes=TRUE;
             }
         }
@@ -827,13 +827,13 @@ INT32U    Esp_DeCode_Protocol(INT8U Data)
     
     if(Data == KEY_CR){
         char *pCmd= strstr(RecProtocol,Str);    
-        if(NULL != pCmd)//´æÔÚ
+        if(NULL != pCmd)//å­˜åœ¨
         {
-            char *pSpace= memchr(pCmd,KEY_SPACE,strlen(pCmd));//´ÓStr¿ªÊ¼£¬½ô½Ó×ÅÑ°ÕÒKEY_SPACE
+            char *pSpace= memchr(pCmd,KEY_SPACE,strlen(pCmd));//ä»Strå¼€å§‹ï¼Œç´§æ¥ç€å¯»æ‰¾KEY_SPACE
             if(RTC_SysTickOffSet(&TickBak) <= 40){
                 //Esp->Mcu
                 //Mcu->Esp->echo2Mcu
-                //Mcu»áÔÚ¶ÌÊ±¼äÄÚÊÕµ½Á½´Î,Ö»ÏìÓ¦µÚÒ»´Î£¬½ô½Ó×ÅµÄµÚ¶ş´Î²»ÏìÓ¦
+                //Mcuä¼šåœ¨çŸ­æ—¶é—´å†…æ”¶åˆ°ä¸¤æ¬¡,åªå“åº”ç¬¬ä¸€æ¬¡ï¼Œç´§æ¥ç€çš„ç¬¬äºŒæ¬¡ä¸å“åº”
                 goto Lab_Err;  
             }
     
@@ -842,12 +842,12 @@ INT32U    Esp_DeCode_Protocol(INT8U Data)
                 *pDataStart++;
             }
             if(*pDataStart == '0'){
-                //0:Êı¾İ
+                //0:æ•°æ®
                 *pDataStart++;
                 PackProt.Len = *pDataStart++;//Len
                 
                 if(PackProt.Len >= sizeof(PackProt.Buff)){
-                    ESP_DEBUG((":>ESP: Rx:Ğ­ÒéÖĞ³¤¶ÈÒç³ö"));
+                    ESP_DEBUG((":>ESP: Rx:åè®®ä¸­é•¿åº¦æº¢å‡º"));
                 }
             
                 memcpy(PackProt.Buff,pDataStart,RecIndex-(pDataStart-&RecProtocol[0])-1);
@@ -865,9 +865,9 @@ INT32U    Esp_DeCode_Protocol(INT8U Data)
             
                 }
             }else if(*pDataStart == '1'){
-                //1:shell ±¾µØ       
+                //1:shell æœ¬åœ°       
                 *pDataStart++;
-                pDataEnd= memchr(pDataStart,KEY_CR,10);//´ÓpDataStart¿ªÊ¼£¬½ô½Ó×ÅÑ°ÕÒKEY_CR
+                pDataEnd= memchr(pDataStart,KEY_CR,10);//ä»pDataStartå¼€å§‹ï¼Œç´§æ¥ç€å¯»æ‰¾KEY_CR
                 FIFO_Writes(&FIFO_Buf[FIFO_Chan_USART].rfifo,pDataStart,pDataEnd-pDataStart);                
                 FIFO_Write(&FIFO_Buf[FIFO_Chan_USART].rfifo,KEY_CR);
                 FIFO_Write(&FIFO_Buf[FIFO_Chan_USART].rfifo,KEY_LF);
@@ -875,9 +875,9 @@ INT32U    Esp_DeCode_Protocol(INT8U Data)
                     
             }
             else if(*pDataStart == '2'){
-                //1:shell Esp×ª·¢       
+                //1:shell Espè½¬å‘       
                 *pDataStart++;
-                pDataEnd= memchr(pDataStart,KEY_CR,10);//´ÓpDataStart¿ªÊ¼£¬½ô½Ó×ÅÑ°ÕÒKEY_CR
+                pDataEnd= memchr(pDataStart,KEY_CR,10);//ä»pDataStartå¼€å§‹ï¼Œç´§æ¥ç€å¯»æ‰¾KEY_CR
 //                FIFO_Writes(&FIFO_Buf[FIFO_Chan_USART].rfifo,(INT8U *)Str,strlen(Str));
 //                FIFO_Writes(&FIFO_Buf[FIFO_Chan_USART].rfifo,pDataStart,pDataEnd-pDataStart);        
 //                FIFO_Write(&FIFO_Buf[FIFO_Chan_USART].rfifo,KEY_CR);
@@ -930,7 +930,7 @@ INT32U    Esp_DeCode(void)
                     Step=3;
                     memset(Pack.Buff,0,Pack.Len);//re init
                     Pack.Buff[0] = Data;           
-                    Pack.Len=1;            //Ç°ÃæÊÇÒıµ¼Ö¡£¬ºóÃæÊÇÊı¾İ
+                    Pack.Len=1;            //å‰é¢æ˜¯å¼•å¯¼å¸§ï¼Œåé¢æ˜¯æ•°æ®
                 }
                 break;
             case 1:
@@ -943,22 +943,22 @@ INT32U    Esp_DeCode(void)
                 if(Data == 0X0A){
                     Step++;
                     Pack.Buff[2] = Data;
-                    Pack.Len=0;            //Ç°ÃæÊÇÒıµ¼Ö¡£¬ºóÃæÊÇÊı¾İ
+                    Pack.Len=0;            //å‰é¢æ˜¯å¼•å¯¼å¸§ï¼Œåé¢æ˜¯æ•°æ®
                 }else    Step=0;
                 break;
             case 3:
-                if(7 == Pack.Len){           //ÒÑ¾­ÊÕµ½ÁË7¸ö£¬µÚ8¸öÎªĞ£ÑéºÍ£¬ËùÒÔÒªÔÚ´ËÊ±½øĞĞÅĞ¶Ï
+                if(7 == Pack.Len){           //å·²ç»æ”¶åˆ°äº†7ä¸ªï¼Œç¬¬8ä¸ªä¸ºæ ¡éªŒå’Œï¼Œæ‰€ä»¥è¦åœ¨æ­¤æ—¶è¿›è¡Œåˆ¤æ–­
                     Step = 0;
                     Pack.Buff[Pack.Len++] = Data;
                     if(Esp_ClacChkSum(Pack.Buff,Pack.Len-1) == Data){
                         //0:none;    1:char;    2:16;    3:All
                         if(Esp.DisplayMode & 0x02)    ESP_DEBUG(("\n\n:>ESP: Rx:[%h]\n",Pack.Buff,Pack.Len));
                         if(Esp.DisplayMode & 0x01)    ESP_DEBUG(("<==>%s\n\n",Pack.Buff,Pack.Len));
-                        if(Pack.Buff[2] != 0){//=1;ĞÄÌø°ü
+                        if(Pack.Buff[2] != 0){//=1;å¿ƒè·³åŒ…
                             Esp_Execute();
                             Esp_Ack((INT8U *)&Peri,sizeof(Peri));//22     01 01     00 00 02 00     26
                         }
-                        Esp.IsPeerLinkSuccess = true; //ÓĞÊı¾İÊÕµ½£¬¿Ï¶¨ÒÑ¾­Á¬½Ó³É¹¦£¬¿ÉÄÜÊÇ±»¶¯Á¬½ÓµÄ
+                        Esp.IsPeerLinkSuccess = true; //æœ‰æ•°æ®æ”¶åˆ°ï¼Œè‚¯å®šå·²ç»è¿æ¥æˆåŠŸï¼Œå¯èƒ½æ˜¯è¢«åŠ¨è¿æ¥çš„
                         return DECODE_OK;
                     }                   
                     return DECODE_Err_CHKSUM;
@@ -970,7 +970,7 @@ INT32U    Esp_DeCode(void)
                 break;
         }
     }
-    if(Idle == 0)    {//ËµÃ÷ÊÕµ½µÄÊı¾İ
+    if(Idle == 0)    {//è¯´æ˜æ”¶åˆ°çš„æ•°æ®
         Esp_Log_Handler(Printf_Force,Data);
         return DECODE_OK;
     }
@@ -978,17 +978,17 @@ INT32U    Esp_DeCode(void)
 }
 void Esp_Monitor(void)
 {
-    if(Esp.InitOver == 0){       //³õÊ¼»¯
+    if(Esp.InitOver == 0){       //åˆå§‹åŒ–
         if(Esp_InitPara(ESP_CMD_INIT) == TRUE){
             Esp.InitOver = 1;
         }
-    }else{                       //½âÂë
+    }else{                       //è§£ç 
         if(Esp_DeCode() == DECODE_DISCONECTED){        
             Esp_InitPara(ESP_CMD_Reset);
             ESP_DEBUG(("ESP: NO TICK disconect!!!\n"));
         }
     }
-    Esp_Log_Handler(Printf_Force,KEY_SPACE);//KEY_SPACE²»Ìî³ä´ËÊı¾İ£¬µ«ÓĞÈÎºÎÊı¾İ£¬Ôò´òÓ¡
+    Esp_Log_Handler(Printf_Force,KEY_SPACE);//KEY_SPACEä¸å¡«å……æ­¤æ•°æ®ï¼Œä½†æœ‰ä»»ä½•æ•°æ®ï¼Œåˆ™æ‰“å°
 
 }    
 #define    Esp_LED_ON    1
@@ -1031,13 +1031,13 @@ void Esp_init(void)
     EEP_ReadData(Addr_CfgNetPara,(INT8U*)&Cfg,sizeof(Cfg));
     Peri.Head0 = 0x22;
     Peri.Head1 = 0x01;
-    Peri.Head2 = 0x01;//Ó¦´ğÊı¾İÖ¡µÄ¹Ì¶¨¸ñÊ½
+    Peri.Head2 = 0x01;//åº”ç­”æ•°æ®å¸§çš„å›ºå®šæ ¼å¼
         
     Esp.DisplayMode = 2;
     
     tmp="AT+CWJAP=\"MERCURY_F06A\",\"0123456780\"";
     if(!strstr((char*)&Cfg.Wifi,"AT+CWJAP"))
-    memcpy((char*)&Cfg.Wifi,tmp,strlen(tmp)+1);//½«×Ö·û´®½áÎ²×Ö·ûÒ»Æğ´æÈë
+    memcpy((char*)&Cfg.Wifi,tmp,strlen(tmp)+1);//å°†å­—ç¬¦ä¸²ç»“å°¾å­—ç¬¦ä¸€èµ·å­˜å…¥
     
     tmp="login:zb_ctrl,321";    
     if(!strstr((char*)&Cfg.Login,"login:"))

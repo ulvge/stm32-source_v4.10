@@ -45,7 +45,7 @@ static INT16U EE_FindValidPage(INT8U Operation);
 static INT16U EE_VerifyPageFullWriteVariable(INT16U VirtAddress, INT16U Data);
 static INT16U EE_PageTransfer(INT16U VirtAddress, INT16U Data);
 
-//³õÊ¼»¯Ğ´µØÖ·£¬¼õÉÙÃ¿´Î¶ÁĞ´Ê±²éÑ¯Ê±¼ä
+//åˆå§‹åŒ–å†™åœ°å€ï¼Œå‡å°‘æ¯æ¬¡è¯»å†™æ—¶æŸ¥è¯¢æ—¶é—´
 INT16U InitCurrWrAddress(void)
 {
     FLASH_Status FlashStatus = FLASH_COMPLETE;
@@ -487,7 +487,7 @@ static INT16U EE_VerifyPageFullWriteVariable(INT16U VirtAddress, INT16U Data)
 
     /* Get the valid Page start Address */
     //Address = (INT32U)(EEPROM_START_ADDRESS + (INT32U)(ValidPage * PAGE_SIZE));
-    //Address = CurWrAddress;//µ±Ç°Ğ´µØÖ·
+    //Address = CurWrAddress;//å½“å‰å†™åœ°å€
 
     /* Get the valid Page end Address */
     PageEndAddress = (INT32U)((EEPROM_START_ADDRESS - 2) + (INT32U)((1 + ValidPage) * PAGE_SIZE));
@@ -508,7 +508,7 @@ static INT16U EE_VerifyPageFullWriteVariable(INT16U VirtAddress, INT16U Data)
             CurWrAddress = CurWrAddress + 4;
             /* Return program operation status */
             return FlashStatus;
-        } else {//ĞŞ¸ÄºóµÄËã·¨ÊÇ²»»áÖ´ĞĞµ½ÕâÀïµÄ
+        } else {//ä¿®æ”¹åçš„ç®—æ³•æ˜¯ä¸ä¼šæ‰§è¡Œåˆ°è¿™é‡Œçš„
           /* Next address location */
             CurWrAddress = CurWrAddress + 4;
         }
@@ -564,7 +564,7 @@ static INT16U EE_PageTransfer(INT16U VirtAddress, INT16U Data)
         return FlashStatus;
     }
 
-    InitCurrWrAddress();//aft ÖØĞÂ³õÊ¼»¯Ğ´µØÖ·
+    InitCurrWrAddress();//aft é‡æ–°åˆå§‹åŒ–å†™åœ°å€
     /* Write the variable passed as parameter in the new active page */
     EepromStatus = EE_VerifyPageFullWriteVariable(VirtAddress, Data);
     /* If program operation was failed, a Flash error code is returned */

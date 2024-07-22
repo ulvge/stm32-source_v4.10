@@ -47,17 +47,17 @@ typedef struct
 
 static const SHELLMAP  shellmap[] = 
 {
-	{"HELP",cmd_Help,0,"Äã¿ÉÒÔÔÚÃüÁîºó¼Ó'?'£¬»ñµÃÆä¿ÉÊäÈëµÄ²ÎÊı,ÀıÈç : 'beep ?'"},
+	{"HELP",cmd_Help,0,"ä½ å¯ä»¥åœ¨å‘½ä»¤ååŠ '?'ï¼Œè·å¾—å…¶å¯è¾“å…¥çš„å‚æ•°,ä¾‹å¦‚ : 'beep ?'"},
 	
     {"RESET",cmd_Reset,0},
     {"TEST",cmd_Test,1},
-    {"BEEP",cmd_Beep,1,"¿ÉÈÃbeepÉùÏì¼¸Éù£¬µ«Ö»ÄÜÊÇ1£¬2£¬3"},
-    {"TEST2",cmd_Test2,3,"¿É½ÓÊÕÈı¸ö²ÎÊı"},
+    {"BEEP",cmd_Beep,1,"å¯è®©beepå£°å“å‡ å£°ï¼Œä½†åªèƒ½æ˜¯1ï¼Œ2ï¼Œ3"},
+    {"TEST2",cmd_Test2,3,"å¯æ¥æ”¶ä¸‰ä¸ªå‚æ•°"},
     {"AV",cmd_AVCTRL,2,"0:Src;1:Vol"},
     {"EEP",cmd_EEPROM,3,"0:write;1:Read;2:write one byte\n,StartAddr\n,Len\n"},
-    {"CLS",cmd_CLS,0,"»áÊä³öÒ»Ğ©¿ÕĞĞ£¬ºÍÖ®Ç°µÄÏÔÊ¾ÄÚÈİ·Ö¿ª\n"},
+    {"CLS",cmd_CLS,0,"ä¼šè¾“å‡ºä¸€äº›ç©ºè¡Œï¼Œå’Œä¹‹å‰çš„æ˜¾ç¤ºå†…å®¹åˆ†å¼€\n"},
     {"RD",cmd_RADIO,2,"RADIO;\n0:SetFre;\n1:UpSeek 0,downSeek\n2:GetCurFre"},
-    {"ESP",cmd_ESP,1,"½«ÃüÁîÖ±½ÓÍ¸´«µ½ESPÄ£¿é£¬½øĞĞÄ£¿éµÄÅäÖÃ"},
+    {"ESP",cmd_ESP,1,"å°†å‘½ä»¤ç›´æ¥é€ä¼ åˆ°ESPæ¨¡å—ï¼Œè¿›è¡Œæ¨¡å—çš„é…ç½®"},
 
     
 };
@@ -77,13 +77,13 @@ static void cmd_ESP(void)
     
 	//FIFO_Writes(&FIFO_Buf[FIFO_Chan_USART].rfifo,"test2 1 0 5",sizeof("test2 1 0 5")-1);
 
-	//½«ÊÕµ½µÄÃüÁî·¢ËÍ¸øEspÄ£¿é
+	//å°†æ”¶åˆ°çš„å‘½ä»¤å‘é€ç»™Espæ¨¡å—
 	#if 0
 	FIFO_Writes(&FIFO_Buf[FIFO_Chan_ESP].sfifo,pPara,LenPara);
 	USART_print_byte(FIFO_Chan_ESP,KEY_CR);
 	USART_print_byte(FIFO_Chan_ESP,KEY_LF);
 	#endif
-	SHELL_DEBUG((":<SHELL: ×ª·¢ÃüÁî:[%S]\n",pPara,LenPara));
+	SHELL_DEBUG((":<SHELL: è½¬å‘å‘½ä»¤:[%S]\n",pPara,LenPara));
 }
 
 static void cmd_CLS(void)
@@ -93,7 +93,7 @@ static void cmd_CLS(void)
 static void cmd_Help(void)
 {
     INT16U i,cnt = 0;
-	SHELL_DEBUG((":>ËùÓĞÖ§³ÖµÄÃüÁî:\n"));
+	SHELL_DEBUG((":>æ‰€æœ‰æ”¯æŒçš„å‘½ä»¤:\n"));
 	for (i=0;i<sizeof(shellmap)/sizeof(SHELLMAP);i++)
 	{
 		SHELL_DEBUG(("  <%m>  ",shellmap[i].command,strlen(shellmap[i].command)));
@@ -117,7 +117,7 @@ static INT32U cmd_ChgPara2DEC(INT8U* para,INT8U paralen)
 				i <<= 4;
 				i |= ((*para++)-'0');
 			}else{
-				SHELL_DEBUG((":> ÇëÊ¹ÓÃÊ®½øÖÆÊı\n"));
+				SHELL_DEBUG((":> è¯·ä½¿ç”¨åè¿›åˆ¶æ•°\n"));
 				return 0;
 			}
 			if(Cnt++ >= 8) break;
@@ -205,7 +205,7 @@ static void cmd_Reset(void)
 	//((void (*)())0)();
 	RTC_DelayXms(100);
 	SHELL_DEBUG(("\n\n*************************\n"));
-	SHELL_DEBUG(("×¼±¸¸´Î»ÏµÍ³\n"));
+	SHELL_DEBUG(("å‡†å¤‡å¤ä½ç³»ç»Ÿ\n"));
 	RTC_DelayXms(500);
 	//cmd_StackFlow();
 	
@@ -245,15 +245,15 @@ static void cmd_Test(void)
 }
 
 //judge param number is valid
-//expect:µ±º¯ÊıÓĞ¼¸¸ö²ÎÊı£¬¾ÍÊÇ¼¸£¬ÄÜÉÙ²»ÄÜ¶à
+//expect:å½“å‡½æ•°æœ‰å‡ ä¸ªå‚æ•°ï¼Œå°±æ˜¯å‡ ï¼Œèƒ½å°‘ä¸èƒ½å¤š
 static BOOLEAN SHELL_Paramcheck(INT8U expect)
 {
     if (incmd.paranum > expect)
 	{
 		if (incmd.paranum > expect)
-    	SHELL_DEBUG((":>Tips:´ËÃüÁîÖ»ÄÜ´ø %o ¸ö²ÎÊı!!!",expect));
+    	SHELL_DEBUG((":>Tips:æ­¤å‘½ä»¤åªèƒ½å¸¦ %o ä¸ªå‚æ•°!!!",expect));
 		else
-    	SHELL_DEBUG((":>Tips:´ËÃüÁîĞèÒª %o ¸ö²ÎÊı!!!",expect));
+    	SHELL_DEBUG((":>Tips:æ­¤å‘½ä»¤éœ€è¦ %o ä¸ªå‚æ•°!!!",expect));
     	return false;
 	}  
 	return true;
@@ -285,34 +285,34 @@ static BOOLEAN SHELL_ParseCommandParam(void)
     
 	incmd.cmd = cmdbuf;	  
 	if((*incmd.cmd == KEY_LF)||(*incmd.cmd == KEY_CR)){
-		incmd.cmd++;//½«×îÇ°ÃæµÄÒÆ³ıµô
+		incmd.cmd++;//å°†æœ€å‰é¢çš„ç§»é™¤æ‰
 		inlen--;
 	}
     incmd.paranum = 0;
 	
     index = SHELL_KeyLocation(incmd.cmd,' ',cnt,inlen);
 	incmd.cmdlen = index;
-    //SHELL_DEBUG(("  ÊäÈëÖ¸Áî:>%m :",incmd.cmd,incmd.cmdlen));
-    if (index == inlen)  //ÎŞ¿Õ¸ñ
+    //SHELL_DEBUG(("  è¾“å…¥æŒ‡ä»¤:>%m :",incmd.cmd,incmd.cmdlen));
+    if (index == inlen)  //æ— ç©ºæ ¼
 	{
 		SHELL_DEBUG(("\n"));
        return true;
 	}
 	cnt++;
-	while (index != inlen) //ÓĞ¿Õ¸ñ
+	while (index != inlen) //æœ‰ç©ºæ ¼
 	{
 		if (incmd.cmd[index] == ' ') 
 		{
 			index++;
 		} 
-		else          //¿Õ¸ñºóµÄ²ÎÊı´æ·Å
+		else          //ç©ºæ ¼åçš„å‚æ•°å­˜æ”¾
 		{
 			tlen = index;
 			incmd.param[incmd.paranum] = &incmd.cmd[index];
 			index = SHELL_KeyLocation(incmd.cmd,' ',cnt,inlen);
 			incmd.paramlen[incmd.paranum] = index - tlen;
 		  
-			SHELL_DEBUG((":>µÚ%l¸ö²ÎÊı:%m ; ",incmd.paranum+1,incmd.param[incmd.paranum],incmd.paramlen[incmd.paranum]));
+			SHELL_DEBUG((":>ç¬¬%lä¸ªå‚æ•°:%m ; ",incmd.paranum+1,incmd.param[incmd.paranum],incmd.paramlen[incmd.paranum]));
 
 			incmd.paranum++;
 			if (incmd.paranum >=  MAX_PARAM) break;
@@ -356,14 +356,14 @@ static BOOLEAN SHELL_Commad(void)
 			cmdfunc = shellmap[i].cmdfunc;
 			if (cmdfunc != NULL) 
 			{
-				SHELL_DEBUG((":>Ö´ĞĞÖ¸Áî:%m...\n",incmd.cmd,incmd.cmdlen));
+				SHELL_DEBUG((":>æ‰§è¡ŒæŒ‡ä»¤:%m...\n",incmd.cmd,incmd.cmdlen));
 				(*cmdfunc)();	 
 			}
-			SHELL_DEBUG((":>ÃüÁîÖ´ĞĞÍê±Ï!\n\n"));
+			SHELL_DEBUG((":>å‘½ä»¤æ‰§è¡Œå®Œæ¯•!\n\n"));
 			return true;
 		}
 	}	
-	SHELL_DEBUG(("\n:>ÎŞ·¨Ê¶±ğµÄÖ¸Áî!\n\n"));
+	SHELL_DEBUG(("\n:>æ— æ³•è¯†åˆ«çš„æŒ‡ä»¤!\n\n"));
 	return false;
 }
 
@@ -388,12 +388,12 @@ void SHELL_TestProcess(void)
 		{
 			if(FILO_Occupy(&sfilo) == 1)  
 			{
- 				SHELL_DEBUG(("\n  :<µ±Ç°ÃüÁî:"));
+ 				SHELL_DEBUG(("\n  :<å½“å‰å‘½ä»¤:"));
 			}
 			FILO_Read(&sfilo);
 			if(FILO_Occupy(&sfilo) >= 1)
 			{
-				SHELL_DEBUG(("\n  :<µ±Ç°ÃüÁî:%m",FILO_StartPos(&sfilo),FILO_Occupy(&sfilo)));
+				SHELL_DEBUG(("\n  :<å½“å‰å‘½ä»¤:%m",FILO_StartPos(&sfilo),FILO_Occupy(&sfilo)));
 			}
 		} 
 		else if (ch == KEY_CR) 
@@ -407,7 +407,7 @@ void SHELL_TestProcess(void)
 			FILO_Write(&sfilo,ch);
 			if(FILO_Occupy(&sfilo) == 1)
 			{
-			  SHELL_DEBUG(("\n  µ±Ç°ÃüÁî:>"));
+			  SHELL_DEBUG(("\n  å½“å‰å‘½ä»¤:>"));
 			}
 			SHELL_DEBUG(("%c",ch));
 			}  

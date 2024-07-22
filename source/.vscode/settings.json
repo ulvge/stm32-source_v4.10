@@ -1,6 +1,0 @@
-{
-    "files.associations": {
-        "UART.C": "cpp",
-        "rtc.h": "c"
-    }
-}

@@ -13,9 +13,9 @@
 
 
 
-//Òı½ÅµÄÊ±ÖÓÊ¹ÄÜº¯ÊıµÄºê¶¨Òå
+//å¼•è„šçš„æ—¶é’Ÿä½¿èƒ½å‡½æ•°çš„å®å®šä¹‰
 #define TM1637_RCC_Cmd    RCC_APB2PeriphClockCmd
-//DIOºÍCLKÏà¹ØÒı½ÅµÄºê¶¨Òå£¬ÓÃ»§Ö»ĞèÒªĞŞ¸ÄÏà¹Øºê¼´¿É
+//DIOå’ŒCLKç›¸å…³å¼•è„šçš„å®å®šä¹‰ï¼Œç”¨æˆ·åªéœ€è¦ä¿®æ”¹ç›¸å…³å®å³å¯
 #define    TM_DIO_PORT    	GPIOB		                 
 #define    TM_DIO_CLK 	    RCC_APB2Periph_GPIOB		
 #define    TM_DIO_PIN		GPIO_Pin_15			        
@@ -24,7 +24,7 @@
 #define    TM_CLK_CLK 	    RCC_APB2Periph_GPIOB		
 #define    TM_CLK_PIN		GPIO_Pin_13			
 
-//Ê±ÖÓÏßºÍÊı¾İÏß¸ßµÍµçÆ½µÄºê¶¨Òå£¬²»ĞèĞŞ¸Ä
+//æ—¶é’Ÿçº¿å’Œæ•°æ®çº¿é«˜ä½ç”µå¹³çš„å®å®šä¹‰ï¼Œä¸éœ€ä¿®æ”¹
 #define      CLK_1         GPIO_SetBits(TM_CLK_PORT,TM_CLK_PIN)
 #define      CLK_0         GPIO_ResetBits(TM_CLK_PORT,TM_CLK_PIN)
 #define      DIO_1         GPIO_SetBits(TM_DIO_PORT,TM_DIO_PIN)
@@ -52,7 +52,7 @@ typedef struct {
 	DispContext context;
 }DispPara;
 
-//Ïà¹Øº¯ÊıÉùÃ÷  
+//ç›¸å…³å‡½æ•°å£°æ˜  
 TM1637_DRV_EXT void TM1637_GPIOInit(void);
 TM1637_DRV_EXT void I2C_Start(void);
 TM1637_DRV_EXT void I2C_stop(void);

@@ -66,7 +66,7 @@ void Beep_InitDrv(void)
 void Beep_Mode(INT8U Mode)
 {
 	if((Mode >= 1) && (Mode <= 3)) 	FIFO_Write(&FIFO_Buf[FIFO_Chan_BEEP].sfifo,Mode);
- 	else	BEEP_DEBUG(("Ö»Ö§³ÖÏì1£¬2£¬3Éù£¬²ÎÊýÎÞÐ§!!!\n"));
+ 	else	BEEP_DEBUG(("åªæ”¯æŒå“1ï¼Œ2ï¼Œ3å£°ï¼Œå‚æ•°æ— æ•ˆ!!!\n"));
 }
 
 void Beep_Monitor(void)

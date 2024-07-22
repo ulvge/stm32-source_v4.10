@@ -4,7 +4,7 @@
 #include "includes.h" 
 
 /**********************Macro Definition Section***************************/
-#define g_8uAudioSourcePvol(x)	((x)<<3)	//¶àÉÙ¸öDB
+#define g_8uAudioSourcePvol(x)	((x)<<3)	//å¤šå°‘ä¸ªDB
 /**********************Variable Definition Section************************/
 
 #if  DBG_AV
@@ -257,7 +257,7 @@ void AV_SetSourceSwitch(INT8U a_8uSource)
 
 	if(a_8uSource >= SOURCE_MAX)
 	{
-		AV_DEBUG((":> Ô´²»´æÔÚ,Ö»Ö§³Ö0-3	\n"));
+		AV_DEBUG((":> æºä¸å­˜åœ¨,åªæ”¯æŒ0-3	\n"));
 		return;
 	}
 	else if((Audio.Source != SOURCE_RADIO)&&(Audio.LastAudioSource == SOURCE_RADIO))
@@ -268,9 +268,9 @@ void AV_SetSourceSwitch(INT8U a_8uSource)
 		}
 	}
 
-	AV_SetMute(TRUE);  //½â¾öPOPÉù   20120703
+	AV_SetMute(TRUE);  //è§£å†³POPå£°   20120703
 	//MUTE_PostMute(F_SRC_SW_MUTE,TRUE);
-	//OS_TaskDelay(2);//½â¾öPOPÉù   20120703
+	//OS_TaskDelay(2);//è§£å†³POPå£°   20120703
 
 	Audio.LastAudioSource = Audio.Source;
 	Audio.Source = a_8uSource;
@@ -296,7 +296,7 @@ void AV_SetSourceSwitch(INT8U a_8uSource)
 void AV_SetVolume(INT8U a_8uVolume)
 {
 	if (a_8uVolume > VOLUME_MAX){
-		AV_DEBUG((":> Òç³ö!!! ÒôÁ¿´óĞ¡0~40	\n"));
+		AV_DEBUG((":> æº¢å‡º!!! éŸ³é‡å¤§å°0~40	\n"));
 		return;
 	}
 

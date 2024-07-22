@@ -33,7 +33,7 @@ static TIMER  *tmrlist,*tmrfreelist;
 
 //===============================================================================================================//
 // Function name:           TimerEntry()
-// Descriptions:            ³õÊ¼»¯T0ºó£¬Ã¿´ÎT0ÖĞ¶Ï½øÈë²éÑ¯ÊÇ·ñÓĞ¶¨Ê±º¯Êı
+// Descriptions:            åˆå§‹åŒ–T0åï¼Œæ¯æ¬¡T0ä¸­æ–­è¿›å…¥æŸ¥è¯¢æ˜¯å¦æœ‰å®šæ—¶å‡½æ•°
 // input parameters:        none
 // output parameters:       none
 // Returned value:          none
@@ -79,7 +79,7 @@ void SysTickIsr (void)
 
 static void Timer1Init (void)
 {			 
-	//5mSÖĞ¶Ï1´Î            
+	//5mSä¸­æ–­1æ¬¡            
 }
 
 TIMER *CreateTimer(void (*timerfunc)(void))
@@ -130,7 +130,7 @@ void StopTimer(TIMER *tmr)
 
 //===============================================================================================================//
 // Function name:           TimerSwitch(TIMER *tmr)  
-// Descriptions:            ²éÑ¯Ä³¸ö¶¨Ê±ÈÎÎñÊÇ·ñÒÑ¾­¿ªÆô
+// Descriptions:            æŸ¥è¯¢æŸä¸ªå®šæ—¶ä»»åŠ¡æ˜¯å¦å·²ç»å¼€å¯
 // input parameters:        TIMER *tmr
 // output parameters:       none
 // Returned value:          1 - ON      0 - OFF
