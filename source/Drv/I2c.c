@@ -501,24 +501,21 @@ void I2C_main(void)
 }
 
 
-#define	EEPROM_PAGE_BYTES			8
 BOOL EEP_ReadData(INT32U subaddr,INT8U *pReadData,INT16U len) 
 {
 	INT16U i,offset=0;
 	for(i = 0; i <= (len-EEPROM_PAGE_BYTES);i+=EEPROM_PAGE_BYTES ) {
-		I2C2_Rx(I2C1_EEPROM_ADDR,subaddr+offset,1,pReadData+offset,EEPROM_PAGE_BYTES);
+		I2C2_Rx(I2C1_EEPROM_ADDR,subaddr+offset,EE_ADDR_LEN,pReadData+offset,EEPROM_PAGE_BYTES);
 		offset+=EEPROM_PAGE_BYTES;
 		RTC_DelayXms(20);
 	}	
 	if(len%EEPROM_PAGE_BYTES){
-		I2C2_Rx(I2C1_EEPROM_ADDR,subaddr+offset,1,pReadData+offset,len%EEPROM_PAGE_BYTES);		
+		I2C2_Rx(I2C1_EEPROM_ADDR,subaddr+offset,EE_ADDR_LEN,pReadData+offset,len%EEPROM_PAGE_BYTES);		
 		RTC_DelayXms(20);
 	}
 	return TRUE;
 }
 
-
-#define	RADIO_PARAM_EEPROM_SIZE	20
 INT8U EEP_WriteData(INT32U subaddr,INT8U *pWriteData,INT16U len) 
 {
 	INT16U i,OffSet,Len1;
@@ -528,10 +525,10 @@ INT8U EEP_WriteData(INT32U subaddr,INT8U *pWriteData,INT16U len)
 	Len1 = EEPROM_PAGE_BYTES-(subaddr%EEPROM_PAGE_BYTES);
 	if(Len1){
 		if(len<=Len1){
-			I2C2_Tx(I2C1_EEPROM_ADDR,subaddr,1,pWriteData,len);
+			I2C2_Tx(I2C1_EEPROM_ADDR,subaddr,EE_ADDR_LEN,pWriteData,len);
 			return TRUE;//write over!
 		}
-		else I2C2_Tx(I2C1_EEPROM_ADDR,subaddr,1,pWriteData,Len1);
+		else I2C2_Tx(I2C1_EEPROM_ADDR,subaddr,EE_ADDR_LEN,pWriteData,Len1);
 		len -= Len1;
 		RTC_DelayXms(20);
 	}
@@ -539,13 +536,13 @@ INT8U EEP_WriteData(INT32U subaddr,INT8U *pWriteData,INT16U len)
 	//2、所有页倍数
 	OffSet = Len1;
 	for(i = 0; i < (len/EEPROM_PAGE_BYTES);i++ ) {
-		I2C2_Tx(I2C1_EEPROM_ADDR,subaddr+OffSet,1,pWriteData+OffSet,EEPROM_PAGE_BYTES);
+		I2C2_Tx(I2C1_EEPROM_ADDR,subaddr+OffSet,EE_ADDR_LEN,pWriteData+OffSet,EEPROM_PAGE_BYTES);
 		OffSet += EEPROM_PAGE_BYTES;
 		RTC_DelayXms(20);
 	}	
 	//3、最后的余数
 	if(len%EEPROM_PAGE_BYTES){
-		I2C2_Tx(I2C1_EEPROM_ADDR,subaddr+OffSet,1,pWriteData+OffSet,len%EEPROM_PAGE_BYTES);
+		I2C2_Tx(I2C1_EEPROM_ADDR,subaddr+OffSet,EE_ADDR_LEN,pWriteData+OffSet,len%EEPROM_PAGE_BYTES);
 		RTC_DelayXms(20);
 	}
 	return TRUE;
