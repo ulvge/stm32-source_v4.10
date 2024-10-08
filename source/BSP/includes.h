@@ -17,7 +17,7 @@
 #include	"lib.h"
 #include	"i2c.h"
 #include	"esp.h"       
-#include	"eeprom.h"
+#include	"eeprom_si.h"
 #include	"stm32f10x_flash.h"
 #include	"key.h"
 #include	"flashIAP.h"

@@ -2,7 +2,7 @@
 #define    ESP_GLOBALS
 /**********************Include File Section********************************/
 #include "includes.h"      
-#include    "eeprom.h"    
+#include    "eeprom_si.h"    
 
 #if  DBG_ESP
 #define ESP_DEBUG( X)   do {DPrint X ;} while(0)

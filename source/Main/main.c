@@ -205,7 +205,7 @@ int main(void)
 	Beep_Mode(1);
 	
 	//Esp_init();
-	EE_Init();
+	EE_si_Init();
 	SysTick_ITConfig(ENABLE);
 	API_IWDG_DrvInit();
 	

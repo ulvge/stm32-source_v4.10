@@ -70,7 +70,7 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-INT16U EE_Init(void);
+INT16U EE_si_Init(void);
 extern INT16U EE_ReadVariable(INT16U VirtAddress, INT16U* Data);
 extern INT16U EE_WriteVariable(INT16U VirtAddress, INT8U *Data8,INT16U Len);
 extern INT16U VirtAddVarTab[NumbOfVar];

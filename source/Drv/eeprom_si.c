@@ -24,7 +24,7 @@
     /* Includes ------------------------------------------------------------------*/
 #define 	STM32F10X_LD
 #include "includes.h"
-#include	"eeprom.h"
+#include	"eeprom_si.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -269,7 +269,7 @@ INT16U __EE_Init(void)
     return FLASH_COMPLETE;
 }
 
-INT16U EE_Init(void)
+INT16U EE_si_Init(void)
 {
     INT16U FlashStatus;
 
