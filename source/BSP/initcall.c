@@ -12,9 +12,9 @@ void DemoAppInitStart(void)
 void DemoAppInitEnd(void)
 {
 }
-CoreInitCall(DemoAppInitStart);
-CoreInitCall(DemoAppInitEnd);
-CoreInitCall(DemoAppInit);
+AppInitCall(DemoAppInitStart);
+AppInitCall(DemoAppInitEnd);
+AppInitCall(DemoAppInit);
    
 extern int Image$$MY_REGION$$Base;
 extern int Image$$MY_REGION$$Limit;

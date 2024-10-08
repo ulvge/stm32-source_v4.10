@@ -17,14 +17,13 @@
 
 
 typedef void (*INIT_CALL)(void);
-#define __define_initcall(level,fn,id) \
-    static const INIT_CALL __initcall_##fn##id  \
-    __attribute__ ((__section__(".initcall."level".init"))) = fn     
-               
-#define CoreInitCall(fn) __define_initcall("core",fn,1) 
+#define __define_initcall(level, secAlias, fn) \
+    static const INIT_CALL __initcall_##level##fn \
+   __attribute__((__section__(".initcall." #level "." secAlias ".init"))) = fn
 
+#define CoreInitCall(fn) __define_initcall(1, "core",fn) 
 
-#define AppInitCall(fn) __define_initcall("app",fn,1)  
+#define AppInitCall(fn) __define_initcall(2, "app",fn)  
 
 
 EXT_INITCALL void AppCallInit(void);   
