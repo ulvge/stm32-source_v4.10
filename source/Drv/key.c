@@ -13,7 +13,7 @@
 #define LONG_PRESS_TIME_MS 1500
 #define LONG_REPEAT_AFTER_PRESS__TIME_MS 100 //when long pressed ,and repeat every 100ms
  
-#define BUTTON_UP   GPIO_Pin_2 
+#define BUTTON_UP   GPIO_Pin_0 
 #define BUTTON_DOWN GPIO_Pin_1    
      
 static void Key_Toggle(void);
@@ -22,21 +22,21 @@ static void Key1Handler(const void *currentConfig, INT8U keyStatus)
     KeyConfig *cfg = (KeyConfig *)currentConfig;
 	if (ValBit(keyStatus, F_Press)) {
 		Key_Toggle();
-		KEY_DEBUG(("key pressed ...%s", cfg->pinName));
+		KEY_DEBUG(("key pressed ...%s\n", cfg->pinName));
 	} else if (ValBit(keyStatus, F_LongPress)) {  
-		KEY_DEBUG(("key F_LongPress ...%s", cfg->pinName));
+		KEY_DEBUG(("key F_LongPress ...%s\n", cfg->pinName));
 		INT8U readBuf[20] = {0};
 	    INT32 res = Flash_ReadFromFlashMass(PARTITION_USER_KEY, 0, readBuf, sizeof(readBuf));
         if(res != SUCCESS){
-    		KEY_DEBUG(("Flash_WriteToFlashMass failed !!!"));
+    		KEY_DEBUG(("Flash_WriteToFlashMass failed !!!\n"));
         }else{
-		    KEY_DEBUG(("ReadFromFlash =[%s]", readBuf, sizeof(readBuf)));
+		    KEY_DEBUG(("ReadFromFlash =[%s]\n", readBuf, sizeof(readBuf)));
         }
 	} else if (ValBit(keyStatus, F_Release)) {
-		KEY_DEBUG(("key Release ...%s", cfg->pinName));
+		KEY_DEBUG(("key Release ...%s\n", cfg->pinName));
 	} else if (ValBit(keyStatus, F_LongPressRepeat)) {
 		TemperatureInside_ADC();
-		KEY_DEBUG(("key LongPressRepeat ...%s", cfg->pinName));
+		KEY_DEBUG(("key LongPressRepeat ...%s\n", cfg->pinName));
 	}
 }           
 static void ButtonHandler(const void *currentConfig, INT8U keyStatus)
@@ -64,7 +64,7 @@ const static  KeyConfig Key1Config = {
 	.active = ACTIVE_LOW,
     .pinName = "main borad key",
 };
-static KeyStatusST Key1Status = {
+__attribute__((unused)) static KeyStatusST Key1Status = {
 	.config = &Key1Config,
 	.startTimeTick = 0,
 };
@@ -76,7 +76,7 @@ const static  KeyConfig ButtonUpConfig = {
 	.active = ACTIVE_LOW, 
     .pinName = "button up",
 };
-static KeyStatusST ButtonUpStatus = {
+__attribute__((unused)) static KeyStatusST ButtonUpStatus = {
 	.config = &ButtonUpConfig,
 	.startTimeTick = 0,
 };
@@ -88,15 +88,17 @@ const static  KeyConfig ButtonDownConfig = {
 	.active = ACTIVE_LOW, 
     .pinName = "button down",
 };
-static KeyStatusST ButtonDownStatus = {
+__attribute__((unused)) static KeyStatusST ButtonDownStatus = {
 	.config = &ButtonDownConfig,
 	.startTimeTick = 0,
 };
 static KeyStatusST *g_Keys[] = {
-	&Key1Status,
-	&ButtonUpStatus,
-	&ButtonDownStatus,
+	// &Key1Status,
+	// &ButtonUpStatus,
+	// &ButtonDownStatus,
+    NULL,
 };
+//static KeyStatusST *g_Keys[] = {NULL};
 /***************  配置LED用到的I/O口 *******************/
 static void LED_GPIO_Config(void)
 {
@@ -130,6 +132,9 @@ static void Key_Scan(void)
 {
 	for (INT8U keyIdx = 0; keyIdx < (sizeof(g_Keys) / sizeof(g_Keys[0])); keyIdx++) {
 		KeyStatusST* currentKey = g_Keys[keyIdx];
+        if (currentKey == NULL) {
+            continue;
+        }
 		LEVEL_ACTIVE active = (LEVEL_ACTIVE)GPIO_ReadInputDataBit(currentKey->config->port, currentKey->config->pin);
 		if (active == currentKey->config->active) { // pressed
 			if (currentKey->isLastPressed == TRUE) {

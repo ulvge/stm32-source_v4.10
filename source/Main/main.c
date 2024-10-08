@@ -2,6 +2,7 @@
 
 #include "includes.h" 
 #include	"TM1637.h"
+#include	"shell_port.h"
 #define	WACHDOG_EN 1
 
 /**********************Macro Definition Section***************************/

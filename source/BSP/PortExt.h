@@ -217,19 +217,11 @@
 #define	IO_PIN_CAN_INH_DET			GPIO_Pin_15
 #define	IO_PORT_CAN_INH_DET			GPIOE
 //Pin 47 
-#if 0//¥ÓΩ®
-#define	IO_PIN_I2C2_SCL_DET			GPIO_Pin_15
-#define	IO_PORT_I2C2_SCL_DET		GPIOB
+#define	IO_PIN_I2C2_SCL_DET			GPIO_Pin_2
+#define	IO_PORT_I2C2_SCL_DET		GPIOA
 //Pin 48
-#define	IO_PIN_I2C2_SDA_DET			GPIO_Pin_13
-#define	IO_PORT_I2C2_SDA_DET		GPIOB
-#else	//∞Â…œ
-#define	IO_PIN_I2C2_SCL_DET			GPIO_Pin_6
-#define	IO_PORT_I2C2_SCL_DET		GPIOB
-//Pin 48
-#define	IO_PIN_I2C2_SDA_DET			GPIO_Pin_7
-#define	IO_PORT_I2C2_SDA_DET		GPIOB
-#endif
+#define	IO_PIN_I2C2_SDA_DET			GPIO_Pin_3
+#define	IO_PORT_I2C2_SDA_DET		GPIOA
 //Pin 49 DGND
 //Pin 50 B3v3
 #if SUPPORT_GYRO

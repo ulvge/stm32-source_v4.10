@@ -111,10 +111,6 @@ INT8U FIFO_SendData(INT8U chan)
 			USART1->DR = FIFO_Read(&FIFO_Buf[chan].sfifo);	//sending data
 			USART1_TX_EN();
 		}
-		else if(chan == FIFO_Chan_ESP){
-			USART2->DR = FIFO_Read(&FIFO_Buf[chan].sfifo);	//sending data
-			USART2_TX_EN();
-		}
 		
 		return true;
 	}

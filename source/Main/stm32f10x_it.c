@@ -735,7 +735,6 @@ void USART1_IRQHandler(void)
 void USART2_IRQHandler(void)
 {
 	OS_IntEnter();
-	Usart2_Int_Handler();
 	OS_IntExit();
 }
 

@@ -3,6 +3,8 @@
     "files.associations": {
         "UART.C": "cpp",
         "eeprom_si.h": "c",
-        "includes.h": "c"
+        "includes.h": "c",
+        "shell_cfg.h": "c",
+        "rtc.h": "c"
     } // 替换为你的 Python 解释器路径
 }

@@ -7,7 +7,7 @@
 #define   DBG_SHELL				1
 #define   DBG_TIME				1
 #define   DBG_BEEP				1
-#define   DBG_I2C				1
+#define   DBG_I2C				0
 #define   DBG_RADIO				1
 #define   DBG_AV				1
 #define   DBG_ESP				1

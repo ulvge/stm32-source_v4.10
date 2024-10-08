@@ -1,5 +1,6 @@
 
 #include "includes.h"
+#include "i2c.h"
 
 #if DBG_I2C
 #define I2C_DEBUG(X) \
@@ -366,7 +367,7 @@ INT8U I2C2_I2CRxByte(void)
     return ReadData;
 }
 
-void I2C2_Tx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pWriteData, INT16U len)
+BOOL I2C2_Tx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pWriteData, INT16U len)
 {
     INT16U i, loop = 2, ret = false;
 
@@ -398,6 +399,7 @@ void I2C2_Tx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pWriteD
                 break;
         }
     }
+    return false;
 }
 BOOL I2C2_Rx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pReadData, INT16U len)
 {
@@ -513,10 +515,12 @@ INT8U EEP_WriteData(INT32U subaddr, INT8U *pWriteData, INT16U len)
     Len1 = EEPROM_PAGE_BYTES - (subaddr % EEPROM_PAGE_BYTES);
     if (Len1) {
         if (len <= Len1) {
-            I2C2_Tx(I2C1_EEPROM_ADDR, subaddr, EE_ADDR_LEN, pWriteData, len);
-            return TRUE; // write over!
-        } else
-            I2C2_Tx(I2C1_EEPROM_ADDR, subaddr, EE_ADDR_LEN, pWriteData, Len1);
+            return I2C2_Tx(I2C1_EEPROM_ADDR, subaddr, EE_ADDR_LEN, pWriteData, len);
+        } else{
+            if (I2C2_Tx(I2C1_EEPROM_ADDR, subaddr, EE_ADDR_LEN, pWriteData, Len1) == false){
+                return false;
+            }
+        }
         len -= Len1;
         RTC_DelayXms(20);
     }
@@ -524,14 +528,15 @@ INT8U EEP_WriteData(INT32U subaddr, INT8U *pWriteData, INT16U len)
     // 2、所有页倍数
     OffSet = Len1;
     for (i = 0; i < (len / EEPROM_PAGE_BYTES); i++) {
-        I2C2_Tx(I2C1_EEPROM_ADDR, subaddr + OffSet, EE_ADDR_LEN, pWriteData + OffSet, EEPROM_PAGE_BYTES);
+        if (I2C2_Tx(I2C1_EEPROM_ADDR, subaddr + OffSet, EE_ADDR_LEN, pWriteData + OffSet, EEPROM_PAGE_BYTES) == false){
+            return false;
+        }
         OffSet += EEPROM_PAGE_BYTES;
         RTC_DelayXms(20);
     }
     // 3、最后的余数
     if (len % EEPROM_PAGE_BYTES) {
-        I2C2_Tx(I2C1_EEPROM_ADDR, subaddr + OffSet, EE_ADDR_LEN, pWriteData + OffSet, len % EEPROM_PAGE_BYTES);
-        RTC_DelayXms(20);
+        return I2C2_Tx(I2C1_EEPROM_ADDR, subaddr + OffSet, EE_ADDR_LEN, pWriteData + OffSet, len % EEPROM_PAGE_BYTES);
     }
     return TRUE;
 }

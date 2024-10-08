@@ -224,7 +224,7 @@ static void IR_getIRDefaultConfig(IR_CFG* config)
     config->Perio = IR_RELOAD_VAL;
     config->preScale = OS_CLOCK / config->workFreq;
 }
-static void IR_Init(void)
+__attribute__((unused)) static void IR_Init(void)
 {
     IR_getIRDefaultConfig(&g_IRCfg);
     TIME_Cap_Init(&g_IRCfg);    //以1Mhz的频率计数
@@ -236,5 +236,5 @@ static void IR_Init(void)
 	return;
 }
 
-CoreInitCall(IR_Init);
+//CoreInitCall(IR_Init);
 

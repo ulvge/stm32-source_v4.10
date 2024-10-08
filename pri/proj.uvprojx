@@ -340,7 +340,7 @@
               <MiscControls>--c99</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\source\BSP;..\source\Drv;..\source\BSP\STM32F10x</IncludePath>
+              <IncludePath>..\source\BSP;..\source\Drv;..\source\BSP\STM32F10x;..\source\shell</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -415,11 +415,6 @@
           <GroupName>drv</GroupName>
           <Files>
             <File>
-              <FileName>shell.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\source\Drv\shell.c</FilePath>
-            </File>
-            <File>
               <FileName>PortDrv.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\source\BSP\PortDrv.c</FilePath>
@@ -448,16 +443,6 @@
               <FileName>lib.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\source\Drv\lib.c</FilePath>
-            </File>
-            <File>
-              <FileName>esp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\source\Drv\esp.c</FilePath>
-            </File>
-            <File>
-              <FileName>eeprom.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\source\Drv\eeprom.c</FilePath>
             </File>
             <File>
               <FileName>key.c</FileName>
@@ -498,6 +483,11 @@
               <FileName>IR.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\source\Drv\IR.c</FilePath>
+            </File>
+            <File>
+              <FileName>eeprom_si.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\Drv\eeprom_si.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -623,6 +613,56 @@
               <FileName>stm32f10x_nvic.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\source\BSP\STM32F10x\stm32f10x_nvic.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>shell</GroupName>
+          <Files>
+            <File>
+              <FileName>shell.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\shell\shell.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\source\shell\shell.h</FilePath>
+            </File>
+            <File>
+              <FileName>shell_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\source\shell\shell_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>shell_cmd_list.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\shell\shell_cmd_list.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_companion.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\shell\shell_companion.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_ext.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\shell\shell_ext.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_ext.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\source\shell\shell_ext.h</FilePath>
+            </File>
+            <File>
+              <FileName>shell_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\shell\shell_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_port.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\source\shell\shell_port.h</FilePath>
             </File>
           </Files>
         </Group>
