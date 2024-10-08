@@ -52,7 +52,7 @@ static const SHELLMAP  shellmap[] =
     {"RESET",cmd_Reset,0},
     {"TEST",cmd_Test,1},
     {"BEEP",cmd_Beep,1,"可让beep声响几声，但只能是1，2，3"},
-    {"TEST2",cmd_Test2,3,"可接收三个参数"},
+    {"TEST2",cmd_Test2,3,"可接收三个参数  "},
     {"AV",cmd_AVCTRL,2,"0:Src;1:Vol"},
     {"EEP",cmd_EEPROM,3,"0:write;1:Read;2:write one byte\n,StartAddr\n,Len\n"},
     {"CLS",cmd_CLS,0,"会输出一些空行，和之前的显示内容分开\n"},

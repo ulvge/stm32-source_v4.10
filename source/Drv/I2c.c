@@ -165,9 +165,9 @@ void I2C1_Tx(INT8U dest_add,INT32U subaddr,INT8U SizeOFsubaddr,INT8U* pWriteData
 					#if I2C_DEBUG
 					static INT32U  ErrCnt;
 					#endif
-					I2C_DEBUG((":> IIC发送失败: %s,%l\n",__FILE__,__LINE__));
-					I2C_DEBUG((":> IIC发送失败: WriteData: [%h]\n",pWriteData,len));
-					I2C_DEBUG((":> IIC发送失败: dest_add:0x%o,subaddr:%x\n",dest_add,subaddr));
+					I2C_DEBUG((":> IIC send failed: %s,%l\n",__FILE__,__LINE__));
+					I2C_DEBUG((":> IIC send failed: WriteData: [%h]\n",pWriteData,len));
+					I2C_DEBUG((":> IIC send failed: dest_add:0x%o,subaddr:%x\n",dest_add,subaddr));
 				}
 			}
 			else break;
@@ -401,9 +401,9 @@ void I2C2_Tx(INT8U dest_add,INT32U subaddr,INT8U SizeOFsubaddr,INT8U* pWriteData
 					#if I2C_DEBUG
 					static INT32U  ErrCnt;
 					#endif
-					I2C_DEBUG((":> IIC发送失败: %s,%l\n",__FILE__,__LINE__));
-					I2C_DEBUG((":> IIC发送失败: WriteData: [%h]\n",pWriteData,len));
-					I2C_DEBUG((":> IIC发送失败: dest_add:0x%o,subaddr:%x\n",dest_add,subaddr));
+					I2C_DEBUG((":> IIC send failed: %s,%l\n",__FILE__,__LINE__));
+					I2C_DEBUG((":> IIC send failed: WriteData: [%h]\n",pWriteData,len));
+					I2C_DEBUG((":> IIC send failed: dest_add:0x%o,subaddr:%x\n",dest_add,subaddr));
 				}
 			}
 			else break;

@@ -719,7 +719,7 @@ BOOL    Esp_InitPara(INT8U Cmd)
             if(CmdSendIndex >= CmdInitNum){             
                 Mode = Mode_TXInit;
                 Esp_Log_Handler(Printf_Force,KEY_CR);
-                ESP_DEBUG((":>ESP: 所有Init命令发送完毕******************************\n\n"));       
+                ESP_DEBUG((":>ESP: Init cmds send over******************************\n\n"));       
                 CmdSendIndex=0;        
                 return TRUE;
             }
@@ -731,14 +731,14 @@ BOOL    Esp_InitPara(INT8U Cmd)
             }
             if(CmdSendIndex >= sizeof(CmdList)/sizeof(CmdList[0])){    
                 Esp_Log_Handler(Printf_Force,KEY_CR);
-                ESP_DEBUG((":>ESP: SmartLink命令发送完毕******************************\n\n"));  
+                ESP_DEBUG((":>ESP: SmartLink send over******************************\n\n"));  
                 
                 if((Esp.IsSmartLinkOver)|| //1、收到密码
                     ((Esp.IsSmartLinkOver == 0)&&(Esp.ReInitSmartLinkCnt++ >= 1))){ //2、暂时还未收到密码
                     Esp.ReInitConnectRounterCnt=0;
                     Esp.ReInitSmartLinkCnt = 0;
                     CmdSendIndex=0;                
-                    ESP_DEBUG((":>ESP: SmartLink 收到密码，Re Init All again\n"));  
+                    ESP_DEBUG((":>ESP: SmartLink Recvd PWD，Re Init All again\n"));  
                 }    
                 else {    //3、实在是收不到密码
                     CmdSendIndex=CmdSmartLink;//Re  Smart Link;    
@@ -847,7 +847,7 @@ INT32U    Esp_DeCode_Protocol(INT8U Data)
                 PackProt.Len = *pDataStart++;//Len
                 
                 if(PackProt.Len >= sizeof(PackProt.Buff)){
-                    ESP_DEBUG((":>ESP: Rx:协议中长度溢出"));
+                    ESP_DEBUG((":>ESP: Rx: Packs overflows"));
                 }
             
                 memcpy(PackProt.Buff,pDataStart,RecIndex-(pDataStart-&RecProtocol[0])-1);

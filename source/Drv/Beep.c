@@ -66,7 +66,7 @@ void Beep_InitDrv(void)
 void Beep_Mode(INT8U Mode)
 {
 	if((Mode >= 1) && (Mode <= 3)) 	FIFO_Write(&FIFO_Buf[FIFO_Chan_BEEP].sfifo,Mode);
- 	else	BEEP_DEBUG(("只支持响1，2，3声，参数无效!!!\n"));
+ 	else	BEEP_DEBUG(("BEEP mode only support 1 2 3!!!\n"));
 }
 
 void Beep_Monitor(void)
