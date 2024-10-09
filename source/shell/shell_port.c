@@ -53,9 +53,9 @@ void userShellInit(void)
     shellInit(&g_shell, g_shellHistroyBuffer, sizeof(g_shellHistroyBuffer));
 }
 
-static INT32U ee_paraCovert(char *input)
+static INT32U ee_paraCovert(char *input, INT32 radix)
 {
-    INT32U res = strtol(input, NULL, 0);
+    INT32U res = strtol(input, NULL, radix);
     return res;
 }
 static int cmd_Beep(int argc, char *argv[])
@@ -63,7 +63,7 @@ static int cmd_Beep(int argc, char *argv[])
     int beepNum;
 
     if (argc == 2) {
-        beepNum = ee_paraCovert(argv[1]);
+        beepNum = ee_paraCovert(argv[1], 0);
         Beep_Mode((INT8U)beepNum);
     }
     return 0;
@@ -88,7 +88,7 @@ static int cmd_EEPROM(int argc, char *argv[])
         IsR_W = *argv[1];
     }
     if (argc >= 3) {
-        SubAddr = ee_paraCovert(argv[2]);
+        SubAddr = ee_paraCovert(argv[2], 0);
     }
     switch (IsR_W) {
     case '0':
@@ -99,7 +99,7 @@ static int cmd_EEPROM(int argc, char *argv[])
             eeUsage();
             return 0;
         }else{
-            len = ee_paraCovert(argv[3]);
+            len = ee_paraCovert(argv[3], 0);
             if (len > sizeof(EEPROM_Buf)){
                 len = sizeof(EEPROM_Buf);
             }
@@ -138,7 +138,7 @@ static int cmd_EEPROM(int argc, char *argv[])
         
         for (INT32 i = 0; i < argc - 3; i++){
             INT32U tmp;
-            tmp = ee_paraCovert(argv[3 + i]);
+            tmp = ee_paraCovert(argv[3 + i], 16);
             EEPROM_Buf[i] = tmp;
         }
         if (EEP_WriteData(SubAddr, EEPROM_Buf, argc - 3) == TRUE){

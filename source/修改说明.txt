@@ -1,4 +1,36 @@
 
+
+*************************************************************************
+2024-10-9 09:58:55
+
+实现了I2C读取信息，并打印
+
+**********************************
+硬件接口：
+//Pin 47 
+#define	IO_PIN_I2C2_SCL_DET			GPIO_Pin_2
+#define	IO_PORT_I2C2_SCL_DET		GPIOA
+//Pin 48
+#define	IO_PIN_I2C2_SDA_DET			GPIO_Pin_3
+#define	IO_PORT_I2C2_SDA_DET		GPIOA
+
+串口打印：
+
+#define	IO_PIN_AUTOTEST_TX_DET			GPIO_Pin_9
+#define	IO_PORT_AUTOTEST_TX_DET			GPIOA
+//Pin 69
+#define	IO_PIN_AUTOTEST_RX_DET			GPIO_Pin_10
+#define	IO_PORT_AUTOTEST_RX_DET			GPIOA
+
+**********************************
+操作说明：
+写：
+ee w 0 0x10 0x20 0x30
+从0开始写，只有写入的数据是16进制的，可以不用0x，其它都是地址或读的长度可以是16或10进制的，自动识别。
+读：
+ee r 0x10 100
+从0x10开始读，读100个
+
 *************************************************************************
 2023-4-11 11:32:47
 1、之前编译时，需要依靠电脑本地默认SDK文件，现在直接依赖于项目里面的SDK
