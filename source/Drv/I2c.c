@@ -141,7 +141,7 @@ INT8U I2C1_I2CRxByte(void)
     return ReadData;
 }
 
-void I2C1_Tx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pWriteData, INT16U len)
+void I2C1_Tx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pWriteData, INT16U len)
 {
     INT8U i, loop = 2, ret = false;
 
@@ -149,7 +149,7 @@ void I2C1_Tx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pWriteD
         if ((len != 0) && (pWriteData != NULL)) {
             I2C1_I2cStart();
             I2C1_I2CTxByte(dest_add);
-            while (SizeOFsubaddr--) {
+            while (sizeOfSubAddr--) {
                 I2C1_I2CTxByte(subaddr & 0xff);
                 subaddr >>= 8;
             }
@@ -173,7 +173,7 @@ void I2C1_Tx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pWriteD
         }
     }
 }
-BOOL I2C1_Rx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pReadData, INT16U len)
+BOOL I2C1_Rx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pReadData, INT16U len)
 {
     BOOL ret = FALSE;
     INT8U i, loop = 2;
@@ -184,7 +184,7 @@ BOOL I2C1_Rx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pReadDa
 
         ret = I2C1_I2CTxByte(dest_add);
         if (ret) {
-            while (SizeOFsubaddr--) {
+            while (sizeOfSubAddr--) {
                 I2C1_I2CTxByte(subaddr & 0xff);
                 subaddr >>= 8;
             }
@@ -367,7 +367,7 @@ INT8U I2C2_I2CRxByte(void)
     return ReadData;
 }
 
-BOOL I2C2_Tx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pWriteData, INT16U len)
+BOOL I2C2_Tx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pWriteData, INT16U len)
 {
     INT16U i, loop = 2, ret = false;
 
@@ -376,7 +376,7 @@ BOOL I2C2_Tx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pWriteD
         if ((len != 0) && (pWriteData != NULL)) {
             I2C2_I2cStart();
             I2C2_I2CTxByte(dest_add);
-            while (SizeOFsubaddr--) {
+            while (sizeOfSubAddr--) {
                 I2C2_I2CTxByte(subaddr & 0xff);
                 subaddr >>= 8;
             }
@@ -399,9 +399,9 @@ BOOL I2C2_Tx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pWriteD
                 break;
         }
     }
-    return false;
+    return ret;
 }
-BOOL I2C2_Rx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pReadData, INT16U len)
+BOOL I2C2_Rx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pReadData, INT16U len)
 {
     BOOL ret = FALSE;
     INT16U i, loop = 2;
@@ -412,7 +412,7 @@ BOOL I2C2_Rx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pReadDa
 
         ret = I2C2_I2CTxByte(dest_add);
         if (ret) {
-            while (SizeOFsubaddr--) {
+            while (sizeOfSubAddr--) {
                 I2C2_I2CTxByte(subaddr & 0xff);
                 subaddr >>= 8;
             }

@@ -31,11 +31,11 @@
 /*i2c sim*******************************************************************************/
 EXT_I2C void I2C_main(void);
 
-EXT_I2C void I2C1_Tx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pWriteData, INT16U len);
-EXT_I2C BOOL I2C1_Rx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pReadData, INT16U len);
+EXT_I2C void I2C1_Tx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pWriteData, INT16U len);
+EXT_I2C BOOL I2C1_Rx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pReadData, INT16U len);
 
-EXT_I2C BOOL I2C2_Tx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pWriteData, INT16U len);
-EXT_I2C BOOL I2C2_Rx(INT8U dest_add, INT32U subaddr, INT8U SizeOFsubaddr, INT8U *pReadData, INT16U len);
+EXT_I2C BOOL I2C2_Tx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pWriteData, INT16U len);
+EXT_I2C BOOL I2C2_Rx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pReadData, INT16U len);
 
 EXT_I2C BOOL EEP_ReadData(INT32U subaddr, INT8U *pReadData, INT16U len);
 EXT_I2C INT8U EEP_WriteData(INT32U subaddr, INT8U *pWriteData, INT16U len);

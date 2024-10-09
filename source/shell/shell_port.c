@@ -12,6 +12,7 @@
 #include "includes.h"
 #include "shell.h"
 #include "typedef.h"
+#include <stdlib.h>
 
 Shell g_shell;
 char g_shellHistroyBuffer[200];
@@ -52,14 +53,19 @@ void userShellInit(void)
     shellInit(&g_shell, g_shellHistroyBuffer, sizeof(g_shellHistroyBuffer));
 }
 
+static INT32U ee_paraCovert(char *input)
+{
+    INT32U res = strtol(input, NULL, 0);
+    return res;
+}
 static int cmd_Beep(int argc, char *argv[])
 {
     int beepNum;
 
     if (argc == 2) {
-        sscanf(argv[1], "%d", &beepNum);
+        beepNum = ee_paraCovert(argv[1]);
+        Beep_Mode((INT8U)beepNum);
     }
-    Beep_Mode((INT8U)beepNum);
     return 0;
 }
 SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN) | SHELL_CMD_DISABLE_RETURN, beep, cmd_Beep, beep);
@@ -75,28 +81,28 @@ static void eeUsage(void)
 #define  EEPROM_TITLE_ROWS_LEN  16
 static int cmd_EEPROM(int argc, char *argv[])
 {
-    INT32U IsRW_, SubAddr, len;
+    char IsR_W;
+    INT32U SubAddr, len;
 
     if (argc >= 2) {
-        sscanf(argv[1], "%d,", &IsRW_);
+        IsR_W = *argv[1];
     }
     if (argc >= 3) {
-        sscanf(argv[2], "%d,", &SubAddr);
+        SubAddr = ee_paraCovert(argv[2]);
     }
-    if (argc >= 4) {
-        sscanf(argv[3], "%d,", &len);
-    }
-    if (len > sizeof(EEPROM_Buf)){
-        len = sizeof(EEPROM_Buf);
-    }
-    switch (IsRW_) {
-    case 0:
+    switch (IsR_W) {
+    case '0':
     case 'r':
     case 'R':
         if (argc != 4){
             SHELL_DEBUG(("para error\n"));
             eeUsage();
             return 0;
+        }else{
+            len = ee_paraCovert(argv[3]);
+            if (len > sizeof(EEPROM_Buf)){
+                len = sizeof(EEPROM_Buf);
+            }
         }
         EEP_ReadData(SubAddr, EEPROM_Buf, len);
         // print head row
@@ -110,7 +116,7 @@ static int cmd_EEPROM(int argc, char *argv[])
             // print head column
             if ((i == 0) ||(i+SubAddr) % EEPROM_TITLE_ROWS_LEN == 0){
                 INT32U column = (i+SubAddr + 1) / EEPROM_TITLE_ROWS_LEN;
-                SHELL_DEBUG(("\r\n%o    ", column));
+                SHELL_DEBUG(("\r\n%o    ", column * EEPROM_TITLE_ROWS_LEN));
                 RTC_DelayXms(10);
             }
             if (i == 0){ // if not from 0,need alignment
@@ -121,7 +127,7 @@ static int cmd_EEPROM(int argc, char *argv[])
             SHELL_DEBUG(("%o ", EEPROM_Buf[i]));
         }
         break;
-    case 1:
+    case '1':
     case 'w':
     case 'W':
         if (argc < 4){
@@ -129,12 +135,13 @@ static int cmd_EEPROM(int argc, char *argv[])
             eeUsage();
             return 0;
         }
-        for (INT32 i = 0; i < len; i++){
-            INT32 tmp;
-            sscanf(argv[4 + i], "%d", &tmp);
+        
+        for (INT32 i = 0; i < argc - 3; i++){
+            INT32U tmp;
+            tmp = ee_paraCovert(argv[3 + i]);
             EEPROM_Buf[i] = tmp;
         }
-        if (EEP_WriteData(SubAddr, EEPROM_Buf, len) == TRUE){
+        if (EEP_WriteData(SubAddr, EEPROM_Buf, argc - 3) == TRUE){
             SHELL_DEBUG(("write success\r\n"));
         }else{
             SHELL_DEBUG(("write failed\r\n"));
