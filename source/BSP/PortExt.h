@@ -388,9 +388,12 @@
 //Pin 92
 #define IO_PIN_I2C1_SCL_DET			GPIO_Pin_13
 #define IO_PORT_I2C1_SCL_DET		GPIOB
-//Pin 93   开发板上有上拉
+//Pin 93   野火开发板上有上拉
 #define	IO_PIN_I2C1_SDA_DET			GPIO_Pin_0
 #define	IO_PORT_I2C1_SDA_DET		GPIOC
+//自己的mini开发板
+// #define	IO_PIN_I2C1_SDA_DET			GPIO_Pin_12
+// #define	IO_PORT_I2C1_SDA_DET		GPIOA
 //Pin 94 Boot0
 
 //Pin 95
