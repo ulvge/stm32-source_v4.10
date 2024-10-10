@@ -1,0 +1,11 @@
+.\chipid.o: chipid.c
+.\chipid.o: chipid.h
+.\chipid.o: ..\CMSIS\stm32f10x.h
+.\chipid.o: ..\CMSIS\core_cm3.h
+.\chipid.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\chipid.o: ..\CMSIS\system_stm32f10x.h
+.\chipid.o: ..\USER\stm32f10x_conf.h
+.\chipid.o: ..\FWlib\inc\stm32f10x_gpio.h
+.\chipid.o: ..\CMSIS\stm32f10x.h
+.\chipid.o: ..\FWlib\inc\stm32f10x_rcc.h
+.\chipid.o: ..\FWlib\inc\stm32f10x_usart.h

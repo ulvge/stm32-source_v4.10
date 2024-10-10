@@ -1,0 +1,12 @@
+..\Output\pwm_output.o: pwm_output.c
+..\Output\pwm_output.o: pwm_output.h
+..\Output\pwm_output.o: ..\CMSIS\stm32f10x.h
+..\Output\pwm_output.o: ..\CMSIS\core_cm3.h
+..\Output\pwm_output.o: D:\Keil\ARM\RV31\INC\stdint.h
+..\Output\pwm_output.o: ..\CMSIS\system_stm32f10x.h
+..\Output\pwm_output.o: ..\USER\stm32f10x_conf.h
+..\Output\pwm_output.o: ..\FWlib\inc\stm32f10x_flash.h
+..\Output\pwm_output.o: ..\CMSIS\stm32f10x.h
+..\Output\pwm_output.o: ..\FWlib\inc\stm32f10x_gpio.h
+..\Output\pwm_output.o: ..\FWlib\inc\stm32f10x_rcc.h
+..\Output\pwm_output.o: ..\FWlib\inc\stm32f10x_tim.h

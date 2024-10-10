@@ -1,0 +1,17 @@
+.\main.o: main.c
+.\main.o: includes.h
+.\main.o: ..\CMSIS\stm32f10x.h
+.\main.o: ..\CMSIS\core_cm3.h
+.\main.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\main.o: ..\CMSIS\system_stm32f10x.h
+.\main.o: ..\USER\stm32f10x_conf.h
+.\main.o: ..\FWlib\inc\stm32f10x_gpio.h
+.\main.o: ..\CMSIS\stm32f10x.h
+.\main.o: ..\FWlib\inc\stm32f10x_rcc.h
+.\main.o: ..\uCOS-II\Source\ucos_ii.h
+.\main.o: ..\APP\app_cfg.h
+.\main.o: ..\APP\os_cfg.h
+.\main.o: ..\uCOS-II\Ports\os_cpu.h
+.\main.o: ..\BSP\BSP.h
+.\main.o: ..\APP\app.h
+.\main.o: ..\BSP\led.h

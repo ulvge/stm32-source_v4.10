@@ -1,0 +1,12 @@
+..\Output\crc.o: crc.c
+..\Output\crc.o: crc.h
+..\Output\crc.o: ..\CMSIS\stm32f10x.h
+..\Output\crc.o: ..\CMSIS\core_cm3.h
+..\Output\crc.o: D:\Keil\ARM\RV31\INC\stdint.h
+..\Output\crc.o: ..\CMSIS\system_stm32f10x.h
+..\Output\crc.o: ..\USER\stm32f10x_conf.h
+..\Output\crc.o: ..\FWlib\inc\stm32f10x_crc.h
+..\Output\crc.o: ..\CMSIS\stm32f10x.h
+..\Output\crc.o: ..\FWlib\inc\stm32f10x_gpio.h
+..\Output\crc.o: ..\FWlib\inc\stm32f10x_rcc.h
+..\Output\crc.o: ..\FWlib\inc\stm32f10x_usart.h

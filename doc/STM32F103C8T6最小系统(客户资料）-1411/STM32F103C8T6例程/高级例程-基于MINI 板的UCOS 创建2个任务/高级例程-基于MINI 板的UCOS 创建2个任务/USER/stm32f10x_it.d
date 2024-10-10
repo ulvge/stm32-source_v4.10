@@ -1,0 +1,17 @@
+.\stm32f10x_it.o: stm32f10x_it.c
+.\stm32f10x_it.o: includes.h
+.\stm32f10x_it.o: ..\CMSIS\stm32f10x.h
+.\stm32f10x_it.o: ..\CMSIS\core_cm3.h
+.\stm32f10x_it.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\stm32f10x_it.o: ..\CMSIS\system_stm32f10x.h
+.\stm32f10x_it.o: ..\USER\stm32f10x_conf.h
+.\stm32f10x_it.o: ..\FWlib\inc\stm32f10x_gpio.h
+.\stm32f10x_it.o: ..\CMSIS\stm32f10x.h
+.\stm32f10x_it.o: ..\FWlib\inc\stm32f10x_rcc.h
+.\stm32f10x_it.o: ..\uCOS-II\Source\ucos_ii.h
+.\stm32f10x_it.o: ..\APP\app_cfg.h
+.\stm32f10x_it.o: ..\APP\os_cfg.h
+.\stm32f10x_it.o: ..\uCOS-II\Ports\os_cpu.h
+.\stm32f10x_it.o: ..\BSP\BSP.h
+.\stm32f10x_it.o: ..\APP\app.h
+.\stm32f10x_it.o: ..\BSP\led.h

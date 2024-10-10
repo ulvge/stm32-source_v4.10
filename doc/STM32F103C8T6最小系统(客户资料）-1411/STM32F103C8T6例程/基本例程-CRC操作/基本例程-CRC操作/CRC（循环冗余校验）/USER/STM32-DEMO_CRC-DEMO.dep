@@ -1,0 +1,102 @@
+Dependencies for Project 'STM32-DEMO', Target 'CRC-DEMO': (DO NOT MODIFY !)
+F (..\CMSIS\startup\startup_stm32f10x_hd.s)(0x49D96948)(--cpu Cortex-M3 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x--list ..\listing\startup_stm32f10x_hd.lst --xref -o .\startup_stm32f10x_hd.o --depend .\startup_stm32f10x_hd.d)
+F (.\main.c)(0x5473D9B9)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\FWlib\inc -I..\USER-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o .\main.o --omf_browse .\main.crf --depend .\main.d)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\stm32f10x.h)(0x4DECC1EB)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\core_cm3.h)(0x49D96948)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\system_stm32f10x.h)(0x49D96948)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\USER\stm32f10x_conf.h)(0x4E340A3C)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_crc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_gpio.h)(0x4DEC4B41)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_rcc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_usart.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\USER\usart1.h)(0x4E3BEBF1)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C7B744)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\USER\crc.h)(0x50DC5E38)
+F (.\stm32f10x_it.c)(0x49D96964)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\FWlib\inc -I..\USER-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o .\stm32f10x_it.o --omf_browse .\stm32f10x_it.crf --depend .\stm32f10x_it.d)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\USER\stm32f10x_it.h)(0x49D96964)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\stm32f10x.h)(0x4DECC1EB)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\core_cm3.h)(0x49D96948)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\system_stm32f10x.h)(0x49D96948)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\USER\stm32f10x_conf.h)(0x4E340A3C)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_crc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_gpio.h)(0x4DEC4B41)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_rcc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_usart.h)(0x49D9694A)
+F (.\usart1.c)(0x5473D9B9)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\FWlib\inc -I..\USER-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o .\usart1.o --omf_browse .\usart1.crf --depend .\usart1.d)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\USER\usart1.h)(0x4E3BEBF1)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\stm32f10x.h)(0x4DECC1EB)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\core_cm3.h)(0x49D96948)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\system_stm32f10x.h)(0x49D96948)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\USER\stm32f10x_conf.h)(0x4E340A3C)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_crc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_gpio.h)(0x4DEC4B41)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_rcc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_usart.h)(0x49D9694A)
+I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C7B744)
+I (C:\Keil\ARM\ARMCC\include\stdarg.h)(0x51C7B744)
+F (.\crc.c)(0x5473D9B9)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\FWlib\inc -I..\USER-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o .\crc.o --omf_browse .\crc.crf --depend .\crc.d)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\USER\crc.h)(0x50DC5E38)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\stm32f10x.h)(0x4DECC1EB)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\core_cm3.h)(0x49D96948)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\system_stm32f10x.h)(0x49D96948)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\USER\stm32f10x_conf.h)(0x4E340A3C)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_crc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_gpio.h)(0x4DEC4B41)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_rcc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_usart.h)(0x49D9694A)
+F (..\FWlib\src\stm32f10x_gpio.c)(0x49D9694A)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\FWlib\inc -I..\USER-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o .\stm32f10x_gpio.o --omf_browse .\stm32f10x_gpio.crf --depend .\stm32f10x_gpio.d)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_gpio.h)(0x4DEC4B41)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\stm32f10x.h)(0x4DECC1EB)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\core_cm3.h)(0x49D96948)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\system_stm32f10x.h)(0x49D96948)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\USER\stm32f10x_conf.h)(0x4E340A3C)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_crc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_rcc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_usart.h)(0x49D9694A)
+F (..\FWlib\src\stm32f10x_rcc.c)(0x49D9694A)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\FWlib\inc -I..\USER-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o .\stm32f10x_rcc.o --omf_browse .\stm32f10x_rcc.crf --depend .\stm32f10x_rcc.d)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_rcc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\stm32f10x.h)(0x4DECC1EB)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\core_cm3.h)(0x49D96948)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\system_stm32f10x.h)(0x49D96948)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\USER\stm32f10x_conf.h)(0x4E340A3C)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_crc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_gpio.h)(0x4DEC4B41)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_usart.h)(0x49D9694A)
+F (..\FWlib\src\stm32f10x_usart.c)(0x49D9694A)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\FWlib\inc -I..\USER-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o .\stm32f10x_usart.o --omf_browse .\stm32f10x_usart.crf --depend .\stm32f10x_usart.d)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_usart.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\stm32f10x.h)(0x4DECC1EB)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\core_cm3.h)(0x49D96948)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\system_stm32f10x.h)(0x49D96948)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\USER\stm32f10x_conf.h)(0x4E340A3C)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_crc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_gpio.h)(0x4DEC4B41)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_rcc.h)(0x49D9694A)
+F (..\FWlib\src\stm32f10x_crc.c)(0x49D9694A)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\FWlib\inc -I..\USER-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o .\stm32f10x_crc.o --omf_browse .\stm32f10x_crc.crf --depend .\stm32f10x_crc.d)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_crc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\stm32f10x.h)(0x4DECC1EB)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\core_cm3.h)(0x49D96948)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\system_stm32f10x.h)(0x49D96948)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\USER\stm32f10x_conf.h)(0x4E340A3C)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_gpio.h)(0x4DEC4B41)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_rcc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_usart.h)(0x49D9694A)
+F (..\CMSIS\core_cm3.c)(0x49D96948)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\FWlib\inc -I..\USER-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o .\core_cm3.o --omf_browse .\core_cm3.crf --depend .\core_cm3.d)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+F (..\CMSIS\system_stm32f10x.c)(0x4DE9AAEE)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\FWlib\inc -I..\USER-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o .\system_stm32f10x.o --omf_browse .\system_stm32f10x.crf --depend .\system_stm32f10x.d)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\stm32f10x.h)(0x4DECC1EB)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\core_cm3.h)(0x49D96948)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\CMSIS\system_stm32f10x.h)(0x49D96948)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\USER\stm32f10x_conf.h)(0x4E340A3C)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_crc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_gpio.h)(0x4DEC4B41)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_rcc.h)(0x49D9694A)
+I (D:\BaiduYunDownload\STM32F103C8T6最小系统版资料\STM32F103C8T6例程\基本例程-CRC操作\基本例程-CRC操作\CRC（循环冗余校验）\FWlib\inc\stm32f10x_usart.h)(0x49D9694A)

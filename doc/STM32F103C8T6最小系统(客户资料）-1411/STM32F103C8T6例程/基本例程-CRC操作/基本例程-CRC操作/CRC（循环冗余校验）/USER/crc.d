@@ -1,0 +1,12 @@
+.\crc.o: crc.c
+.\crc.o: crc.h
+.\crc.o: ..\CMSIS\stm32f10x.h
+.\crc.o: ..\CMSIS\core_cm3.h
+.\crc.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\crc.o: ..\CMSIS\system_stm32f10x.h
+.\crc.o: ..\USER\stm32f10x_conf.h
+.\crc.o: ..\FWlib\inc\stm32f10x_crc.h
+.\crc.o: ..\CMSIS\stm32f10x.h
+.\crc.o: ..\FWlib\inc\stm32f10x_gpio.h
+.\crc.o: ..\FWlib\inc\stm32f10x_rcc.h
+.\crc.o: ..\FWlib\inc\stm32f10x_usart.h

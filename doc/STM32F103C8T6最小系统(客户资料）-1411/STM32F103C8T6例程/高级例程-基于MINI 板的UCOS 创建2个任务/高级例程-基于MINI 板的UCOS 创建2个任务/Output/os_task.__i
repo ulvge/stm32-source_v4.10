@@ -1,0 +1,5 @@
+-c --cpu Cortex-M3 -D__MICROLIB -g -O2 --apcs=interwork -I..\CMSIS -I..\FWlib\inc -I..\USER -I..\APP -I..\BSP -I..\uCOS-II\Ports -I..\uCOS-II\Source
+-I C:\Keil\ARM\RV31\INC
+-I C:\Keil\ARM\CMSIS\Include
+-I C:\Keil\ARM\Inc\ST\STM32F10x
+-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o ..\output\os_task.o --omf_browse ..\output\os_task.crf --depend ..\output\os_task.d "..\uCOS-II\Source\os_task.c"
