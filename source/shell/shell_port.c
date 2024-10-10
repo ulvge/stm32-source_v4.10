@@ -75,38 +75,38 @@ static INT8U EEPROM_Buf[1024];
 static void eeUsage(void)
 {
     //        ee  r/w   addr    len/data
-    SHELL_DEBUG(("ee 0 1 100: read from addr = 1, len = 100\n"));
-    SHELL_DEBUG(("ee 1 2 0x10 0x20 0x30 : write to addr = 2, data [0x10 0x20 0x30]\n"));
+    SHELL_DEBUG(("eg: ee 0xa0 r 1 100: read from addr = 1, len = 100\n"));
+    SHELL_DEBUG(("eg: ee 0xa0 w 2 0x10 0x20 0x30 : write to addr = 2, data [0x10 0x20 0x30]\n"));
 }
 #define  EEPROM_TITLE_ROWS_LEN  16
 static int cmd_EEPROM(int argc, char *argv[])
 {
     char IsR_W;
-    INT32U SubAddr, len;
-
-    if (argc >= 2) {
-        IsR_W = *argv[1];
+    INT32U devAddr, devAddrBak, regAddr, len;
+    INT32U paraOffset = 1;
+    
+    if (argc < 5) {
+        SHELL_DEBUG(("ee para need more than 5\n"));
+        eeUsage();
+        return 0;
     }
-    if (argc >= 3) {
-        SubAddr = ee_paraCovert(argv[2], 0);
-    }
+    devAddr = ee_paraCovert(argv[paraOffset++], 0);
+    IsR_W = *argv[paraOffset++];
+    regAddr = ee_paraCovert(argv[paraOffset++], 0);
+    
+    devAddrBak = I2C1_EEPROM_ADDR;
+    I2C1_EEPROM_ADDR = devAddr;
     switch (IsR_W) {
     case '0':
     case 'r':
     case 'R':
-        if (argc != 4){
-            SHELL_DEBUG(("para error\n"));
-            eeUsage();
-            return 0;
-        }else{
-            len = ee_paraCovert(argv[3], 0);
-            if (len > sizeof(EEPROM_Buf)){
-                len = sizeof(EEPROM_Buf);
-            }
+        len = ee_paraCovert(argv[paraOffset++], 0);
+        if (len > sizeof(EEPROM_Buf)){
+            len = sizeof(EEPROM_Buf);
         }
-        if (EEP_ReadData(SubAddr, EEPROM_Buf, len) == false){
+        if (EEP_ReadData(regAddr, EEPROM_Buf, len) == false){
             SHELL_DEBUG(("dev no ack\n"));
-            return 0;
+            goto exit;
         }
         // print head row
         SHELL_DEBUG(("       "));
@@ -117,13 +117,13 @@ static int cmd_EEPROM(int argc, char *argv[])
         //SHELL_DEBUG(("\r\n"));
         for (INT32U i = 0; i < len; i++){
             // print head column
-            if ((i == 0) ||(i+SubAddr) % EEPROM_TITLE_ROWS_LEN == 0){
-                INT32U column = (i+SubAddr + 1) / EEPROM_TITLE_ROWS_LEN;
+            if ((i == 0) ||(i+regAddr) % EEPROM_TITLE_ROWS_LEN == 0){
+                INT32U column = (i+regAddr + 1) / EEPROM_TITLE_ROWS_LEN;
                 SHELL_DEBUG(("\r\n%o    ", column * EEPROM_TITLE_ROWS_LEN));
-                RTC_DelayXms(10);
+                RTC_DelayXms(5);
             }
             if (i == 0){ // if not from 0,need alignment
-                for (INT32U j = 0; j < SubAddr % EEPROM_TITLE_ROWS_LEN; j++){
+                for (INT32U j = 0; j < regAddr % EEPROM_TITLE_ROWS_LEN; j++){
                     SHELL_DEBUG(("    ")); // place holder
                 }
             }
@@ -133,24 +133,23 @@ static int cmd_EEPROM(int argc, char *argv[])
     case '1':
     case 'w':
     case 'W':
-        if (argc < 4){
-            SHELL_DEBUG(("para error\n"));
-            eeUsage();
-            return 0;
-        }
-        
-        for (INT32 i = 0; i < argc - 3; i++){
+        for (INT32 i = 0; i < argc - paraOffset; i++){
             INT32U tmp;
-            tmp = ee_paraCovert(argv[3 + i], 16);
+            tmp = ee_paraCovert(argv[paraOffset + i], 16);
             EEPROM_Buf[i] = tmp;
         }
-        if (EEP_WriteData(SubAddr, EEPROM_Buf, argc - 3) == TRUE){
+        if (EEP_WriteData(regAddr, EEPROM_Buf, argc - paraOffset) == TRUE){
             SHELL_DEBUG(("write success\r\n"));
         }else{
             SHELL_DEBUG(("write failed\r\n"));
         }
         break;
+        default:
+            eeUsage();
+            break;
     }
+    exit:
+    I2C1_EEPROM_ADDR = devAddrBak;
     return 0;
 }
 SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0) | SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN) | SHELL_CMD_DISABLE_RETURN, ee, cmd_EEPROM, read write eeprom);
