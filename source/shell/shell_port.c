@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 Shell g_shell;
-char g_shellHistroyBuffer[200];
+char g_shellHistroyBuffer[2000];
 
 /**
  * @brief 用户shell写

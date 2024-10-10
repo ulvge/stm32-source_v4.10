@@ -1,19 +1,19 @@
 全部清0
-ee w 0x10 0 0 0 0
-ee w 0x80 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-ee w 0x90 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+ee 0xa0 w 0x10 0 0 0 0
+ee 0xa0 w 0x80 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+ee 0xa0 w 0x90 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 还原
-ee w 0x10 0 4A 30 FB
-ee w 0x80 0 4A 30 FB 0 4A 30 FB 0 4A 30 FB 0 4A 30 FB
-ee w 0x90 0 4A 30 FB 0 4A 30 FB 0 4A 30 FB 0 4A 30 FB
+ee 0xa0 w 0x10 0 4A 30 FB
+ee 0xa0 w 0x80 0 4A 30 FB 0 4A 30 FB 0 4A 30 FB 0 4A 30 FB
+ee 0xa0 w 0x90 0 4A 30 FB 0 4A 30 FB 0 4A 30 FB 0 4A 30 FB
 
 全部清0
-ee w 0x8 0 0 0 0
+ee 0xa0 w 0x8 0 0 0 0
 还原
-ee w 0x8 0 0 09  A4
+ee 0xa0 w 0x8 0 0 09  A4
 
 
 全部清0
-ee w 0xe 0 0
+ee 0xa0 w 0xe 0 0
 还原
-ee w 0x8 21 22
+ee 0xa0 w 0x8 21 22
