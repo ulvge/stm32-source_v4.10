@@ -2,6 +2,7 @@
 #include "includes.h"
 #include "i2c.h"
 
+INT8U I2C1_EEPROM_ADDR = 0xA0;
 #if DBG_I2C
 #define I2C_DEBUG(X) \
     do {             \
@@ -141,7 +142,23 @@ INT8U I2C1_I2CRxByte(void)
     return ReadData;
 }
 
-void I2C1_Tx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pWriteData, INT16U len)
+BOOL I2C_Tx(INT8U bus, INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pWriteData, INT16U len)
+{
+    if (bus == 1) {
+        return I2C1_Tx(dest_add, subaddr, sizeOfSubAddr, pWriteData, len);
+    }else{
+        return I2C2_Tx(dest_add, subaddr, sizeOfSubAddr, pWriteData, len);
+    }
+}
+BOOL I2C_Rx(INT8U bus, INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pReadData, INT16U len)
+{
+    if (bus == 1) {
+        return I2C1_Rx(dest_add, subaddr, sizeOfSubAddr, pReadData, len);
+    }else{
+        return I2C2_Rx(dest_add, subaddr, sizeOfSubAddr, pReadData, len);
+    }
+}
+BOOL I2C1_Tx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pWriteData, INT16U len)
 {
     INT8U i, loop = 2, ret = false;
 
@@ -172,6 +189,7 @@ void I2C1_Tx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pWriteD
                 break;
         }
     }
+    return ret;
 }
 BOOL I2C1_Rx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pReadData, INT16U len)
 {
@@ -217,9 +235,9 @@ BOOL I2C1_Rx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pReadDa
 void I2C1_DrvInit(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     // Pin 92
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Pin = IO_PIN_I2C1_SCL_DET;
     GPIO_Init(IO_PORT_I2C1_SCL_DET, &GPIO_InitStructure);
     // Pin 93
@@ -228,11 +246,11 @@ void I2C1_DrvInit(void)
     GPIO_Init(IO_PORT_I2C1_SDA_DET, &GPIO_InitStructure);
     I2C1_I2cStop();
 
-    GPIO_SDA_In_I2C1.GPIO_Speed = GPIO_Speed_2MHz;
+    GPIO_SDA_In_I2C1.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_SDA_In_I2C1.GPIO_Mode = GPIO_Mode_IN_FLOATING;
     GPIO_SDA_In_I2C1.GPIO_Pin = IO_PIN_I2C1_SDA_DET;
 
-    GPIO_SDA_Out_I2C1.GPIO_Speed = GPIO_Speed_2MHz;
+    GPIO_SDA_Out_I2C1.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_SDA_Out_I2C1.GPIO_Mode = GPIO_Mode_Out_OD;
     GPIO_SDA_Out_I2C1.GPIO_Pin = IO_PIN_I2C1_SDA_DET;
 }
@@ -483,23 +501,29 @@ static void I2C_Monitor(void)
 TIMER *I2cTmr;
 void I2C_main(void)
 {
+    I2C1_DrvInit();
     I2C2_DrvInit();
     I2cTmr = CreateTimer(I2C_Monitor);
 #if EN_DEBUG == 0
     StartTimer(I2cTmr, _MS(1500));
 #endif
 }
-
+#define  EEP_BUS 1 // printer
+//#define  EEP_BUS 2 // 开发板
 BOOL EEP_ReadData(INT32U subaddr, INT8U *pReadData, INT16U len)
 {
     INT16U i, offset = 0;
     for (i = 0; i <= (len - EEPROM_PAGE_BYTES); i += EEPROM_PAGE_BYTES) {
-        I2C2_Rx(I2C1_EEPROM_ADDR, subaddr + offset, EE_ADDR_LEN, pReadData + offset, EEPROM_PAGE_BYTES);
+        if (I2C_Rx(EEP_BUS, I2C1_EEPROM_ADDR, subaddr + offset, EE_ADDR_LEN, pReadData + offset, EEPROM_PAGE_BYTES) == false){
+            return false;
+        }
         offset += EEPROM_PAGE_BYTES;
         RTC_DelayXms(20);
     }
     if (len % EEPROM_PAGE_BYTES) {
-        I2C2_Rx(I2C1_EEPROM_ADDR, subaddr + offset, EE_ADDR_LEN, pReadData + offset, len % EEPROM_PAGE_BYTES);
+        if (I2C_Rx(EEP_BUS, I2C1_EEPROM_ADDR, subaddr + offset, EE_ADDR_LEN, pReadData + offset, len % EEPROM_PAGE_BYTES) == false){
+            return false;
+        }
         RTC_DelayXms(20);
     }
     return TRUE;
@@ -515,9 +539,9 @@ INT8U EEP_WriteData(INT32U subaddr, INT8U *pWriteData, INT16U len)
     Len1 = EEPROM_PAGE_BYTES - (subaddr % EEPROM_PAGE_BYTES);
     if (Len1) {
         if (len <= Len1) {
-            return I2C2_Tx(I2C1_EEPROM_ADDR, subaddr, EE_ADDR_LEN, pWriteData, len);
+            return I2C_Tx(EEP_BUS, I2C1_EEPROM_ADDR, subaddr, EE_ADDR_LEN, pWriteData, len);
         } else{
-            if (I2C2_Tx(I2C1_EEPROM_ADDR, subaddr, EE_ADDR_LEN, pWriteData, Len1) == false){
+            if (I2C_Tx(EEP_BUS, I2C1_EEPROM_ADDR, subaddr, EE_ADDR_LEN, pWriteData, Len1) == false){
                 return false;
             }
         }
@@ -528,7 +552,7 @@ INT8U EEP_WriteData(INT32U subaddr, INT8U *pWriteData, INT16U len)
     // 2、所有页倍数
     OffSet = Len1;
     for (i = 0; i < (len / EEPROM_PAGE_BYTES); i++) {
-        if (I2C2_Tx(I2C1_EEPROM_ADDR, subaddr + OffSet, EE_ADDR_LEN, pWriteData + OffSet, EEPROM_PAGE_BYTES) == false){
+        if (I2C_Tx(EEP_BUS, I2C1_EEPROM_ADDR, subaddr + OffSet, EE_ADDR_LEN, pWriteData + OffSet, EEPROM_PAGE_BYTES) == false){
             return false;
         }
         OffSet += EEPROM_PAGE_BYTES;
@@ -536,7 +560,7 @@ INT8U EEP_WriteData(INT32U subaddr, INT8U *pWriteData, INT16U len)
     }
     // 3、最后的余数
     if (len % EEPROM_PAGE_BYTES) {
-        return I2C2_Tx(I2C1_EEPROM_ADDR, subaddr + OffSet, EE_ADDR_LEN, pWriteData + OffSet, len % EEPROM_PAGE_BYTES);
+        return I2C_Tx(EEP_BUS, I2C1_EEPROM_ADDR, subaddr + OffSet, EE_ADDR_LEN, pWriteData + OffSet, len % EEPROM_PAGE_BYTES);
     }
     return TRUE;
 }

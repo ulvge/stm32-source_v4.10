@@ -288,7 +288,7 @@ static void TM1637_DisplayTime(void)
 	TM1637_CMDDisplay(&g_dispPara.context, g_dispPara.type);
 }
 static  TIMER *TmrDisplay;
-static void TM1637_Init(void)
+__attribute__((unused)) static void TM1637_Init(void)
 {
     TM1637_GPIOInit();
 
@@ -296,4 +296,4 @@ static void TM1637_Init(void)
 	StartTimer(TmrDisplay, _MS(TIM1637_REFRESH_CYCLE));
 }
 
-CoreInitCall(TM1637_Init);
+//CoreInitCall(TM1637_Init);

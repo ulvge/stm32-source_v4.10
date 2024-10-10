@@ -337,16 +337,6 @@ INT8U Esp_IsSmartLink_OK(INT8U ch)
 
 void Esp_InitLedPort(void)
 {
-    GPIO_InitTypeDef  GPIO_InitStructure;
-    
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);
-
-    GPIO_InitStructure.GPIO_Speed=GPIO_Speed_2MHz;        
-    GPIO_InitStructure.GPIO_Mode=GPIO_Mode_Out_PP;
-    GPIO_InitStructure.GPIO_Pin=GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15;
-    GPIO_Init(IO_PORT_LED,&GPIO_InitStructure);
-
-    GPIO_SetBits(IO_PORT_LED,GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15);
 }
 
 INT8U    Esp_ClacChkSum(INT8U *Start,INT8U len)
@@ -429,8 +419,6 @@ void Esp_Execute(void)
     //协议中是1或2
     Peri.LED0 = GPIO_ReadOutputDataBit(IO_PORT_LED,IO_PIN_LED0)+1;
     Peri.LED1 = GPIO_ReadOutputDataBit(IO_PORT_LED,IO_PIN_LED1)+1;
-    Peri.LED2 = GPIO_ReadOutputDataBit(IO_PORT_LED,IO_PIN_LED2)+1;
-    Peri.LED3 = GPIO_ReadOutputDataBit(IO_PORT_LED,IO_PIN_LED3)+1;
 
     Peri.CheckSum = Esp_ClacChkSum((INT8U*)&Peri,sizeof(Peri)-1);
 }

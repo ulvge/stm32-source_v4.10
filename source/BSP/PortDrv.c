@@ -75,11 +75,6 @@ void Port_PortInit(void)
 //Remap End
 /*Port Set  start*/
 	GPIO_InitStructure.GPIO_Speed=GPIO_Speed_2MHz;	
-//Debug Start
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_Out_PP;
-	GPIO_InitStructure.GPIO_Pin=IO_PIN_CAN_TX_DET;
-	GPIO_Init(IO_PORT_CAN_TX_DET,&GPIO_InitStructure);
-	//GPIO_SetBits(IO_PORT_CAN_TX_DET,IO_PIN_CAN_TX_DET);
 //Debug End
 //Normal Port Start
 	//Pin 1
@@ -250,11 +245,11 @@ void Port_PortInit(void)
 	GPIO_InitStructure.GPIO_Pin=IO_PIN_CAN_INH_DET;
 	GPIO_Init(IO_PORT_CAN_INH_DET,&GPIO_InitStructure);
 	//Pin 47
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_AF_OD;
+	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_Out_OD;
 	GPIO_InitStructure.GPIO_Pin=IO_PIN_I2C2_SCL_DET;
 	GPIO_Init(IO_PORT_I2C2_SCL_DET,&GPIO_InitStructure);
 	//Pin 48
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_AF_OD;
+	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_Out_OD;
 	GPIO_InitStructure.GPIO_Pin=IO_PIN_I2C2_SDA_DET;
 	GPIO_Init(IO_PORT_I2C2_SDA_DET,&GPIO_InitStructure);
 	//Pin 49 DGND
@@ -335,34 +330,7 @@ void Port_PortInit(void)
 	GPIO_InitStructure.GPIO_Pin=IO_PIN_BEEP_DET;
 	GPIO_Init(IO_PORT_BEEP_DET,&GPIO_InitStructure);
 #endif
-	//Pin 66
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_Out_PP;
-	GPIO_InitStructure.GPIO_Pin=IO_PIN_CAN_STB0_DET;
-	GPIO_Init(IO_PORT_CAN_STB0_DET,&GPIO_InitStructure);
-	//Pin 67
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_IN_FLOATING;
-	GPIO_InitStructure.GPIO_Pin=IO_PIN_CAN_EN_DET;
-	GPIO_Init(IO_PORT_CAN_EN_DET,&GPIO_InitStructure);
 
-#ifdef AUTOTEST
-	//Pin 68
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_AF_OD;
-	GPIO_InitStructure.GPIO_Pin=IO_PIN_AUTOTEST_TX_DET;
-	GPIO_Init(IO_PORT_AUTOTEST_TX_DET,&GPIO_InitStructure);
-	//Pin 69
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_AF_OD;
-	GPIO_InitStructure.GPIO_Pin=IO_PIN_AUTOTEST_RX_DET;
-	GPIO_Init(IO_PORT_AUTOTEST_RX_DET,&GPIO_InitStructure);
-#endif
-
-	//Pin 70
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_AF_OD;
-	GPIO_InitStructure.GPIO_Pin=IO_PIN_CAN_RX_DET;
-	GPIO_Init(IO_PORT_CAN_RX_DET,&GPIO_InitStructure);
-	//Pin 71
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_AF_OD;
-	GPIO_InitStructure.GPIO_Pin=IO_PIN_CAN_TX_DET;
-	GPIO_Init(IO_PORT_CAN_TX_DET,&GPIO_InitStructure);
 	//Pin 72 JTAG_SWDO
 	//Pin 73 NC
 	//Pin 74 DGND
@@ -448,26 +416,8 @@ void Port_PortInit(void)
 	GPIO_Init(IO_PORT_LOAD_CLOSE_CTRL, &GPIO_InitStructure);
 	GPIO_ResetBits(IO_PORT_LOAD_CLOSE_CTRL, IO_PIN_LOAD_CLOSE_CTRL);
 #endif
-
-	//Pin 89
-	//Pin 90
-	//Pin 91
-	//Pin 92
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_AF_OD;
-	GPIO_InitStructure.GPIO_Pin=IO_PIN_I2C1_SCL_DET;
-	GPIO_Init(IO_PORT_I2C1_SCL_DET,&GPIO_InitStructure);
-	//Pin 93
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_AF_OD;
-	GPIO_InitStructure.GPIO_Pin=IO_PIN_I2C1_SDA_DET;
-	GPIO_Init(IO_PORT_I2C1_SDA_DET,&GPIO_InitStructure);
 	//Pin 94 Boot0
 	//Pin 95
-#ifdef S_HC4052
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_Out_PP;
-	GPIO_InitStructure.GPIO_Pin=IO_PIN_A_SEL;
-	GPIO_Init(IO_PORT_A_SEL,&GPIO_InitStructure);
-	//GPIO_SetBits(IO_PORT_A_SEL,IO_PIN_A_SEL);
-#endif
 #ifdef S_ILLDET_PWM_DUTY
 	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_AF_PP;	
 	GPIO_InitStructure.GPIO_Pin=IO_PIN_LED_PWM;
@@ -482,12 +432,6 @@ void Port_PortInit(void)
 	GPIO_InitStructure.GPIO_Pin=IO_PIN_RADIO_ANT_CTRL;
 	GPIO_Init(IO_PORT_RADIO_ANT_CTRL,&GPIO_InitStructure);
 	//Pin 98
-#ifdef S_HC4052
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_Out_PP;
-	GPIO_InitStructure.GPIO_Pin=IO_PIN_B_SEL;
-	GPIO_Init(IO_PORT_B_SEL,&GPIO_InitStructure);
-	//GPIO_SetBits(IO_PORT_B_SEL,IO_PIN_B_SEL);
-#endif
 
 	//Pin 99 DGND
 	//Pin 100 B3v3
@@ -502,9 +446,6 @@ void Port_PortInit(void)
 
 
 //AD Port Start
-  	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
-	GPIO_InitStructure.GPIO_Pin = IO_PIN_AD_KEY_ONE_DET;	
-  	GPIO_Init(IO_PORT_AD_KEY_ONE_DET, &GPIO_InitStructure);
 	GPIO_InitStructure.GPIO_Pin=IO_PIN_AD_KEY_TWO_DET;
 	GPIO_Init(IO_PORT_AD_KEY_TWO_DET,&GPIO_InitStructure);
 	GPIO_InitStructure.GPIO_Pin=IO_PIN_AD_KEY_THREE_DET;

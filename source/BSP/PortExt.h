@@ -46,9 +46,6 @@
 //Pin 12 osc16mhz
 //Pin 13 osc16mhz
 //Pin 14 mcu reset
-//Pin 15
-#define	IO_PIN_AD_KEY_ONE_DET		GPIO_Pin_0
-#define	IO_PORT_AD_KEY_ONE_DET		GPIOC
 //Pin 16
 #define	IO_PIN_AD_KEY_TWO_DET		GPIO_Pin_1
 #define	IO_PORT_AD_KEY_TWO_DET		GPIOC
@@ -84,12 +81,6 @@
 
 //Pin 25 PB12
 #define  IO_PIN_LED0                      GPIO_Pin_12
-//Pin 26 PB13
-#define  IO_PIN_LED1                      GPIO_Pin_13
-//Pin 27 PB14
-#define  IO_PIN_LED2                      GPIO_Pin_14
-//Pin 28 PB15
-#define  IO_PIN_LED3                      GPIO_Pin_15
 
 //#define    TM_DIO_PORT    	GPIOB
 //#define  TM_CLK_PIN		GPIO_Pin_13			
@@ -224,21 +215,6 @@
 #define	IO_PORT_I2C2_SDA_DET		GPIOA
 //Pin 49 DGND
 //Pin 50 B3v3
-#if SUPPORT_GYRO
-//Pin 51
-#define IO_PIN_GYRO_SPI_CS_DET			GPIO_Pin_12	
-#define IO_PORT_GYRO_SPI_CS_DET		GPIOB
-//Pin 52
-#define IO_PIN_GYRO_SPI_CLK_DET		GPIO_Pin_13
-#define IO_PORT_GYRO_SPI_CLK_DET		GPIOB
-//Pin 53
-#define IO_PIN_GYRO_SPI_MISO_DET		GPIO_Pin_14
-#define IO_PORT_GYRO_SPI_MISO_DET		GPIOB
-//Pin 54
-#define IO_PIN_GYRO_SPI_MOSI_DET		GPIO_Pin_15
-#define IO_PORT_GYRO_SPI_MOSI_DET		GPIOB
-#endif
-
 #ifdef S_UART3
 //Pin 55
 #define	IO_PIN_USART3_TX				GPIO_Pin_8
@@ -301,9 +277,6 @@
 //Pin 66
 #define	IO_PIN_CAN_STB0_DET			GPIO_Pin_9
 #define	IO_PORT_CAN_STB0_DET		GPIOC
-//Pin 67
-#define	IO_PIN_CAN_EN_DET			GPIO_Pin_8
-#define	IO_PORT_CAN_EN_DET			GPIOA
 
 //Pin 68
 #define	IO_PIN_AUTOTEST_TX_DET			GPIO_Pin_9
@@ -312,12 +285,6 @@
 #define	IO_PIN_AUTOTEST_RX_DET			GPIO_Pin_10
 #define	IO_PORT_AUTOTEST_RX_DET			GPIOA
 
-//Pin 70
-#define	IO_PIN_CAN_RX_DET			GPIO_Pin_11
-#define	IO_PORT_CAN_RX_DET			GPIOA
-//Pin 71
-#define	IO_PIN_CAN_TX_DET			GPIO_Pin_12
-#define	IO_PORT_CAN_TX_DET			GPIOA
 //Pin 72 JTAG_SWDO
 //Pin 73 NC
 //Pin 74 DGND
@@ -419,17 +386,12 @@
 #define	IO_PORT_BREAK_DET_DET			GPIOB
 #endif
 //Pin 92
-#define IO_PIN_I2C1_SCL_DET			GPIO_Pin_6
+#define IO_PIN_I2C1_SCL_DET			GPIO_Pin_13
 #define IO_PORT_I2C1_SCL_DET		GPIOB
-//Pin 93 
-#define	IO_PIN_I2C1_SDA_DET			GPIO_Pin_7
-#define	IO_PORT_I2C1_SDA_DET		GPIOB
+//Pin 93   开发板上有上拉
+#define	IO_PIN_I2C1_SDA_DET			GPIO_Pin_0
+#define	IO_PORT_I2C1_SDA_DET		GPIOC
 //Pin 94 Boot0
-#ifdef S_HC4052
-//Pin 95
-#define	IO_PIN_A_SEL		GPIO_Pin_8
-#define	IO_PORT_A_SEL		GPIOB
-#endif
 
 //Pin 95
 #define	IO_PIN_ILL_DET				GPIO_Pin_8
@@ -451,11 +413,6 @@
 #define	IO_PIN_RADIO_ANT_CTRL			GPIO_Pin_0
 #define	IO_PORT_RADIO_ANT_CTRL			GPIOE
 
-#ifdef S_HC4052
-//Pin 98
-#define	IO_PIN_B_SEL		GPIO_Pin_1
-#define	IO_PORT_B_SEL		GPIOE
-#endif
 #ifdef MODULE_RN4930
 //Pin 98
 #define	IO_PIN_MPEG_POWER_CTRL			GPIO_Pin_1	//-----------------------------------------------MPEG5V

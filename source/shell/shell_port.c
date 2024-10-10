@@ -104,7 +104,10 @@ static int cmd_EEPROM(int argc, char *argv[])
                 len = sizeof(EEPROM_Buf);
             }
         }
-        EEP_ReadData(SubAddr, EEPROM_Buf, len);
+        if (EEP_ReadData(SubAddr, EEPROM_Buf, len) == false){
+            SHELL_DEBUG(("dev no ack\n"));
+            return 0;
+        }
         // print head row
         SHELL_DEBUG(("       "));
         // 0 1 2 3 ` 15
