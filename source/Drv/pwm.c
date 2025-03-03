@@ -58,8 +58,8 @@ typedef struct {
 	INT16U	clkDiv;               //和PWM死区信号有关 https://blog.csdn.net/yuyan7045/article/details/121289037?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.nonecase
 }FrequecnyPreScale_ST;
 static const FrequecnyPreScale_ST g_tablePreScale[] = {
-	{100,			PWM_PRE_SCALE_DIV3600_1K, 0, TIM_CKD_DIV1},
-	{1000 * 1000,	PWM_PRE_SCALE_DIV36_1M, 0, TIM_CKD_DIV1},
+	{100,			PWM_PRE_SCALE_DIV3600_1K, 1000, TIM_CKD_DIV1},
+	{1000 * 1000,	PWM_PRE_SCALE_DIV36_1M, 1000, TIM_CKD_DIV1},
 };
 
 typedef enum {
@@ -202,7 +202,7 @@ void PWM_DutyChange(BOOLEAN isAdd)
 	PWM_DEBUG(("->: PWM_DutyChange [%l]\n", dutyPercent)); 
     PWM_SetDuty(PWM_TIM, PWM_PIN, PWM_calcDutyByPercent(dutyPercent));
 }
-static void PWM_TIM1_Config(PWM_CFG* pwmConfig) //INT8U psc, INT32U repetNums)
+static void PWM_TIM1_Config(PWM_CFG* pwmConfig)
 {
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 
@@ -213,7 +213,7 @@ static void PWM_TIM1_Config(PWM_CFG* pwmConfig) //INT8U psc, INT32U repetNums)
 	TIM_TimeBaseStructure.TIM_Period = pwmConfig->Perio - 1;
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;                 //向上计数溢出模式  
 
-	TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;		//每次向上溢出都产生更新事件;向上溢出,重复x次后，才上报一次中断
+	TIM_TimeBaseStructure.TIM_RepetitionCounter = pwmConfig->repetNums;		//每次向上溢出都产生更新事件;向上溢出,重复x次后，才上报一次中断
 	TIM_TimeBaseInit(PWM_TIM, &TIM_TimeBaseStructure);
 	PWM_SetDuty(PWM_TIM, PWM_PIN, PWM_calcDutyByPercent(PWM_PERCNET_DEFAULT));
 	//设置PWM_TIM的PWM输出为使能

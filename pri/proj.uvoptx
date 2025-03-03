@@ -145,7 +145,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGTARM</Key>
-          <Name>(1010=75,104,441,651,0)(1007=624,418,801,683,0)(1008=405,409,771,635,0)(1009=808,203,1042,741,0)(100=843,81,1479,744,0)(110=33,138,237,594,0)(111=60,88,264,544,0)(1011=350,513,874,864,0)(180=-1,-1,-1,-1,0)(120=1383,348,1804,753,0)(121=1066,376,1487,781,0)(122=810,475,1231,880,0)(123=-1,-1,-1,-1,0)(140=-1,-1,-1,-1,0)(240=-1,-1,-1,-1,0)(190=-1,-1,-1,-1,0)(200=-1,-1,-1,-1,0)(170=870,222,1145,508,0)(130=785,60,1369,744,0)(131=86,91,670,775,0)(132=-1,-1,-1,-1,0)(133=-1,-1,-1,-1,0)(160=707,397,1145,800,0)(161=417,193,855,596,0)(162=-1,-1,-1,-1,0)(210=-1,-1,-1,-1,0)(211=-1,-1,-1,-1,0)(220=-1,-1,-1,-1,0)(221=-1,-1,-1,-1,0)(230=-1,-1,-1,-1,0)(231=-1,-1,-1,-1,0)(232=-1,-1,-1,-1,0)(233=-1,-1,-1,-1,0)(150=687,240,1280,864,0)(151=-1,-1,-1,-1,0)</Name>
+          <Name>(1010=75,104,441,651,0)(1007=624,418,801,683,0)(1008=405,409,771,635,0)(1009=808,203,1042,741,0)(100=843,81,1479,744,0)(110=33,138,237,594,0)(111=60,88,264,544,0)(1011=1265,511,1799,872,1)(180=-1,-1,-1,-1,0)(120=1383,348,1804,753,0)(121=1066,376,1487,781,0)(122=810,475,1231,880,0)(123=-1,-1,-1,-1,0)(140=-1,-1,-1,-1,0)(240=-1,-1,-1,-1,0)(190=-1,-1,-1,-1,0)(200=-1,-1,-1,-1,0)(170=870,222,1145,508,0)(130=785,60,1369,744,0)(131=86,91,670,775,0)(132=-1,-1,-1,-1,0)(133=-1,-1,-1,-1,0)(160=707,397,1145,800,0)(161=417,193,855,596,0)(162=-1,-1,-1,-1,0)(210=-1,-1,-1,-1,0)(211=-1,-1,-1,-1,0)(220=-1,-1,-1,-1,0)(221=-1,-1,-1,-1,0)(230=-1,-1,-1,-1,0)(231=-1,-1,-1,-1,0)(232=-1,-1,-1,-1,0)(233=-1,-1,-1,-1,0)(150=687,240,1290,874,1)(151=-1,-1,-1,-1,0)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -162,80 +162,30 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>1845</LineNumber>
+          <LineNumber>113</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134247546</Address>
+          <Address>134229842</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\source\shell\shell.c</Filename>
+          <Filename>..\source\Drv\TemperatureInside.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\demo\../source/shell/shell.c\1845</Expression>
+          <Expression>\\demo\../source/Drv/TemperatureInside.c\113</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>incmd</ItemText>
+          <ItemText>Temp_RawData</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>incmd.cmd[index]</ItemText>
-        </Ww>
-        <Ww>
-          <count>2</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>incmd.cmd[index+1]</ItemText>
-        </Ww>
-        <Ww>
-          <count>3</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>incmd.param[incmd.paranum]</ItemText>
-        </Ww>
-        <Ww>
-          <count>4</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>argv[3]</ItemText>
-        </Ww>
-        <Ww>
-          <count>5</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>argv[4]</ItemText>
-        </Ww>
-        <Ww>
-          <count>6</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>argv[5]</ItemText>
-        </Ww>
-        <Ww>
-          <count>7</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>argc - 3</ItemText>
-        </Ww>
-        <Ww>
-          <count>8</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>argv[1]</ItemText>
-        </Ww>
-        <Ww>
-          <count>9</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>*input</ItemText>
-        </Ww>
-        <Ww>
-          <count>10</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>input</ItemText>
-        </Ww>
-        <Ww>
-          <count>11</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>I2C1_EEPROM_ADDR</ItemText>
+          <ItemText>ADC_ConvertedValue</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
