@@ -428,7 +428,7 @@ BOOL I2C2_Rx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pReadDa
         loop--;
         I2C2_I2cStart();
 
-        ret = I2C2_I2CTxByte(dest_add);
+        ret = I2C2_I2CTxByte(dest_add); // 0xa0
         if (ret) {
             while (sizeOfSubAddr--) {
                 I2C2_I2CTxByte(subaddr & 0xff);
@@ -438,7 +438,7 @@ BOOL I2C2_Rx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pReadDa
                 GPIO_SetBits(IO_PORT_I2C2_SDA_DET, IO_PIN_I2C2_SDA_DET);
                 I2C2_WaitTick();
                 I2C2_I2cStart();
-                ret = I2C2_I2CTxByte(dest_add | 0X01);
+                ret = I2C2_I2CTxByte(dest_add | 0X01);// 0xa1
                 if (ret) {
                     for (i = 0; i < len; i++) {
                         pReadData[i] = I2C2_I2CRxByte();
@@ -460,15 +460,24 @@ BOOL I2C2_Rx(INT8U dest_add, INT32U subaddr, INT8U sizeOfSubAddr, INT8U *pReadDa
     return ret;
 }
 
+//#define  EEP_BUS 1 // printer
+#define  EEP_BUS 2 // 开发板
 void I2C2_DrvInit(void)
 {
+    GPIOMode_TypeDef gpioMode = GPIO_Mode_Out_PP;
+    if (EEP_BUS == 1) { // printer
+        gpioMode = GPIO_Mode_Out_PP;
+    } else {
+        gpioMode = GPIO_Mode_Out_OD;
+    }
+        // Pin 47
     GPIO_InitTypeDef GPIO_InitStructure;
     // Pin 47
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Mode = gpioMode;
     GPIO_InitStructure.GPIO_Pin = IO_PIN_I2C2_SCL_DET;
     GPIO_Init(IO_PORT_I2C2_SCL_DET, &GPIO_InitStructure);
     // Pin 48
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Mode = gpioMode;
     GPIO_InitStructure.GPIO_Pin = IO_PIN_I2C2_SDA_DET;
     GPIO_Init(IO_PORT_I2C2_SDA_DET, &GPIO_InitStructure);
     I2C2_I2cStop();
@@ -478,7 +487,7 @@ void I2C2_DrvInit(void)
     GPIO_SDA_In_I2C2.GPIO_Pin = IO_PIN_I2C2_SDA_DET;
 
     GPIO_SDA_Out_I2C2.GPIO_Speed = GPIO_Speed_2MHz;
-    GPIO_SDA_Out_I2C2.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_SDA_Out_I2C2.GPIO_Mode = gpioMode;
     GPIO_SDA_Out_I2C2.GPIO_Pin = IO_PIN_I2C2_SDA_DET;
 }
 
@@ -508,8 +517,6 @@ void I2C_main(void)
     StartTimer(I2cTmr, _MS(1500));
 #endif
 }
-#define  EEP_BUS 1 // printer
-//#define  EEP_BUS 2 // 开发板
 BOOL EEP_ReadData(INT32U subaddr, INT8U *pReadData, INT16U len)
 {
     INT16U i, offset = 0;

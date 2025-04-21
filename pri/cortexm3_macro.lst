@@ -434,7 +434,7 @@ ork --depend=..\output\cortexm3_macro.d -o..\output\cortexm3_macro.o -I.\RTE\_T
 arget_1 -IC:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Inc
 lude -IC:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\I
 nclude --predefine="__UVISION_VERSION SETA 538" --predefine="_RTE_ SETA 1" --pr
-edefine="STM32F10X_MD SETA 1" --predefine="_RTE_ SETA 1" --list=.\cortexm3_macr
+edefine="STM32F10X_HD SETA 1" --predefine="_RTE_ SETA 1" --list=.\cortexm3_macr
 o.lst ..\source\BSP\STM32F10x\cortexm3_macro.s
 
 
